@@ -12,6 +12,8 @@ redirect_from:
 
 I am a sixth year mathematics PhD student at [Harvard](https://www.math.harvard.edu/people/moreland-gwyneth/). I am on the job market this year.
 
+[Here is my CV](https://gwynethmoreland.github.io/files/Moreland_Gwyneth_CV_Oct22.pdf).
+
 My advisor is Joe Harris. My research interests are algebraic geometry. Most recently, I have been thinking about Hilbert schemes and postulation problems.
 
 Previously, I did my undergrad studies at [University of Michigan](https://lsa.umich.edu/math).
