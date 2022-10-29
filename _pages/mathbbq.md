@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "&bsol mathbb"
+title: "\\mathbb"
 permalink: /mathbbq/
 author_profile: true
 ---
