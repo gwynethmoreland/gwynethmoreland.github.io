@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "\\mathbb "{""
+title: "\\mathbb \{ \}"
 permalink: /mathbbq/
 author_profile: true
 ---
