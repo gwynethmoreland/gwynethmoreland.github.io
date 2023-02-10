@@ -7,6 +7,8 @@ author_profile: true
 
 Currently I am the math department's [Pedagogy Fellow](https://bokcenter.harvard.edu/people/gwyneth-moreland). Among other duties, I help facilitate TUMS, the Harvard Math Department's teaching training course for the first year graduate students.
 
+I currently hold office hours 3:30-4:30pm in the common room on Friday's.
+
 Past teaching
 ------
 * Fall 2019: Math 1b (Calculus II)
