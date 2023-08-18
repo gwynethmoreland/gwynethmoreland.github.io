@@ -5,12 +5,15 @@ permalink: /teaching/
 author_profile: true
 ---
 
-Currently I am the math department's [Pedagogy Fellow](https://bokcenter.harvard.edu/people/gwyneth-moreland). Among other duties, I help facilitate TUMS, the Harvard Math Department's teaching training course for the first year graduate students.
+Currently I am teaching Math 210: Multivariable calculus. Our section meets 2-2:50PM. Please see the [Blackboard site](https://uic.blackboard.com/) for more details.
 
-I currently hold office hours 3:30-4:30pm in the common room on Fridays. NOTE: today, Feb 17, they will be held in SC 530.
+My office hours are Mondays at 4:30-5:30PM and Wednesdays at 4-5PM in SEO (Science and Engineering Offices) 411.
 
-Past teaching
+
+
+Past teaching (at Harvard)
 ------
+* Fall 2022: TUMS (Teaching Undergraduate Mathematics Seminar)
 * Fall 2019: Math 1b (Calculus II)
 * Fall 2021: Math 1b (Calculus II)
 
