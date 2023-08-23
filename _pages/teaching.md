@@ -7,7 +7,7 @@ author_profile: true
 
 Currently I am teaching Math 210: Multivariable calculus. Our section meets 2-2:50PM. Please see the [Blackboard site](https://uic.blackboard.com/) for more details.
 
-My office hours are Mondays at 4:30-5:30PM and Wednesdays at 4-5PM in SEO (Science and Engineering Offices) 411.
+My office hours are Mondays at 4:30-5:30PM and Wednesdays at 4-5PM in SEO (Science and Engineering Offices) 413.
 
 
 
