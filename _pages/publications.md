@@ -7,7 +7,7 @@ author_profile: true
 
 In preparation
 ------
-* G. Moreland, *On the effective & nef cones of the Chow ring of the Hilbert scheme of three points in $\mathbb{P}^3$.* In preparation.
+* G. Moreland, *Higher codimension nef and effective cycles on the Hilbert scheme of 3 points in projective 3-space* Pre-print available [here].(https://arxiv.org/abs/2403.08918)
 * G. Moreland, *Postulation of a union of one double plane and many lines.* In preparation.
 
 Accepted
