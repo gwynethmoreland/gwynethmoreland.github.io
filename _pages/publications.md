@@ -13,7 +13,7 @@ In preparation
 
 Accepted
 ------
-* M. Brandt, J. Bruce, M. Chan, M. Melo, G. Moreland, C. Wolfe, *On the top-weight rational cohomology of $A_g$.* Geometry & Topology, to appear.
+* M. Brandt, J. Bruce, M. Chan, M. Melo, G. Moreland, C. Wolfe, *On the top-weight rational cohomology of $A_g$.* Geometry & Topology (2024).
 [arXiv:2012.02892](https://arxiv.org/abs/2012.02892)
 
 * J. DeWitt, K. Ford, E. Goldstein, S.J. Miller, G. Moreland, E. Palsson, S. Senger, *Dimensional lower bounds for Falconer type incidence and point configuration theorems.* JAMA (2019)
