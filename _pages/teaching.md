@@ -5,12 +5,13 @@ permalink: /teaching/
 author_profile: true
 ---
 
-Currently I am teaching Math 215: Introduction to Advanced Mathematics. Our section meets 1-1:50PM on MWF. Please see the [Blackboard site](https://uic.blackboard.com/) for more details.
+For fall 2024, I am teaching Math 210: Calculus III. Our section meets 2-2:50PM on MWF. Please see the [Blackboard site](https://uic.blackboard.com/) for more details.
 
-My office hours are Mondays at 2-3PM and Wednesdays at 12-1PM in SEO (Science and Engineering Offices) 413.
+My office hours are TBA.
 
 Past teaching (at UIC)
 ------
+* Spring 2024: Math 215 (Introduction to Advanced Mathematics)
 * Fall 2023: Math 210 (Calc III)
 
 Past teaching (at Harvard)
