@@ -104,6 +104,7 @@
 \newcommand{\TT}{{\mathscr T}}
 \newcommand{\SSS}{{\mathscr S}}
 \newcommand{\II}{{\mathscr I}}
+\newcommand{\JJ}{{\mathscr J}}
 \newcommand{\GG}{{\mathscr G}}
 \newcommand{\pp}{\frak{p}}
 \newcommand{\qq}{\frak{q}}
@@ -3244,7 +3245,7 @@ From the Euler exact sequence we get:
 \begin{align*}
 \det(\OO_X(-1)^{\oplus n+1}) = \det(\Omega_{X/k}) \otimes \det(\OO_x) 
 \end{align*}
-On the left we get $\omega_{X} \otimes \OO_x = \omega_X$. On the right we get $\OO_X(-1)^{\otimes (n+1)} = \OO_X(-n-1)$. Here, $\det$ of a locally free sheaf of rank $r$ means taking $\wedge^r$ of that sheaf. The equation above follows from the analogous statement for free modules (you showed this on HW 2).
+On the right we get $\omega_{X} \otimes \OO_x = \omega_X$. On the left we get $\OO_X(-1)^{\otimes (n+1)} = \OO_X(-n-1)$. Here, $\det$ of a locally free sheaf of rank $r$ means taking $\wedge^r$ of that sheaf. The equation above follows from the analogous statement for free modules (you showed this on HW 2).
 \end{proof}
 
 \begin{remark} Could also manually compute from div of a rational section. %\red{Could do more detail...}
@@ -3293,8 +3294,22 @@ See Hartshorne Theorem II.8.18. It's a neat study of how the hyperplane equation
 %####################    L E C T U R E      3 1   ###############################
 %#######################################################################
 %#######################################################################
-\begin{comment}
-\section{April 02: Cohomology}
+\section{April 02: Right derived functors, sheaf cohomology intro}
+
+Before we dive into the nitty-gritty of sheaf cohomology and necessary cohomology background: if we have an exact sequence of sheaves on some scheme $X$
+\[0 \to \FF' \to \FF \to \FF'' \to 0\]
+ then taking global sections is only left exact. We would like some way to continue this sequence
+\[0 \to \Gamma(X,\FF') \to \Gamma(X,\FF) \to \Gamma(X,\FF'') \to H^1(X,\FF') \to H^1(X,\FF) \to H^1(X,\FF'') \to H^2(X,\FF') \to \dots\]
+with the higher cohomology groups helping measure how the map on global sections fails to be exact (and want to use these in general for measuring obstructions), and with tools to compute when $H^1(X,\FF') = 0$ so that we get exactness. For example, one way to think of the fact that taking global sections is exact when $X$ is affine and $\FF'$ is quasicoherent is that
+\[H^1(X,\FF') = 0\]
+for $X$ affine and $\FF'$ quasicoherent (this is a theorem we will see later).
+
+We will see that the right definition for the sheaf cohomology groups is the right derived functor of the global sections functor.
+\\
+
+\hrule
+\vspace{1em}
+
 \begin{definition}
 Recall that a \textbf{complex} $A^{\bullet}$ in an abelian category is a sequence 
 \[\dots \stackrel{d^{i-2}}{\longrightarrow} A^{i-1} \stackrel{d^{i-1}}{\longrightarrow} A^i \stackrel{d^i}{\longrightarrow} A^{i+1} \stackrel{d^{i+1}}{\longrightarrow} \dots\]
@@ -3307,10 +3322,12 @@ such that $d^i \circ d^{i-1} = 0$ for all $i$. (Or also phrased as $d^2 = 0$).
 
 \begin{proposition} Given $0 \to A^{\bullet} \to B^{\bullet} \to C^{\bullet} \to 0$ an exact sequence of complexes, there exists a long exact sequence of cohomology:
 \[ \dots \to H^p A^{\bullet} \to H^p B^{\bullet} \to H^p C^{\bullet} \to H^{p+1} A^{\bullet} \to H^{p+1} B^{\bullet} \to H^{p+1} C^{\bullet} \to \dots\]
+Its existence is gained from the snake lemma (specifically, you take $c \in H^n(C)$ take a $b \in H^n(B)$ that maps to it. $db$ is in the kernel of the map to $C$, so it must be the image of some $a$ from $A^{n+1}$. Then the connecting map sends $c$ to the class of $a$).
 \end{proposition}
-\red{Doublecheck what this is}
 
-Given an abelian category and $A$ an object, the functor $\Hom(A, \star)$ is a covariant and left exact functor to abelian groups. The functor $\Hom(\star, A)$ is a contravariant left exact functor. 
+Given an abelian category and $A$ an object, the functor $\Hom(A, \star)$ is a covariant and left exact functor to abelian groups. The functor $\Hom(\star, A)$ is a contravariant left exact functor. That is, $0 \to B' \to B \to B'' \to 0$ exact means 
+\[0 \to \Hom(B'',A) \to \Hom(B,A) \to \Hom(B',A)\]
+is exact.
 
 \begin{definition} An object $I$ in an abelian category is \textbf{injective} if $\Hom( \star, I)$ is exact.
 \end{definition}
@@ -3320,13 +3337,13 @@ Given an abelian category and $A$ an object, the functor $\Hom(A, \star)$ is a c
 is exact
 \end{definition}
 
-We say an abelian category has \textit{enough injectives} if every object is a subobject of an injective object. This implies that every object has an injective resolution: you may think of this as basically the meaning of "enough injectives." (Any two injectives are, in that case, homotopy equivalent \red{FILL IN})
+We say an abelian category has \textbf{\textit{enough injectives}} if every object is a subobject of an injective object. \textbf{This implies that every object has an injective resolution}: you may think of this as basically the meaning of "enough injectives." (Any two injectives are, in that case, homotopy equivalent, in that you have maps in each between the complexes in each direction such that their composition is homotopic to the identity: i.e. induces identity map on cohomology)
 
 \begin{example}
 The injective objects in the category of abelian groups are the divisible groups-- i.e. groups where for any integer $n$ and elements $x$, there is a $y$ such that $ny = x$.
 \end{example}
 
-\begin{construction} Suppose $F: \frak{A} \to \frak{B}$ is a covariant left exact functor. We construct the \textbf{right derived functors} $R^i F$, $i \ge 0$, as follows. For each $A$ of $\frak{A}$, pick an injective resolution. Then define
+\begin{construction} Suppose $F: \frak{A} \to \frak{B}$ is a covariant left exact functor between abelian categories. Suppose $\frak{A}$ has enough injectives. We construct the \textbf{right derived functors} $R^i F$, $i \ge 0$, as follows. For each $A$ of $\frak{A}$, pick an injective resolution. Then define
 \[R^iF(A) = H^i(F(I^{\bullet})) = H^i\Big(0 \to F(I^0) \to F(I^1) \to \dots\Big)\]
 These are the right derived functors $R^i F$.
 \end{construction}
@@ -3349,7 +3366,7 @@ we get morphisms $\delta^i: R^iF(A'') \to R^{i+1}F(A')$ such that we get a long 
 the $\delta^i$ as above form a commutative diagram, so that we can get morphisms between the long exact sequences.
 \[\begin{tikzcd}
 R^i F(A'') \arrow[r,"\delta^i"] \arrow[d] & R^{i+1}F(A') \arrow[d]\\
-R^i F(B'') \arrow[r,"\delta^i"]& R^{i+1}F(B')\\=
+R^i F(B'') \arrow[r,"\delta^i"]& R^{i+1}F(B')\\
 \end{tikzcd}
 \]
 \item $I$ injective implies that $R^iF(I) = 0$ for $i > 0$.
@@ -3364,26 +3381,94 @@ R^i F(B'') \arrow[r,"\delta^i"]& R^{i+1}F(B')\\=
 where each $J^i$ is acyclic for $F$, then for each $i \ge 0$ there is a natural isomorphism $R^i F(A) \cong h^i(F(J^{\bullet}))$.
 \end{proposition}
 
+So you can instead compute the right derived functors with an acyclic resolution, which gives us a little more leeway.
+\\
+
+\hrule
+\vspace{1em}
+
+\begin{proposition} If $A$ is a ring, then the category of $A$-modules has enough injectives
+\end{proposition}
+
 \begin{proposition} Let $(X, \OO_X)$ be a ringed space. Then $\textup{Mod}(\OO_X)$ has enough injectives.
 \end{proposition}
+\begin{proof}
+See Hartshorne Proposition III.2.2. Very roughly, at each point, $\OO_{X,x}$ modules have enough injectives and "assemble" this info to get $\textup{Mod}(\OO_X)$ has enough injectives.
+\end{proof}
 
 \begin{definition} We set
 \[H^i(X, \star) = \textup{$i$-th right derived functor of $\Gamma(X,\star)$}\]
 \end{definition}
 
+\begin{remark} From this definition, we get some nice properties immediately. We get that $H^0(X,\FF) = \Gamma(X,\FF)$, we get additivity, we get long exact sequences.
+\end{remark}
+
+\begin{remark}Let $(X,\OO_X)$ be a ringed space. If $A = \Gamma(X,\OO_X)$, then for any $\OO_X$-module $\FF$ we have that the cohomology groups of $\FF$ have an $A$-module structure. Likewise, if $X$ is a scheme over $\spec B$ for some ring $B$, the cohomology groups of $\FF$ have a $B$-module structure.
+\end{remark}
+
+\begin{definition} A sheaf $\FF$ on a ringed space $(X,\OO_X)$ is \textbf{flasque} or \textbf{flabby} provided that the restriction maps are all surjective. That is, $V \subseteq U$ implies $\FF(U) \twoheadrightarrow \FF(V)$. 
+\end{definition}
+
+\begin{remark}A common example of flasque sheaves are skyscraper sheaves.
+\end{remark}
+
+\begin{lemma}\label{lemma:injective-implies-flasque} If $(X,\OO_X)$ is a ringed space, then any $\OO_X$-module is flasque. (Note that taking $\OO_X = \underline{\Z}$ guarantees existence of injective resolutions, and thus flasque resolutions, for general sheaves of abelian groups on a ringed space).
+\end{lemma}
+\begin{proof}
+Let $U$ be open in $X$. By abuse of notation, we set $\OO_U = j_!(\OO_X|_U)$, which is the restriction of $\OO_X$ to $U$, extended by zero outside $U$. Let $\II$ be an injective $\OO_X$-module, and $V \subseteq U$ be open sets. We have:
+\[0 \to \OO_V \to \OO_U\]
+$\II$ is injective, so we get a surjection 
+\[\Hom(\OO_U, \II) \to \Hom(\OO_V,\II) \to 0\]
+but lower shriek \footnote{See Hartshorne exercise II.19 for more on extension by zero and lower shriek. Let $j: U \to X$ be inclusion of an open set. Extension of $\FF$ a sheaf on $U$ by zero in general is done by taking $j_!\FF$ to be the sheafification of: $V \mapsto \FF(V)$ if $V \subseteq U$ and $V \mapsto 0$ otherwise. It is adjoint to the restriction functor. The general construction of the lower-shriek functor $f_!$ and discussions of what its adjoint should be is more complicated.} is adjoint to restriction, so
+\[\Hom(\OO_U,\II) = \Hom_{\OO_X|_{U}}(\OO_X|_{U}, \II|_U) = \II(U)\]
+So we have that restriction $\II(U) \to \II(V)$ is surjective.
+\end{proof}
+
+\begin{proposition} Flasque sheaves are acyclic for $\Gamma(X,\star)$. Thus, "flasque resolutions" can be used to compute sheaf cohomology.
+\end{proposition}
+\begin{proof}
+Embed $\FF$ in an injective $\II$, and denote by $\mathscr{Q}$ the quotient.
+\[0 \to \FF \to \II \to \mathscr{Q} \to 0\]
+$\FF$ is flasque, and $\II$ is injective and thus flasque. Thus, $\mathscr{Q}$ is flasque.\footnote{To see this: one can show $0 \to \GG ' \to \GG \to \GG '' \to 0$ with $\GG'$ flasque implies $0 \to \GG'(U) \to \GG(U) \to \GG''(U) \to 0$ is exact. So, let $V \subseteq U$. In the notation $0 \to \FF \to \II \to \mathscr{Q} \to 0$, flasqueness of $\FF$ means that $f \in \mathscr{Q}(V)$ can be lifted to $f' \in \II(V)$. Then this extends to $f'' \in \II(U)$, since $\II$ is flasque. Then we have the image of $f''$ in $\mathscr{Q}(U)$ is an extension of $f \in \mathscr{Q}(V)$, so restriction maps on $\mathscr{Q}$ are surjective.}
+Taking global sections yields
+\[ 0 \to \Gamma(X,F) \to \Gamma(X,\II) \to \Gamma(X,\mathscr{Q}) \to 0\]
+since all the sheaves are flasque. Consider as well the exact sequence of sheaf cohomology. Since $H^i(X,\II) = 0$, we get $H^1(X,\FF) = 0$, and $H^i(X,\FF) = H^{i-1}(X,\GG)$ for each $i \ge 2$. $\GG$ is flasque, so induction will yield that all the higher cohomology $H^i(X,\FF) = 0$. That is to say, the higher direct images of $\Gamma(X,\star)$ vanish for $\FF$ and thus $\FF$ is acyclic.
+\end{proof}
+
+\begin{corollary} Let $Y$ be a closed subscheme of $X$ and $\FF$ a sheaf of abelian groups on $Y$, and $i: Y \to X$ the inclusion. Then
+\[H^i(Y,\FF) = H^i(X,i_*\FF)\]
+Thus, we sometimes drop the $i_*$ notation and just write $H^i(X,\FF)$.
+\end{corollary}
+\begin{proof}
+Note that injective sheaves are also flasque (see Lemma \ref{lemma:injective-implies-flasque}). If $\JJ^{\bullet}$ is a flasque resolution of $\FF$ on $Y$, then $i_*\JJ^{\bullet}$ will be a flasque resolution of $i_*\FF$, and we have $\Gamma(Y,\JJ^i) = \Gamma(X,i_* \JJ^i)$, so we'll get the same cohomology groups.
+\end{proof}
+
+
+%#######################################################################
+%#######################################################################
+%####################    L E C T U R E      3 2   ###############################
+%#######################################################################
+%#######################################################################
+\begin{comment}
+\section{April 04: properties and vanishing theorems of sheaf cohomology, \v Cech cohomology}
 \begin{theorem} We have
 \[H^i(X,\FF) = 0 \quad \quad \textup{for all $i > \dim X$}\]
-(And, $H^i(X,\FF) = 0$ for $i < 0$).
+%(And, $H^i(X,\FF) = 0$ for $i < 0$).
 \end{theorem}
+\begin{proof}
+See Hartshorne Theorem III.2.7. The proof is an induction on dimension. \red{In cases where we can swap sheaf cohomology for Cech, this will become a little more immediate.}
+%Requires that injective $\OO_X$-modules are flasque, and some facts about \textbf{flasque sheaves}. Flasque sheaves or flabby sheaves are ones such that restriction maps are surjective. \red{Flasque sheaves acyclic, etc}.
+\end{proof}
 
 \begin{proposition} We have
 \[\varinjlim H^i(X,\FF_{\alpha}) = H^i(X, \varinjlim \FF_{\alpha})\]
 \end{proposition}
 
-\begin{proposition} Let $i Y \to X$ be a closed subscheme of $X$. Then
-\[H^i(Y,\FF) \cong H^i(X, j_*\FF)\]
-(Hence, you will sometimes see people write $\FF$ instead of $j_* \FF$).
-\end{proposition}
+\begin{lemma} Let $I$ be an injective module over a Noetherian ring $A$. Then $\wt{I}$ is a flasque sheaf on $\spec A$.
+\end{lemma}
+\begin{proof}
+See Hartshorne Proposition III.3.4.
+\end{proof}
 
 \begin{theorem} Suppose $X$ is a Noetherian scheme. The following are equivalent:
 \begin{enumerate}[(a)]
@@ -3392,24 +3477,46 @@ where each $J^i$ is acyclic for $F$, then for each $i \ge 0$ there is a natural 
 \item $H^i(X, \II) = 0$ for all coherent ideal sheaves $\II$.
 \end{enumerate}
 \end{theorem}
-\red{Maybe say a little motivation for this}
+\begin{proof}\textup{ }
+\begin{itemize}
+\item \textbf{(i) $\Rightarrow$ (ii):} Let $X = \spec A$. Let $\FF$ be quasicoherent, let $M = \Gamma(X,\FF)$. Take an injective resolution in the category of $A$-modules:
+\[0 \to M \to I^0 \to I^1 \to \dots\]
+This yields a flasque resolution:
+\[0 \to \wt{M} \to \wt{I^0} \to \wt{I^1} \to \dots\]
+so we can use this sequence to compute cohomology. Applying the global sections functor $\Gamma(X,\star)$, we recover the above sequence of modules, and we know this sequence is exact (since $X$ affine and all the terms as quasicoherent). Thus $H^0(X,\FF) = M$, and $H^i(X,\FF) = 0$ for $i > 0$.
+\item \textbf{(ii) $\Rightarrow$ (iii):} Immediate.
+\item \textbf{(iii) $\Rightarrow$ (i):} One can use the hypothesis to show that $X$ is covered by the $X_{f}$ for $f \in \Gamma(X,\OO_X)$. Namely, let $U$ be an open affine of $P$ a closed point, and set $Y = X \setminus U$ We get:
+\[0 \to \II_{Y \cup \{P\}} \to \II_Y \to k(P) \to 0\]
+The latter term is a skyscraper sheaf $k(P)$ supported at $P$. Exactness can be checked at the stalk level. We get:
+\[\Gamma(X,\II_Y) \to \Gamma(X,k(P)) \to H^1(X,\II_{Y \cup \{P\}}) = 0\]
+so there is an element $f \in \Gamma(X,\II_Y)$ that maps to 1, i.e. $f \in \II_Y$ such that $f_p \equiv 1$ mod $\mm_p$. Then $p \in X_f \subseteq U$ (because $f$ vanishes on $Y$ by construction). Further, $X_f = U_f$, so $X_f$ is affine.
 
-\begin{remark} The vanishing of $H^1$ on affines combined with the long exact sequence on the $R^i$ means that taking global sections, which is normally left-exact, is an exact functor on quasicoherent sheaves on affine schemes. (We have checked this before, but it is good to know we recover this fact).
-\end{remark}
-These sheaf cohomology groups have a few properties. (These satisfy the "desired properties" we would want it to have outlined in Chapter 18.1 of Vakil).
+Quasicompactness implies that we only need finitely many $X_{f_i}$ to cover $X$. Denote the corresponding elements $f_1,\dots,f_r$. Using our affine-ness criteria from HW 1. we need to check that $f_1,\dots,f_r$ generate the unit ideal in $A = \Gamma(X,\OO_X)$. Consider:
+\[0 \to \FF \to \OO^{\oplus r}_X \to \OO_X \to 0\]
+where $\OO^r_X \to \OO_X$ looks like $(a_1,\dots,a_r) \mapsto \sum f_i a_i$, i.e. it is a multiplication map. We want to show that $H^1(X,\FF)$, so that the map on global sections is surjective. By filtering:
+\[\FF = \FF \cap \OO_X^r \supseteq \FF \cap \OO_X^{r-1} \supseteq \dots \supseteq \FF \cap \OO_X \]
+Each quotient in the filtration looks like a coherent sheaf of ideals in $\OO_X$ and thus has vanishing $H^1$. Considering each of the quotient sequences and the corresponding long exact sequence, we "climb up" the filtration and get that each $\FF \cap \OO_X^{i}$ has vanishing $H^1$. Thus, $H^1(X,\FF) = 0$. But then 
+\[\Gamma(X,\OO^r_X) \to \Gamma(X,\OO_X)\]
+is surjective, meaning $f_1,\dots,f_r$ generate the unit ideal.
+\end{itemize}
+\end{proof}
+
+%\begin{remark} The vanishing of $H^1$ on affines combined with the long exact sequence on the $R^i$ means that taking global sections, which is normally left-exact, is an exact functor on quasicoherent sheaves on affine schemes. (We have checked this before, but it is good to know we recover this fact).
+%\end{remark}
+These sheaf cohomology groups have a few properties that are worth pointing out. (These satisfy the "desired properties" we would want it to have outlined in Chapter 18.1 of Vakil).
 
 \begin{proposition} We have the following properties of sheaf cohomology:
 \begin{enumerate}[(a)]
 \item Suppose $X$ is separated and quasicompact over $A$. Then $H^i(X,\star)$ is a covariant functor 
 \[\textup{Qcoh}_X \to \textup{Mod}_A\]
 \item We have that $H^0(X,\FF) = \Gamma(X,\FF)$. The covariance for $i=0$ referred to above induces the usual $\Gamma(X,\FF) \to \Gamma(X,\GG)$.
-\item Given a short exact sequence of quasicoherent sheaves on $X$, the right derived functor interpretation means a short exact sequence $0 \to \FF \to \GG \to \HH \to 0$ induces a long exact sequence on cohomology.
+\item Given a short exact sequence of quasicoherent sheaves on $X$, the right derived functor interpretation means a short exact sequence $0 \to \FF \to \GG \to \mathscr{H} \to 0$ induces a long exact sequence on cohomology.
 \item If $\pi: X\to Y$ is any morphism of quasicompact separated $A$-schemes, and $\FF$ quasicoherent on $X$, then there is a natural morphism
 \[H^i(Y,\pi_* F) \to H^i(X,\FF)\]
 extending $\Gamma(Y,\pi_* \FF) \to \Gamma(X,\FF)$. \red{Leray spectral sequence stuff}
 \item If $\pi: X \to Y$ is an affine morphism, and $\FF$ quasicoherent on $X$, then the natural map on cohomology groups is an isomorphism
 \[H^i(Y, \pi_* \FF) \stackrel{\cong}{\longrightarrow} H^i(X,\FF)\]
-Then $\pi$ is a closed embedding into projective space, this isomorphism will help us translate between computations on projective schemes and computations on projective space.
+When $\pi$ is a closed embedding into projective space, this isomorphism will help us translate between computations on projective schemes and computations on projective space.
 \end{enumerate}
 \end{proposition}
 
@@ -3420,27 +3527,27 @@ We will eventually see for $\PP^n_A$
 
 \begin{enumerate}
 \item $H^0(\PP^n_A, \OO^{\PP^n_A}(m))$ is a free $A$-module of rank $\binom{n+m}{m}$ if $m \ge 0$.
-\item $H^n(\PP^n_A, \OO_{\PP^n_A}(m))$ is free of rank $\binom{-m-1}{-n-m-1}$ if $m \le -n-1$. \red{Translate this to more positive binomial entries?}
+\item $H^n(\PP^n_A, \OO_{\PP^n_A}(m))$ is free of rank $\binom{-m-1}{-n-m-1}$ if $m \le -n-1$. %\red{Translate this to more positive binomial entries?}
 \item $H^i(\PP^n, \OO_{\PP^n_A}(m))$ otherwise
 \end{enumerate}
 
 \begin{remark}
 There are a few observations to be made here:
 \begin{itemize}
-\item The cohomology vanishes in degree above $n$ (corresponding to the fact that $\PP^n_A$ is covered by $n+1$ affines). \red{check}
+\item The cohomology vanishes in degree above $n$ (consequence of previously mentioned theorem, but also can be derived from the fact that $\PP^n_A$ is covered by $n+1$ affines)
 \item The cohomology groups are \underline{finitely generated} $A$-modules. This is true for coherent sheaves on projective $A$-schemes.
 \item The top degree cohomology vanishes for $m > -n-1$. This is an example of \textbf{Kodaira vanishing}, which gives us, in this case, that for $\OO(p)$ with $p > 0$, we have that 
 \[H^n(X, \OO_{\PP^n_k}(p) \otimes \Omega_{\PP^n/k}) = H^n(X, \OO_{\PP^n_k}(p-n-1)) = 0\]
 Here $\textup{char }k = 0$. (Kodaira vanishing gives $H^q(X, \LL \otimes \Omega_{X/k}^{\otimes p}) = 0$ for $p+q > \dim X$ where $\LL$ is ample and $X$ projective over $k$. Above we want $q = \dim X$ and $p = 1$ so the inequality is satisfied).
-\item The top cohomology group is one-dimensional for $m = -n-1$ and $A = k$. This is an example of Serre duality:
-\[\red{do the equation}\]
+\item The top cohomology group is one-dimensional for $m = -n-1$ and $A = k$. Namely, observe that for $X = \PP^n_k$ we have
+\[h^0(X,\OO_{X}) = h^n(X, \OO_{X}(-n-1) \otimes \OO_X^{\vee}) = h^n(X,\omega_X \otimes \OO_X^{\vee})\]
+This is a first example of Serre duality:
+\[H^i(X,\mathscr{E}) \cong H^{n-i}(X, \omega_X \otimes \mathscr{E}^{\vee})^*\]
+where $\mathscr{E}$ is locally free sheaf of finite rank.
 \item The alternating sum
 \[\sum (-1)^i h^i(\OO^n,\OO(m)) \]
 is a polynomial in $m$ of degree $n$. This is an example of a \textbf{Hilbert polynomial}. \red{Add on}
 \end{itemize}
-\end{remark}
-
-\begin{remark} \red{Something something here about how you can compute with acyclic resolution and not injective}
 \end{remark}
 
 \hrule
@@ -3491,6 +3598,14 @@ which, after trivializing, looks like
 So we get that $H^1$ is, as a group, $k[u^{\pm 1}]/(u^dq(u^{-1}) - p(u))_{p,q}$. \red{Compute rank?}
 \end{example}
 \end{comment}
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
 %#######################################################################
 %#######################################################################
 %#######################################################################
