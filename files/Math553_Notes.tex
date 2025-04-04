@@ -38,6 +38,7 @@
       \newtheorem{construction}[theorem]{Construction}
       \newtheorem{lemma}[theorem]{Lemma}
       \newtheorem{remark}[theorem]{Remark}
+      
 
     \theoremstyle{remark}
 
@@ -68,6 +69,7 @@
   \newcommand{\C}{{\mathbb C}}
 \newcommand{\Z}{{\mathbb Z}}
 \newcommand{\OO}{{\mathcal O}}
+
 
 \newcommand{\N}{{\mathcal N}}
 %\newcommand{\R}{{\mathbb R}}
@@ -112,6 +114,7 @@
 \newcommand{\wt}{\widetilde}
 \newcommand{\NE}{\text{NE}}
 \newcommand{\Bl}{\textup{Bl}}
+\newcommand{\vH}{\textup{\v H}}
 
 \newcommand{\Kbar}{{\bar K}}
 \newcommand{\A}{{\mathbb A}}
@@ -3300,9 +3303,9 @@ Before we dive into the nitty-gritty of sheaf cohomology and necessary cohomolog
 \[0 \to \FF' \to \FF \to \FF'' \to 0\]
  then taking global sections is only left exact. We would like some way to continue this sequence
 \[0 \to \Gamma(X,\FF') \to \Gamma(X,\FF) \to \Gamma(X,\FF'') \to H^1(X,\FF') \to H^1(X,\FF) \to H^1(X,\FF'') \to H^2(X,\FF') \to \dots\]
-with the higher cohomology groups helping measure how the map on global sections fails to be exact (and want to use these in general for measuring obstructions), and with tools to compute when $H^1(X,\FF') = 0$ so that we get exactness. For example, one way to think of the fact that taking global sections is exact when $X$ is affine and $\FF'$ is quasicoherent is that
+with the higher cohomology groups helping measure how the map on global sections fails to be exact (and want to use these in general for measuring obstructions), and with tools to compute when $H^1(X,\FF') = 0$ so that we get exactness. One way to phrase the fact that taking global sections is exact when $X$ is affine and $\FF'$ is quasicoherent is that
 \[H^1(X,\FF') = 0\]
-for $X$ affine and $\FF'$ quasicoherent (this is a theorem we will see later).
+for $X$ affine and $\FF'$ quasicoherent.
 
 We will see that the right definition for the sheaf cohomology groups is the right derived functor of the global sections functor.
 \\
@@ -3403,7 +3406,7 @@ See Hartshorne Proposition III.2.2. Very roughly, at each point, $\OO_{X,x}$ mod
 \begin{remark} From this definition, we get some nice properties immediately. We get that $H^0(X,\FF) = \Gamma(X,\FF)$, we get additivity, we get long exact sequences.
 \end{remark}
 
-\begin{remark}Let $(X,\OO_X)$ be a ringed space. If $A = \Gamma(X,\OO_X)$, then for any $\OO_X$-module $\FF$ we have that the cohomology groups of $\FF$ have an $A$-module structure. Likewise, if $X$ is a scheme over $\spec B$ for some ring $B$, the cohomology groups of $\FF$ have a $B$-module structure.
+\begin{remark}Let $(X,\OO_X)$ be a ringed space. If $A = \Gamma(X,\OO_X)$, then for any $\OO_X$-module $\FF$ we have that the cohomology groups of $\FF$ have an $A$-module structure. Likewise, if $X$ is a scheme over $\spec B$ for some ring $B$, the cohomology groups of $\FF$ have a $B$-module structure. But do note that sometimes we want to think about cohomology of sheaves of abelian groups $\FF$ that do \textit{not} necessarily have a multiplication action by the structure sheaf.
 \end{remark}
 
 \begin{definition} A sheaf $\FF$ on a ringed space $(X,\OO_X)$ is \textbf{flasque} or \textbf{flabby} provided that the restriction maps are all surjective. That is, $V \subseteq U$ implies $\FF(U) \twoheadrightarrow \FF(V)$. 
@@ -3412,7 +3415,7 @@ See Hartshorne Proposition III.2.2. Very roughly, at each point, $\OO_{X,x}$ mod
 \begin{remark}A common example of flasque sheaves are skyscraper sheaves.
 \end{remark}
 
-\begin{lemma}\label{lemma:injective-implies-flasque} If $(X,\OO_X)$ is a ringed space, then any $\OO_X$-module is flasque. (Note that taking $\OO_X = \underline{\Z}$ guarantees existence of injective resolutions, and thus flasque resolutions, for general sheaves of abelian groups on a ringed space).
+\begin{lemma}\label{lemma:injective-implies-flasque} If $(X,\OO_X)$ is a ringed space, then any injective $\OO_X$-module is flasque. (Note that taking $\OO_X = \underline{\Z}$ guarantees existence of injective resolutions, and thus flasque resolutions, for general sheaves of abelian groups on a ringed space).
 \end{lemma}
 \begin{proof}
 Let $U$ be open in $X$. By abuse of notation, we set $\OO_U = j_!(\OO_X|_U)$, which is the restriction of $\OO_X$ to $U$, extended by zero outside $U$. Let $\II$ be an injective $\OO_X$-module, and $V \subseteq U$ be open sets. We have:
@@ -3449,19 +3452,20 @@ Note that injective sheaves are also flasque (see Lemma \ref{lemma:injective-imp
 %####################    L E C T U R E      3 2   ###############################
 %#######################################################################
 %#######################################################################
-\begin{comment}
-\section{April 04: properties and vanishing theorems of sheaf cohomology, \v Cech cohomology}
+\section{April 04: Properties and vanishing theorems of sheaf cohomology}
 \begin{theorem} We have
 \[H^i(X,\FF) = 0 \quad \quad \textup{for all $i > \dim X$}\]
+for all $X$ a noetherian topological space of dimension $n$ and $\FF$ a sheaf of abelian groups on $X$.
 %(And, $H^i(X,\FF) = 0$ for $i < 0$).
 \end{theorem}
 \begin{proof}
-See Hartshorne Theorem III.2.7. The proof is an induction on dimension. \red{In cases where we can swap sheaf cohomology for Cech, this will become a little more immediate.}
+See Hartshorne Theorem III.2.7. The proof is an induction on dimension. \red{} %\red{In cases where we can swap sheaf cohomology for Cech, this will become a little more immediate.}
 %Requires that injective $\OO_X$-modules are flasque, and some facts about \textbf{flasque sheaves}. Flasque sheaves or flabby sheaves are ones such that restriction maps are surjective. \red{Flasque sheaves acyclic, etc}.
 \end{proof}
 
 \begin{proposition} We have
-\[\varinjlim H^i(X,\FF_{\alpha}) = H^i(X, \varinjlim \FF_{\alpha})\]
+\[\varinjlim H^i(X,\FF_{\alpha}) \stackrel{\cong}{\to} H^i(X, \varinjlim \FF_{\alpha})\]
+
 \end{proposition}
 
 \begin{lemma} Let $I$ be an injective module over a Noetherian ring $A$. Then $\wt{I}$ is a flasque sheaf on $\spec A$.
@@ -3474,7 +3478,7 @@ See Hartshorne Proposition III.3.4.
 \begin{enumerate}[(a)]
 \item $X$ is affine
 \item $H^i(X, \FF) = 0$ for all quasicoherent $\FF$ and $i > 0$
-\item $H^i(X, \II) = 0$ for all coherent ideal sheaves $\II$.
+\item $H^1(X, \II) = 0$ for all coherent ideal sheaves $\II$.
 \end{enumerate}
 \end{theorem}
 \begin{proof}\textup{ }
@@ -3487,13 +3491,13 @@ so we can use this sequence to compute cohomology. Applying the global sections 
 \item \textbf{(ii) $\Rightarrow$ (iii):} Immediate.
 \item \textbf{(iii) $\Rightarrow$ (i):} One can use the hypothesis to show that $X$ is covered by the $X_{f}$ for $f \in \Gamma(X,\OO_X)$. Namely, let $U$ be an open affine of $P$ a closed point, and set $Y = X \setminus U$ We get:
 \[0 \to \II_{Y \cup \{P\}} \to \II_Y \to k(P) \to 0\]
-The latter term is a skyscraper sheaf $k(P)$ supported at $P$. Exactness can be checked at the stalk level. We get:
+The latter term is a skyscraper sheaf of the residue field $k(P)$ supported at $P$. Exactness can be checked at the stalk level. We get:
 \[\Gamma(X,\II_Y) \to \Gamma(X,k(P)) \to H^1(X,\II_{Y \cup \{P\}}) = 0\]
 so there is an element $f \in \Gamma(X,\II_Y)$ that maps to 1, i.e. $f \in \II_Y$ such that $f_p \equiv 1$ mod $\mm_p$. Then $p \in X_f \subseteq U$ (because $f$ vanishes on $Y$ by construction). Further, $X_f = U_f$, so $X_f$ is affine.
 
-Quasicompactness implies that we only need finitely many $X_{f_i}$ to cover $X$. Denote the corresponding elements $f_1,\dots,f_r$. Using our affine-ness criteria from HW 1. we need to check that $f_1,\dots,f_r$ generate the unit ideal in $A = \Gamma(X,\OO_X)$. Consider:
+Quasicompactness implies that we only need finitely many $X_{f_i}$ to cover $X$. Denote the corresponding elements $f_1,\dots,f_r$. Using our affine-ness criteria from HW 1, we need to check that $f_1,\dots,f_r$ generate the unit ideal in $A = \Gamma(X,\OO_X)$. Consider:
 \[0 \to \FF \to \OO^{\oplus r}_X \to \OO_X \to 0\]
-where $\OO^r_X \to \OO_X$ looks like $(a_1,\dots,a_r) \mapsto \sum f_i a_i$, i.e. it is a multiplication map. We want to show that $H^1(X,\FF)$, so that the map on global sections is surjective. By filtering:
+where $\OO^r_X \to \OO_X$ looks like $(a_1,\dots,a_r) \mapsto \sum f_i a_i$, i.e. it is a multiplication map. We want to show that $H^1(X,\FF)$, so that the map on global sections is surjective. Here $\FF$ just denotes the kernel sheaf of this morphism. By filtering:
 \[\FF = \FF \cap \OO_X^r \supseteq \FF \cap \OO_X^{r-1} \supseteq \dots \supseteq \FF \cap \OO_X \]
 Each quotient in the filtration looks like a coherent sheaf of ideals in $\OO_X$ and thus has vanishing $H^1$. Considering each of the quotient sequences and the corresponding long exact sequence, we "climb up" the filtration and get that each $\FF \cap \OO_X^{i}$ has vanishing $H^1$. Thus, $H^1(X,\FF) = 0$. But then 
 \[\Gamma(X,\OO^r_X) \to \Gamma(X,\OO_X)\]
@@ -3503,26 +3507,33 @@ is surjective, meaning $f_1,\dots,f_r$ generate the unit ideal.
 
 %\begin{remark} The vanishing of $H^1$ on affines combined with the long exact sequence on the $R^i$ means that taking global sections, which is normally left-exact, is an exact functor on quasicoherent sheaves on affine schemes. (We have checked this before, but it is good to know we recover this fact).
 %\end{remark}
-These sheaf cohomology groups have a few properties that are worth pointing out. (These satisfy the "desired properties" we would want it to have outlined in Chapter 18.1 of Vakil).
+These sheaf cohomology groups have some additional properties worth pointing out.
 
 \begin{proposition} We have the following properties of sheaf cohomology:
 \begin{enumerate}[(a)]
-\item Suppose $X$ is separated and quasicompact over $A$. Then $H^i(X,\star)$ is a covariant functor 
-\[\textup{Qcoh}_X \to \textup{Mod}_A\]
-\item We have that $H^0(X,\FF) = \Gamma(X,\FF)$. The covariance for $i=0$ referred to above induces the usual $\Gamma(X,\FF) \to \Gamma(X,\GG)$.
-\item Given a short exact sequence of quasicoherent sheaves on $X$, the right derived functor interpretation means a short exact sequence $0 \to \FF \to \GG \to \mathscr{H} \to 0$ induces a long exact sequence on cohomology.
+%\item Suppose $X$ is separated and quasicompact over $A$. Then $H^i(X,\star)$ is a covariant functor 
+%\[\textup{Qcoh}_X \to \textup{Mod}_A\]
+%\item We have that $H^0(X,\FF) = \Gamma(X,\FF)$. The covariance for $i=0$ referred to above induces the usual $\Gamma(X,\FF) \to \Gamma(X,\GG)$.
+%\item Given a short exact sequence of quasicoherent sheaves on $X$, the right derived functor interpretation means a short exact sequence $0 \to \FF \to \GG \to \mathscr{H} \to 0$ induces a long exact sequence on cohomology.
 \item If $\pi: X\to Y$ is any morphism of quasicompact separated $A$-schemes, and $\FF$ quasicoherent on $X$, then there is a natural morphism
 \[H^i(Y,\pi_* F) \to H^i(X,\FF)\]
-extending $\Gamma(Y,\pi_* \FF) \to \Gamma(X,\FF)$. \red{Leray spectral sequence stuff}
-\item If $\pi: X \to Y$ is an affine morphism, and $\FF$ quasicoherent on $X$, then the natural map on cohomology groups is an isomorphism
+extending $\Gamma(Y,\pi_* \FF) \to \Gamma(X,\FF)$. %\red{(Leray spectral sequence stuff: note that $f_*$ composed with global sections functor is same as global sections functor on the original, so get $R^i(\Gamma \circ f_*)(\FF) = H^i(X,\FF)$. Study of what happens to injective objects and spectral sequence shenanigans gets this.} Likewise, get $H^i(Y, \GG) \to H^i(X,\pi^*\GG)$.
+\item If $\pi: X \to Y$ is an affine morphism between noetherian separated schemes, and $\FF$ quasicoherent on $X$, then the natural map on cohomology groups is an isomorphism
 \[H^i(Y, \pi_* \FF) \stackrel{\cong}{\longrightarrow} H^i(X,\FF)\]
-When $\pi$ is a closed embedding into projective space, this isomorphism will help us translate between computations on projective schemes and computations on projective space.
+This is Hartshorne exercise III.4.2 and it is on your homework.
+When $\pi$ is a closed embedding into projective space, this isomorphism will help us translate between computations on projective schemes and computations on projective space. 
 \end{enumerate}
 \end{proposition}
 
-\begin{remark} It is worth noting that in practice, and especially in the scope of this course, you will not have to compute cohomology by writing down an injective resolution and computing the cohomology of the complex. You will usually compute it from long exact sequences, vanishing theorems, and using Cech cohomology (which is much more "concrete" and friendly for computing).
+\begin{remark} It is worth noting that in practice, and especially in the scope of this course, you generally will not have to compute cohomology by writing down an injective resolution and computing the cohomology of the complex. You will usually compute it from long exact sequences, vanishing theorems, and using Cech cohomology (which is much more "concrete" and friendly for computing).
 \end{remark}
-
+%#######################################################################
+%#######################################################################
+%####################    L E C T U R E      3 3   ###############################
+%#######################################################################
+%#######################################################################
+\begin{comment}
+\section{April 07: \v Cech cohomology, and cohomology of line bundles on projective space}
 We will eventually see for $\PP^n_A$
 
 \begin{enumerate}
@@ -3579,14 +3590,38 @@ and the map $C^p(\{U_i\}_{i \in I}, \FF) \to C^{p+1}(\{U_i\}_{i \in I}, \FF)$ is
 
 \begin{definition} We denote
 \[ \textup{\v H}(\{U_i\}, \FF) = H^p(C^{\bullet}(\{U_i\}_{i \in I}, \FF))\]
+While this is defined in general for a sheaf of abelian groups on a topological space $X$, in the context of algebraic geometry we will usually be restricting our attention to $X$ a scheme and $\{U_i\}$ a cover by open affines. Furthermore, you will almost always want the condition that $X$ is noetherian and separated for the following.
 \end{definition}
 
-\begin{theorem} Suppose $X$ is quasicompact and separated. THen $\textup{\v H}(\{U_i\},\FF)$ is independent of the choice of finite cover $\{U_i\}$. \red{could say more}. Hence in this case we can suppress the $\{U_i\}$ notation and refer to the \v Cech cohomology groups as $H^i(X,\FF)$. \red{CHECK IF VAKIL REQUIRES AFFINE}
+\begin{remark} Note that we immediately get that $H^0$ is the group of global sections. This follows from sheaf axioms.
+\end{remark}
+
+\begin{theorem} Suppose $X$ is a noetherian and separated scheme. Then $\vH(\{U_i\},\FF)$ is independent of the choice of affine open finite cover $\{U_i\}$. Hence in this case we can suppress the $\{U_i\}$ notation and refer to the \v Cech cohomology groups as $\vH^i(X,\FF)$.
 \end{theorem}
 
-\begin{theorem} Let $X$ be noetherian and separated. Let $\{U_i\}$ be an open affine cover of $X$, ad let $\FF$ be quasi-coherent on $X$. Then for all $p \ge 0$, we have
+\begin{remark} The proof is a bit of diagram bashing (see Vakil 18.2.3) The idea is to show that $H^i(\{U_i\}_{i=0}^n) \to H^i(\{U_i\}_{i=1}^n)$ is an isomorphism when $\{U_i\}_{i=1}^n$ is an open affine cover. In that way, we can show that adding an extra piece to a cover does not change cohomology. So take two separate covers, and refine them together, and get that each cover gives the same cohomology as the refined cover.
+
+The separated criterion is important for guaranteeing that that $U_i \cap U_j$ is affine (Hartshorne Exercise II.4.3 from HW 2) as you need some vanishing theorems about (\v Cech) cohomology of quasicoherent sheaves on affines. The noetherian criterion is important for guaranteeing $X$ quasicompact (though we will want specifically noetherian for statements later on).
+\end{remark}
+
+\begin{theorem} Let $X$ be noetherian and separated. Let $\{U_i\}$ be an open affine cover of $X$, and let $\FF$ be quasicoherent on $X$. Then for all $p \ge 0$, we have
 \[ \Big(H^p(\{U_i\},\FF \Big) = \textup{\v H}^p(X,\FF) \stackrel{\cong}{\longrightarrow} H^p(X,\FF)\]
+\textbf{In general:} for $X$ a topological space, $\{U_i\}$ an open cover, you get a morphism (not necessarily an isomorphism, though).
 \end{theorem}
+\begin{proof}
+\red{DELAY TILL NEXT TIME: COMPUTATION MORE IMPORTANT}
+\\
+
+Define a "sheafified" version of the \v Cech complex, where for any open $V \subseteq X$ you let $i_V: V \to X$ denote the inclusion map, and construct a complex of sheaves on $X$ by setting:
+\[\mathscr{C}^p(\{U_i\},\FF) = \prod_{i_0 < \dots<i_p} i_v^*(\FF|_{U_0,\dots,U_p})\]
+and define the $d$ maps analogously. By construction, we have $\Gamma(X,\mathscr{C}^{p}(\{U_i\},\FF)) = C^p(\{U_i\},\FF)$.
+
+Look at the two resolutions $0 \to \FF \to \II^{\bullet}$ and $0 \to \FF \to \mathscr{C}^{\bullet}(\{U_i\},\FF)$. A general result on complexes (see Hilton \& Stammbach section IV theorem 4.4) says (since the latter chain has higher cohomology zero-- careful with what that means!) that you get a map of complexes $\mathscr{C}^{\bullet}(\{U_i\},\FF) \to \II^{\bullet}$, inducing the identity map on $\FF$. Then taking global sections and cohomology, we get the desired map.
+
+Why is it an isomorphism? Note that we always have the $U_{i_0 < \dots < i_p}$ are affine because $X$ is separated. Then imbedding into flasque \red{and etc etc etc} we get a chain of isomorphisms and are done.
+\end{proof}
+
+The following shows the computational usefulness of \v Cech cohomology. Writing down injection resolutions is hard. Writing down flasque resolutions, while a bit better, can still be quite tricky! Whereas concrete chart computations on $\PP^n$ and some other stock projective schemes are not so bad.
 
 \begin{example} Consider the cohomology groups of $H^i(\PP^1,\OO(d))$. We use the affine cover $U_0 = D(x_0), U_1 = D(x_1)$. Let $u = x_1/x_0$. Then we get
 \[0 \to \OO(d)(U_0) \times \OO(d)(U_1) \to \OO(d)(U_0 \cap U_1) \to 0\]
@@ -3595,8 +3630,16 @@ which, after trivializing, looks like
 0 \longrightarrow \quad \quad \quad k[u] \times k[v = u^{-1}] &\to k[u,u^{-1}] \quad \quad \quad \quad \longrightarrow 0 \\
   (p(u), q(v)) &\mapsto u^d q(u^{-1}) - p(u) 
 \end{align*}
-So we get that $H^1$ is, as a group, $k[u^{\pm 1}]/(u^dq(u^{-1}) - p(u))_{p,q}$. \red{Compute rank?}
+So we get that $H^1$ is, as a group (specifically, $k$-vector space), $k[u^{\pm 1}]/(u^dq(u^{-1}) - p(u))_{p,q}$. If $d \ge 0$ then note that we can get $1,u^m,u^-m$ in the set of things we're modding out by, so $H^1(\PP^n,\OO(d)) = 0$ in that case. If $d=-1$, we still get that $1,u^m,u^{-m}$ are getting killed off and $H^1(\PP^n,\OO(d)) = 0$.
+\\
+
+What happens if $d \le -2$? In this case we have $u^{-m}$ getting zeroed out for $|m| \ge |d|$, and any non-negative degree monomials are also getting zeroed out. We get that $u^{-1},u^{-2},\dots,u^{d+1}$ is a basis. So $H^1(\PP^n,\OO(d))$ is a vector space of dimension $-d-1 = \binom{-d-1}{-d-1-1}$, as we wanted. 
+\\
+
+One will often see the computation we've done framed as:
+\[H^1(\PP^n,\OO(d)) = \left(\frac{1}{x_0x_1} k\left[\frac{1}{x_0},\frac{1}{x_1}\right]\right)_d\]
 \end{example}
+Next time we will compute the cohomology of line bundles on $\PP^n$ in general.
 \end{comment}
 %#######################################################################
 %#######################################################################
