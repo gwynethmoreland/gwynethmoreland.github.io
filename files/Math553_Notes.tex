@@ -3422,7 +3422,7 @@ Let $U$ be open in $X$. By abuse of notation, we set $\OO_U = j_!(\OO_X|_U)$, wh
 \[0 \to \OO_V \to \OO_U\]
 $\II$ is injective, so we get a surjection 
 \[\Hom(\OO_U, \II) \to \Hom(\OO_V,\II) \to 0\]
-but lower shriek \footnote{See Hartshorne exercise II.19 for more on extension by zero and lower shriek. Let $j: U \to X$ be inclusion of an open set. Extension of $\FF$ a sheaf on $U$ by zero in general is done by taking $j_!\FF$ to be the sheafification of: $V \mapsto \FF(V)$ if $V \subseteq U$ and $V \mapsto 0$ otherwise. It is adjoint to the restriction functor. The general construction of the lower-shriek functor $f_!$ and discussions of what its adjoint should be is more complicated.} is adjoint to restriction, so
+but lower shriek \footnote{See Hartshorne exercise II.19 for more on extension by zero and lower shriek. Let $j: U \to X$ be inclusion of an open set. Extension of $\FF$ a sheaf on $U$ by zero in general is done by taking $j_!\FF$ to be the sheafification of: $V \mapsto \FF(V)$ if $V \subseteq U$ and $V \mapsto 0$ otherwise. It is adjoint to the restriction functor in this caes. The general construction of the lower-shriek functor $f_!$ and discussions of what its adjoint should be is more complicated.} is adjoint to restriction, so
 \[\Hom(\OO_U,\II) = \Hom_{\OO_X|_{U}}(\OO_X|_{U}, \II|_U) = \II(U)\]
 So we have that restriction $\II(U) \to \II(V)$ is surjective.
 \end{proof}
@@ -3497,10 +3497,10 @@ so there is an element $f \in \Gamma(X,\II_Y)$ that maps to 1, i.e. $f \in \II_Y
 
 Quasicompactness implies that we only need finitely many $X_{f_i}$ to cover $X$. Denote the corresponding elements $f_1,\dots,f_r$. Using our affine-ness criteria from HW 1, we need to check that $f_1,\dots,f_r$ generate the unit ideal in $A = \Gamma(X,\OO_X)$. Consider:
 \[0 \to \FF \to \OO^{\oplus r}_X \to \OO_X \to 0\]
-where $\OO^r_X \to \OO_X$ looks like $(a_1,\dots,a_r) \mapsto \sum f_i a_i$, i.e. it is a multiplication map. We want to show that $H^1(X,\FF)$, so that the map on global sections is surjective. Here $\FF$ just denotes the kernel sheaf of this morphism. By filtering:
-\[\FF = \FF \cap \OO_X^r \supseteq \FF \cap \OO_X^{r-1} \supseteq \dots \supseteq \FF \cap \OO_X \]
-Each quotient in the filtration looks like a coherent sheaf of ideals in $\OO_X$ and thus has vanishing $H^1$. Considering each of the quotient sequences and the corresponding long exact sequence, we "climb up" the filtration and get that each $\FF \cap \OO_X^{i}$ has vanishing $H^1$. Thus, $H^1(X,\FF) = 0$. But then 
-\[\Gamma(X,\OO^r_X) \to \Gamma(X,\OO_X)\]
+where $\OO^{\oplus r}_X \to \OO_X$ looks like $(a_1,\dots,a_r) \mapsto \sum f_i a_i$, i.e. it is a multiplication map. We want to show that $H^1(X,\FF) = 0$, so that the map on global sections is surjective. Here $\FF$ just denotes the kernel sheaf of this morphism. By filtering:
+\[\FF = \FF \cap \OO_X^{\oplus r} \supseteq \FF \cap \OO_X^{\oplus (r-1)} \supseteq \dots \supseteq \FF \cap \OO_X \]
+Each quotient in the filtration looks like a coherent sheaf of ideals in $\OO_X$ and thus has vanishing $H^1$. Considering each of the quotient sequences and the corresponding long exact sequence, we "climb up" the filtration and get that each $\FF \cap \OO_X^{\oplus i}$ has vanishing $H^1$. Thus, $H^1(X,\FF) = 0$. But then 
+\[\Gamma(X,\OO^{\oplus r}_X) \to \Gamma(X,\OO_X)\]
 is surjective, meaning $f_1,\dots,f_r$ generate the unit ideal.
 \end{itemize}
 \end{proof}
@@ -3532,12 +3532,11 @@ When $\pi$ is a closed embedding into projective space, this isomorphism will he
 %####################    L E C T U R E      3 3   ###############################
 %#######################################################################
 %#######################################################################
-\begin{comment}
-\section{April 07: \v Cech cohomology, and cohomology of line bundles on projective space}
-We will eventually see for $\PP^n_A$
+\section{April 07: \v Cech cohomology, and cohomology of line bundles on $\PP^1$}
 
-\begin{enumerate}
-\item $H^0(\PP^n_A, \OO^{\PP^n_A}(m))$ is a free $A$-module of rank $\binom{n+m}{m}$ if $m \ge 0$.
+Let $A$ be a noetherian ring. We will eventually see the following properties.
+\begin{enumerate} 
+\item $H^0(\PP^n_A, \OO_{\PP^n_A}(m))$ is a free $A$-module of rank $\binom{n+m}{m}$ if $m \ge 0$.
 \item $H^n(\PP^n_A, \OO_{\PP^n_A}(m))$ is free of rank $\binom{-m-1}{-n-m-1}$ if $m \le -n-1$. %\red{Translate this to more positive binomial entries?}
 \item $H^i(\PP^n, \OO_{\PP^n_A}(m))$ otherwise
 \end{enumerate}
@@ -3545,21 +3544,27 @@ We will eventually see for $\PP^n_A$
 \begin{remark}
 There are a few observations to be made here:
 \begin{itemize}
-\item The cohomology vanishes in degree above $n$ (consequence of previously mentioned theorem, but also can be derived from the fact that $\PP^n_A$ is covered by $n+1$ affines)
+\item The cohomology vanishes in degree above $n$ (consequence of previously mentioned theorem, but also can be derived from the fact that $\PP^n_A$ is covered by $n+1$ affines and that sheaf cohomology and \v Cech cohomology agree for $\PP^n_A$)
 \item The cohomology groups are \underline{finitely generated} $A$-modules. This is true for coherent sheaves on projective $A$-schemes.
-\item The top degree cohomology vanishes for $m > -n-1$. This is an example of \textbf{Kodaira vanishing}, which gives us, in this case, that for $\OO(p)$ with $p > 0$, we have that 
-\[H^n(X, \OO_{\PP^n_k}(p) \otimes \Omega_{\PP^n/k}) = H^n(X, \OO_{\PP^n_k}(p-n-1)) = 0\]
-Here $\textup{char }k = 0$. (Kodaira vanishing gives $H^q(X, \LL \otimes \Omega_{X/k}^{\otimes p}) = 0$ for $p+q > \dim X$ where $\LL$ is ample and $X$ projective over $k$. Above we want $q = \dim X$ and $p = 1$ so the inequality is satisfied).
+\item The top degree cohomology vanishes for $m > -n-1$. This is an example of \textbf{Kodaira vanishing}. Kodaira vanishing says, amongst other things, that for ample $\LL$ we have% which gives us, in this case, that for $\OO(p)$ with $p > 0$, we have that 
+%\[H^n(X, \OO_{\PP^n_k}(p) \otimes \Omega_{\PP^n/k}) = H^n(X, \OO_{\PP^n_k}(p-n-1)) = 0\]
+%Here $\textup{char }k = 0$. (Kodaira vanishing gives $H^q(X, \LL \otimes \Omega_{X/k}^{\wedge p}) = 0$ for $p+q > \dim X$ where $\LL$ is ample and $X$ projective over $k$. Above we want $q = \dim X$ and $p = 1$ so the inequality is satisfied). 
+\[H^i(X,\LL \otimes \omega_{X/k}) = 0 \]
+for $i > 0$. So, we get $H^i(\PP^n_k, \OO_{\PP^n_k}(d)) = 0$ for $d > -n-1$.
 \item The top cohomology group is one-dimensional for $m = -n-1$ and $A = k$. Namely, observe that for $X = \PP^n_k$ we have
-\[h^0(X,\OO_{X}) = h^n(X, \OO_{X}(-n-1) \otimes \OO_X^{\vee}) = h^n(X,\omega_X \otimes \OO_X^{\vee})\]
+\[h^0(X,\OO_{X}) = h^n(X, \OO_{X}(-n-1) \otimes \OO_X^{\vee})^{\vee} = h^n(X,\omega_X \otimes \OO_X^{\vee})^{\vee}\]
 This is a first example of Serre duality:
-\[H^i(X,\mathscr{E}) \cong H^{n-i}(X, \omega_X \otimes \mathscr{E}^{\vee})^*\]
-where $\mathscr{E}$ is locally free sheaf of finite rank.
-\item The alternating sum
-\[\sum (-1)^i h^i(\OO^n,\OO(m)) \]
-is a polynomial in $m$ of degree $n$. This is an example of a \textbf{Hilbert polynomial}. \red{Add on}
+\[H^i(X,\mathscr{E}) \cong H^{n-i}(X, \omega_X \otimes \mathscr{E}^{\vee})^{\vee}\]
+where $\mathscr{E}$ is a locally free sheaf of finite rank.
+%\item The alternating sum
+%\[\sum (-1)^i h^i(\PP^n,\OO(m)) \]
+%is a polynomial in $m$ of degree $n$. This is an example of a \textbf{Hilbert polynomial}. 
 \end{itemize}
 \end{remark}
+
+\begin{definition}
+For a smooth scheme $X$, the tensor powers $\omega^m_X$ of the canonical bundle are called the \textbf{pluricanonical} sheaves of $X$. The ranks of the global sections of the tensor powers, i.e. the $h^0(X,\omega_X^m)$, are called the \textbf{plurigenera} of $X$. To refer to a specific tensor power, $h^0(X,\omega_X^m)$ is the \textbf{$m$-th plurigenus} of $X$.
+\end{definition}
 
 \hrule
 \vspace{1 em}
@@ -3585,18 +3590,18 @@ and the map $C^p(\{U_i\}_{i \in I}, \FF) \to C^{p+1}(\{U_i\}_{i \in I}, \FF)$ is
 
 \begin{proposition} The \v Cech complex is a complex: $d^2 = 0$.
 \end{proposition}
-\begin{proof} The algebra here can be bashed out fairly straightforwardly: you'll get two paths to removing two elements, and cancelling signs from these two computations.
+\begin{proof} The algebra here can be bashed out fairly straightforwardly: you'll get two paths to removing two elements, and you'll get cancelling signs from these two computations.
 \end{proof}
 
 \begin{definition} We denote
 \[ \textup{\v H}(\{U_i\}, \FF) = H^p(C^{\bullet}(\{U_i\}_{i \in I}, \FF))\]
-While this is defined in general for a sheaf of abelian groups on a topological space $X$, in the context of algebraic geometry we will usually be restricting our attention to $X$ a scheme and $\{U_i\}$ a cover by open affines. Furthermore, you will almost always want the condition that $X$ is noetherian and separated for the following.
+While this is defined in general for a sheaf of abelian groups on a topological space $X$, in the context of algebraic geometry we will usually be restricting our attention to $X$ a scheme and $\{U_i\}$ a cover by open affines. Furthermore, you will almost always want the condition that $X$ is noetherian and separated.
 \end{definition}
 
-\begin{remark} Note that we immediately get that $H^0$ is the group of global sections. This follows from sheaf axioms.
+\begin{remark} Note that we immediately get that $H^0$ is the group of global sections. This follows from sheaf axioms: taking the kernel of the first map is the data of sections on a cover that agree on overlaps.
 \end{remark}
 
-\begin{theorem} Suppose $X$ is a noetherian and separated scheme. Then $\vH(\{U_i\},\FF)$ is independent of the choice of affine open finite cover $\{U_i\}$. Hence in this case we can suppress the $\{U_i\}$ notation and refer to the \v Cech cohomology groups as $\vH^i(X,\FF)$.
+\begin{theorem} Suppose $X$ is a noetherian and separated scheme, $\FF$ quasicoherent. Then $\vH(\{U_i\},\FF)$ is independent of the choice of affine open finite cover $\{U_i\}$. Hence in this case we can suppress the $\{U_i\}$ notation and refer to the \v Cech cohomology groups as $\vH^i(X,\FF)$.
 \end{theorem}
 
 \begin{remark} The proof is a bit of diagram bashing (see Vakil 18.2.3) The idea is to show that $H^i(\{U_i\}_{i=0}^n) \to H^i(\{U_i\}_{i=1}^n)$ is an isomorphism when $\{U_i\}_{i=1}^n$ is an open affine cover. In that way, we can show that adding an extra piece to a cover does not change cohomology. So take two separate covers, and refine them together, and get that each cover gives the same cohomology as the refined cover.
@@ -3609,7 +3614,10 @@ The separated criterion is important for guaranteeing that that $U_i \cap U_j$ i
 \textbf{In general:} for $X$ a topological space, $\{U_i\}$ an open cover, you get a morphism (not necessarily an isomorphism, though).
 \end{theorem}
 \begin{proof}
-\red{DELAY TILL NEXT TIME: COMPUTATION MORE IMPORTANT}
+%##
+See Hartshorne Theorem III.4.5.
+\begin{comment}
+\red{DELAY TILL NEXT TIME: COMPUTATION MORE IMPORTANT: need a few facts}
 \\
 
 Define a "sheafified" version of the \v Cech complex, where for any open $V \subseteq X$ you let $i_V: V \to X$ denote the inclusion map, and construct a complex of sheaves on $X$ by setting:
@@ -3619,6 +3627,7 @@ and define the $d$ maps analogously. By construction, we have $\Gamma(X,\mathscr
 Look at the two resolutions $0 \to \FF \to \II^{\bullet}$ and $0 \to \FF \to \mathscr{C}^{\bullet}(\{U_i\},\FF)$. A general result on complexes (see Hilton \& Stammbach section IV theorem 4.4) says (since the latter chain has higher cohomology zero-- careful with what that means!) that you get a map of complexes $\mathscr{C}^{\bullet}(\{U_i\},\FF) \to \II^{\bullet}$, inducing the identity map on $\FF$. Then taking global sections and cohomology, we get the desired map.
 
 Why is it an isomorphism? Note that we always have the $U_{i_0 < \dots < i_p}$ are affine because $X$ is separated. Then imbedding into flasque \red{and etc etc etc} we get a chain of isomorphisms and are done.
+\end{comment}
 \end{proof}
 
 The following shows the computational usefulness of \v Cech cohomology. Writing down injection resolutions is hard. Writing down flasque resolutions, while a bit better, can still be quite tricky! Whereas concrete chart computations on $\PP^n$ and some other stock projective schemes are not so bad.
@@ -3628,9 +3637,10 @@ The following shows the computational usefulness of \v Cech cohomology. Writing 
 which, after trivializing, looks like
 \begin{align*}
 0 \longrightarrow \quad \quad \quad k[u] \times k[v = u^{-1}] &\to k[u,u^{-1}] \quad \quad \quad \quad \longrightarrow 0 \\
-  (p(u), q(v)) &\mapsto u^d q(u^{-1}) - p(u) 
+  (p(u), q(v)) &\mapsto -u^d q(u^{-1}) + p(u) 
 \end{align*}
-So we get that $H^1$ is, as a group (specifically, $k$-vector space), $k[u^{\pm 1}]/(u^dq(u^{-1}) - p(u))_{p,q}$. If $d \ge 0$ then note that we can get $1,u^m,u^-m$ in the set of things we're modding out by, so $H^1(\PP^n,\OO(d)) = 0$ in that case. If $d=-1$, we still get that $1,u^m,u^{-m}$ are getting killed off and $H^1(\PP^n,\OO(d)) = 0$.
+%\red{CHECK SIGNS WITH TRANS FUNCTIONS}
+So we get that $H^1$ is, as a group (specifically, $k$-vector space), $k[u^{\pm 1}]/(u^dq(u^{-1}) - p(u))_{p,q}$. If $d \ge 0$ then note that we can get $1,u^m,u^{-m}$ in the set of things we're modding out by, so $H^1(\PP^n,\OO(d)) = 0$ in that case. If $d=-1$, we still get that $1,u^m,u^{-m}$ are getting killed off and $H^1(\PP^n,\OO(d)) = 0$.
 \\
 
 What happens if $d \le -2$? In this case we have $u^{-m}$ getting zeroed out for $|m| \ge |d|$, and any non-negative degree monomials are also getting zeroed out. We get that $u^{-1},u^{-2},\dots,u^{d+1}$ is a basis. So $H^1(\PP^n,\OO(d))$ is a vector space of dimension $-d-1 = \binom{-d-1}{-d-1-1}$, as we wanted. 
@@ -3638,8 +3648,90 @@ What happens if $d \le -2$? In this case we have $u^{-m}$ getting zeroed out for
 
 One will often see the computation we've done framed as:
 \[H^1(\PP^n,\OO(d)) = \left(\frac{1}{x_0x_1} k\left[\frac{1}{x_0},\frac{1}{x_1}\right]\right)_d\]
+
+Indeed we could've done our computation by looking at
+\[0 \to k[x_0,x_1,x_0^{-1}]_{d} \times k[x_0,x_1,x_1^{-1}]_d \to k[x_0,x_1,x_0^{-1},x_1^{-1}]_d \to 0 \]
+If $d \ge -1$, it is clear this map is surjective and thus $H^1$ vanishes. If $d \ge -2$, we get that
+\[\frac{1}{x_0x_1^{|d|-1}}, \frac{1}{x_0^2 x_1^{|d|-2}}, \dots, \frac{1}{x_0^{|d|-1}x_1} \]
 \end{example}
-Next time we will compute the cohomology of line bundles on $\PP^n$ in general.
+
+\begin{remark} Through the lens of the first style of computation, consider $H^1(\PP^1_k,\OO_{\PP^n_k}(-2)) = \langle c u^{-1}\rangle$. We get an isomorphism with the ground field $k$ by taking the coefficient of $u^{-1}$, but we could also interpret this as taking the residue, which is an integration operation. This intuition is useful later on for Serre duality.
+\end{remark}
+%#######################################################################
+%#######################################################################
+%####################    L E C T U R E      3 4   ###############################
+%#######################################################################
+%#######################################################################
+\begin{comment}
+\section{April 09: Cohomology of line bundles on projective space}
+We now compute the cohomology of line bundles on $\PP^n$. The usual proof you'll see is to induct on dimension and handle, for fixed $n$, all the $\OO_{\PP^n}(d)$ at once.
+
+\begin{proposition} Let $A$ be a noetherian ring and let $\PP^n = \PP^n_A$ and $\OO_{\PP^n_A}(d) = \OO(d)$. Then:
+\begin{enumerate}
+\item $H^0(\PP^n,\OO(d)) = A[x_0,\dots,x_n]_d$
+\item $H^n(\PP^n,\OO(d)) = \left(\frac{1}{x_0 \dots x_n} A[\frac{1}{x_0},\dots,\frac{1}{x_n}]\right)_{d}$
+\item $H^i(\PP^n,\OO(d)) = 0$ for $0 < i < n$. (And likewise for $n< i$ and $i < 0$).
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+The first part (1) has been done previously, when we computed $\Gamma(\PP^n,\OO(d))$. 
+\\
+
+We proceed to the second part, (2). Let $\FF = \oplus_{d \in \Z} \OO(d))$. On some $D(x_{i_0 \dots i_k})$, we'd have 
+\[\Gamma(D(x_{i_0} \dots x_{i_k}), \OO(d)) = \left(A[x_0,\dots,x_n]_{x_{i_0} \dots x_{i_k}}\right)_d\]
+and thus $\Gamma(D(x_{i_0} \dots x_{i_k}, \FF) = A[x_0,\dots,x_n]_{x_{i_0} \dots x_{i_k}}$ and we recover data about $\OO(d)$ by taking the $d$-th graded piece. We consider the last chunk of the \v Cech complex:
+\begin{align*}
+\dots \to \prod_{0 < \dots < \hat{i} < \dots n} A[x_0,\dots,x_n]_{x_0 \dots \widehat{x_i} \dots x_n} \to A[x_0,\dots,x_n]_{x_0 \dots x_n}
+\end{align*}
+Thus:
+\begin{align*}
+H^n(\PP^n, \FF) &= \frac{A[x_0,\dots,x_n]_{x_0 \dots x_n}}{\textup{im} \left(\prod A[x_0,\dots,x_n]_{x_0 \dots \widehat{x_i} \dots x_n} \to A[x_0,\dots,x_n]_{x_0 \dots x_n}\right)}\\
+&= \frac{\langle x_0^{a_0} \dots x_n^{a_n} | a_i \in \Z \rangle}{\langle x_0^{a_0} \dots x_n^{a_n} | \textup{ at least one of $a_i \ge 0$}\rangle}\\
+&= \langle x_0^{a_0} \dots x_n^{a_n} : \textup{all $a_i < 0$}\rangle\\
+&= \frac{1}{x_0 \dots x_n} A[x_0^{-1}, \dots, x_n^{-1}]
+\end{align*}
+and picking out the $d$-th graded piece yields the result of (2).
+\\
+
+We finish with proving (3). We do this via induction. Note that it is vacuously true for $\PP^1$. Suppose the statement is true up to dimension $n-1$. We will show it is true for $\PP^n$. Consider a hyperplane $H \cong \PP^{n-1}$ in $\PP^n$. We have
+\[0 \to \OO_{\PP^n}(-1) \to \OO_{\PP^n} \to i_*(\OO_{\PP^{n-1}}) \to 0\]
+where we can consider the first map as multiplication by $x_n$. Twisting by $d$ and summing over all $d$ we get:
+\[0 \to \bigoplus_{d \in \Z} \OO_{\PP^n}(d-1) \to \bigoplus_{d \in \Z}\OO_{\PP^n}(d) \to \bigoplus_{d \in \Z}i_*\OO_{\PP^{n-1}}(d) \to 0\]
+And then taking the long exact sequence in cohomology:
+\[0 \to H^0 \left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d-1) \right)  \stackrel{\times x_n }{\to} H^0 \left(\bigoplus_{d \in \Z}\OO_{\PP^n}(d) \right) \to H^0 \left( \bigoplus_{d \in \Z}i_*\OO_{\PP^{n-1}}(d)\right) \to H^1\left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d-1) \right) \stackrel{\times x_n}{\to} \dots\]
+Our next goal is to show that, for $0 < i < n$, we have that 
+\[ H^i \left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d-1) \right)  \stackrel{\times x_n}{\to} H^i \left(\bigoplus_{d \in \Z}\OO_{\PP^n}(d)\right) \]
+is an isomorphism. We proceed with this goal in mind.
+\\
+
+By Homework 3 (affine maps induce isomorphism on cohomology), we may compute the $i_*\OO_{\PP^{n-1}}(d)$ terms on $\PP^{n-1}$. Then the $H^i(\oplus \OO_{\PP^{n-1}}(d)) = 0$ for $1 \le i \le n- 2$. This yields chunks of the sequence like
+\[0  \to H^i \left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d-1) \right)  \stackrel{\times x_n}{\to} H^i \left(\bigoplus_{d \in \Z}\OO_{\PP^n}(d)\right) \to 0\]
+for $1 < i < n-1$. So now we just need to check the isomorphism at $i=1,n-1$. For $i=1$ we get
+\[H^0 \left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d-1) \right)  \stackrel{\times x_n }{\to} H^0 \left(\bigoplus_{d \in \Z}\OO_{\PP^n}(d) \right) \to H^0 \left( \bigoplus_{d \in \Z}i_*\OO_{\PP^{n-1}}(d)\right) \to H^1\left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d-1) \right) \stackrel{\times x_n}{\to} H^1\left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d) \right) \to 0\dots\]
+The second map being surjective means that we get 
+\[0  \to H^1\left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d-1) \right) \stackrel{\times x_n}{\to} H^1\left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d) \right) \to 0\dots\]
+is exact. Likewise, when looking at
+\begin{align*}
+&0 \to H^{n-1} \left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d-1) \right)  \stackrel{\times x_n }{\to} H^{n-1} \left(\bigoplus_{d \in \Z}\OO_{\PP^n}(d) \right) \to H^{n-1} \left( \bigoplus_{d \in \Z}i_*\OO_{\PP^{n-1}}(d)\right) \\
+&\quad \quad \quad \stackrel{\delta}{\to} H^{n} \left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d-1) \right)  \stackrel{\times x_n }{\to} H^{n} \left(\bigoplus_{d \in \Z}\OO_{\PP^n}(d) \right)  \to 0
+\end{align*}
+with our knowledge of the degree cohomology of projective space, the connecting morphism must be $\delta = \times x_n^{-1}$. In particular, this map is injective. Thus we get
+\begin{align*}
+&0 \to H^{n-1} \left( \bigoplus_{d \in \Z} \OO_{\PP^n}(d-1) \right)  \stackrel{\times x_n }{\to} H^{n-1} \left(\bigoplus_{d \in \Z}\OO_{\PP^n}(d) \right) \to H^{n-1} \to 0
+\end{align*}
+is exact. So, we've shown that multiplication by $x_n$ is an isomorphism on the middle degree terms. This is only possible if these modules are zero. 
+\\
+
+To be even more explicit: we can show that $H^i(\PP^n,\FF)_{x_n} = 0$. Localization and cohomology commute in this case \footnote{localization commutes with quotients, images, etc}, so if we localized the \v Cech compex for computing $H^i(\PP^n,\FF)$, it would compute $H^i(\PP^n,\FF)_{x_n}$. But this also computes $\FF_{x_n}$ on $D(x_n)$, and all the higher cohomology groups on affine schemes vanish for quasicoherent sheaves. So we get that $ H^i(\PP^n,\FF)_{x_n} = 0$. So, every element of $H^i(\PP^n,\FF)$ is killed by a power of $x_n$. But if multiplication by $x_n$ is an isomorphism, then it must be that $H^i(\PP^n,\FF) = 0$.
+\end{proof}
+
+%#######################################################################
+%#######################################################################
+%####################    L E C T U R E      ? ?   ###############################
+%#######################################################################
+%#######################################################################
+\section{April ??: Flat morphisms, smooth morphisms}
+Flat morphisms help give us a notion of a "nice" family of schemes. A lot of the example families we've written down
 \end{comment}
 %#######################################################################
 %#######################################################################
