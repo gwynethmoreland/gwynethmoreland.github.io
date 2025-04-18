@@ -3794,17 +3794,31 @@ There are ways to relax the smoothness conditions, but we will not get around to
 %####################    L E C T U R E      3  6  ###############################
 %#######################################################################
 %#######################################################################
-\begin{comment}
 \section{April 14: Ext, Serre duality, proof in the projective space case}
 
-Let $(X,\OO_X)$ be a ringed space, and $\FF,\GG$ be $\OO_X$ modules. Recall that $\Hom(\FF,\GG) = \Hom_X(\FF,\GG)$ is the group of $\OO_X$-module homomorphisms, and $\scrHom(\FF,\GG)$ is the "sheafy" version. 
+Let $(X,\OO_X)$ be a ringed space, and $\FF,\GG$ be $\OO_X$ modules. Recall that $\Hom(\FF,\GG) = \Hom_X(\FF,\GG)$ is the group of $\OO_X$-module homomorphisms, and $\scrHom(\FF,\GG)$ is the "sheafy" version. That is, 
+\[\scrHom(\FF,\GG)(U) = \Hom_{\OO_X |_U}(\FF|_U, \GG_U)\]
 
-For fixed $\FF$, we have that $Hom(\FF,\star)$ is a left exact covariant functor from the category of $\OO_X$-modules $\frak{Mod}(X)$ to the category of abelian groups. Similarly, $\scrHom(\FF,\star)$ is left exact covariant functor from $\frak{Mod}(X)$ to itself. Recall that $\frak{Mod}(X)$ has enough injectives. Thus the following construction is valid. \red{WORRY ABOUT CONTRAVARIANCE VS COVARIANCE}
+For fixed $\FF$, we have that $Hom(\FF,\star)$ is a left exact covariant functor from the category of $\OO_X$-modules $\frak{Mod}(X)$ to the category of abelian groups. Similarly, $\scrHom(\FF,\star)$ is left exact covariant functor from $\frak{Mod}(X)$ to itself. Recall that $\frak{Mod}(X)$ has enough injectives. Thus the following construction is valid.
 
-\begin{definition} Let $(X,\OO_X)$ be a ringed space and $\FF$ and $\OO_X$-module. Then set $\Ext^i(\FF,\star)$ to be the right derived functors of $\Hom(\FF,\star)$ and $\scrExt(\FF,\star)$ to be the right derived functors of $\scrHom(\FF,\star)$.
+\begin{definition} Let $(X,\OO_X)$ be a ringed space and $\FF$ and $\OO_X$-module. Then set $\Ext^i(\FF,\star)$ to be the $i$-th right derived functor of $\Hom(\FF,\star)$ and $\scrExt^i(\FF,\star)$ to be the $i$-th right derived functor of $\scrHom(\FF,\star)$.
 \end{definition}
 
-We get the usual nice properties (additivity, $\Ext^0$ is Hom, long exact sequences, higher Ext groups vanish when the second entry is injective, and analogous statements for sheaves). To make our lives a bit easier:
+We get the usual nice properties (additivity, $\Ext^0$ is Hom, long exact sequences, higher Ext groups vanish when the second entry is injective, and analogous statements for sheaves). 
+
+\begin{remark} Note that $\Hom(\star,\FF)$ is contravariant left exact. One would want to try to compute its right derived functor with projective resolutions, but $\textup{Mod}(X)$ does not necessarily have enough projectives! Here a projective object is one such that $\Hom(P,\star)$ is exact. 
+\end{remark}
+
+\begin{remark} However, one can see that $\Ext^i(\star,\GG)$ has some derived-like properties, even if it cannot be constructed as a derived functor. Namely, we can still get long exact sequences from it. We will see that $\Ext^i(\star,\GG)$ is a \textbf{contravariant $\delta$-functor}, though we will not define this term for another page or so.
+
+Let $0 \to \FF_1 \to \FF_2 \to \FF_3 \to 0$ be an exact sequence of $\OO_X$ modules on a ringed space $(X,\OO_X)$. Take an injective resolution:
+\[0 \to \GG \to \II^0 \to \II^1 \to \II^2 \to \dots\]
+Using that $\Hom(\star,\II)$ is exact, we get a short exact sequence of complexes
+\[0 \to \Hom(\FF_3, \II^{\bullet}) \to \Hom(\FF_2,I^{\bullet}) \to \Hom(\FF_1,\II^{\bullet}) \to 0\]
+and taking the long exact sequence in cohomology will get you a long exact sequence of the $\Ext^i(\FF_j, \GG)$.
+\end{remark}
+
+To make our lives a bit easier, here some some nice properties.
 
 \begin{lemma} If $\II$ is an injective object in $\frak{Mod}(X)$, then for any $U \subseteq X$ open, $\II|_U$ is an injective object in $\frak{Mod}(U)$. 
 \end{lemma}
@@ -3835,12 +3849,9 @@ $\scrHom(\OO_X,\star)$ is the identity functor, and so the first two bullet poin
 \end{proposition}
 \begin{proof}
 Note that the $i=0$ case just says that 
-\[\Hom(\FF \otimes \EE, \GG) = \Hom(\FF,\EE^{\vee} \otimes \GG)\]
-which you showed on homework 2. For $i > 0$ note that $\II$ injective implies $\II \otimes \EE$ is injective, so you can get a relationship between the resolutions/use some properties of $\delta$-functors to get equality of the Exts. It helps that tensoring with locally free sheaves is exact (look at it stalk-wise-- you are tensoring with $\OO_{X,p}^{\oplus r}$ so you get $M_p^{\oplus r}$).
+\[\Hom(\FF \otimes \EE, \GG) = \Hom(\FF,\EE^{\vee} \otimes \GG),\]
+which you showed on Homework 2. For $i > 0$ note that $\II$ injective implies $\II \otimes \EE$ is injective, so you can get a relationship between the resolutions/use some properties of $\delta$-functors to get equality of the Exts. It helps that tensoring with locally free sheaves is exact (look at it stalk-wise-- you are tensoring with $\OO_{X,p}^{\oplus r}$ so you get $M_p^{\oplus r}$). See Hartshorne Proposition III.6.7 for more details.
 \end{proof}
-
-\red{more stuff inbetween here}
-\[\includegraphics[scale=.4]{hart_vec.png}\]
 
 \begin{definition} Let $\frak{A}, \frak{B}$ be abelian categories. A covariant $\delta$- functor from $\frak{A}$ to $\frak{B}$ is a collection of indexed functors $T = (T^i)_{i \ge 0}$ and morphisms $\delta^i: T^i(A'') \to T^{i+1}(A')$ for each short exact sequence $0 \to A' \to A \to A'' \to 0$ and each $i \ge 0$ such that
 \begin{enumerate}
@@ -3866,19 +3877,19 @@ T^i(B'') \arrow[r,"\delta^i"] &T^{i+1}(B')\\
 \begin{definition} A $\delta$-functor $T = (T^i): \frak{A} \to \frak{B}$ is \textbf{universal} if, given any other $\delta$-functor $T' = (T')^i: \frak{A} \to \frak{B}$ and any morphism $f^0: T^0 \to (T')^0$ there exists a unique sequence of morphisms $f^i: T^i \to (T')^i$ for each $i \ge 0$, which commute with the $\delta^i$ for each short exact sequence.
 \end{definition}
 
-We will deal with contravariant delta functors, so just reverse the arrows.
-
 \begin{remark}
 If $F: \frak{A} \to \frak{B}$ is covariant and additive, then there can be at most one (up to iso) universal $\delta$-functor $T$ with $T^0 = F$.
 \end{remark}
 
-\begin{definition} An additive functor $F: \frak{A} \to \frak{B}$ is \textbf{effacable} if, for each object $A$ in $\frak{A}$, there is a monomorphism $u: A \to M$ for some $M$ with $F(u) = 0$. It is coeffaceable if for each $A$ there exists an epimorphism $v: P \to A$ such that $F(v) = 0$.
+\begin{definition} An additive functor $F: \frak{A} \to \frak{B}$ is \textbf{effacable} if, for each object $A$ in $\frak{A}$, there is a monomorphism $u: A \to M$ for some $M$ with $F(u) = 0$. It is \textbf{coeffaceable} if for each $A$ there exists an epimorphism $v: P \to A$ such that $F(v) = 0$.
 \end{definition}
 
 \begin{theorem} Let $T = (T^i)$ be a covariant $\delta$-functor from $\frak{A}$ to $\frak{B}$. If $T^i$ is effaceable for each $i > 0$, then $T$ is universal.
 \end{theorem}
 
-\red{As with the case of Poincar\'e duality, we crucially establish a perfect pairing.}
+\textbf{We will deal with contravariant $\delta$-functors,} so just reverse the arrows in all the definitions. In the proof of Serre duality, we'll want to show two contravariant $\delta$-functors are the same-- we'll do so by showing they're both universal and have the same $T^0$. So to do this, we'll need to show they're both \textbf{\textit{coeffaceable}}.
+
+As with the case of Poincar\'e duality, we crucially establish a perfect pairing.
 
 \begin{theorem}[Serre duality for projective space] Let $X = \PP^n_k$ for a field $k$. Then:
 \begin{enumerate}
@@ -3917,83 +3928,288 @@ with $\EE_i$ sums of line bundles $\OO_X(q_i)$. $\Hom(\star,\omega)$ and $H^n(X,
 Then the five lemma implies that $\Hom(\FF,\omega) \to H^n(X,\FF)^{\vee}$ is an isomorphism (add another column of zeroes to the left to get five columns and the desired isomorphism being the middle one).
 %###$
 \item
-Both sides are contravariant $\delta$-functors, indexed by $i$. We have that the $T^0$ are isomorphic by part (b). So it remains to show they are coeffaceable (we need coeffaceable because these are contravariant).
+Both sides ($\Ext^i(\star,\omega)$, $H^{n-i}(X,\star)^{\vee}$) are contravariant $\delta$-functors, indexed by $i$. We have that the $T^0$ are isomorphic by part (b). So it remains to show they are coeffaceable. Note that we need coeffaceable because these are contravariant.
 
 Given $\FF$ coherent, we know that we can write 
-\[\EE = \oplus_{i=1}^n \OO(-q) \to \FF \to 0\]
+\[\EE = \oplus_{j=1}^k \OO(-q) \to \FF \to 0\]
 with $q >> 0$. So we have this epimorphism going to our $\FF$. Then 
-\[\Ext^i(\EE,\omega) = \oplus_{i=1}^n \Ext^i(\OO(-q),\omega) = \Ext^i(\OO_X,\omega(q)) = H^i(X, \omega(q)) = 0\]
+\[\Ext^i(\EE,\omega) = \oplus_{j=1}^k \Ext^i(\OO(-q),\omega) = \oplus_{j=1}^k  \Ext^i(\OO_X,\omega(q)) = \oplus_{j=1}^k  H^i(X, \omega(q)) = 0\]
 for $i > 0$ and $q$ large. On the other hand, we see 
-\[H^{n-i}(X,\EE)^{\vee} = \oplus H^{n-i}(X,\OO(-q))^{\vee} = 0\]
+\[H^{n-i}(X,\EE)^{\vee} = \oplus_{j=1}^k H^{n-i}(X,\OO(-q))^{\vee} = 0\]
 for $i > 0$ and $q > 0$. Thus both sides are coeffaceable for $i > 0$. So both $\delta$-functors are universal with the same starting functor, hence isomorphic.
 \end{itemize}
 \end{proof}
 
 %#######################################################################
 %#######################################################################
-%####################    L E C T U R E      ? ?   ###############################
+%####################    L E C T U R E      3 7   ###############################
 %#######################################################################
 %#######################################################################
-\section{April ??: Flat morphisms, smooth morphisms}
-Flat morphisms help give us a notion of a "nice" family of schemes. A lot of the example families we've written down
-\end{comment}
+\section{April 16: Dualizing sheaves, flat modules, flat morphisms}
+
+To generalize Serre duality, one looks to the importance of (a), (b). 
+
+\begin{definition} Let $X$ be a proper scheme of dimension $n$ over a field $k$. A \textbf{dualizing sheaf} for $X$ is a coherent sheaf $\omega_X^{\circ}$ on $X$ with a \textbf{trace} morphism $t: H^n(X,\omega_X) \to k$ such that for all coherent sheaves $\FF$ on $X$, the natural pairing
+\[\Hom(\FF,\omega^{\circ}_X) \times H^n(X,\FF) \to H^n(X,\omega^{\circ}_X)\]
+composed with $t$ afterwards gives an isomorphism $\Hom(\FF,\omega_X^{\circ}) \to H^n(X,\FF)^{\vee}$.
+\end{definition}
+
+If they exist, a dualizing sheaf (with its trace morphism) is unique (up to unique isomorphism). They exist for $X$ proper over $k$, though showing it for schemes projective over $k$ tends to be easier. As one would expect, the construction of $\omega_X^{\circ}$ should somehow be "cotangent-y."  For $X$ smooth, the dualizing sheaf is indeed $\omega_{X/k}$. In general: it is $ \scrExt^{N - \dim X}_{\OO_{\PP^N}}(i_*\OO_X, \omega_{\PP^N})$. There is a way to put an $\OO_X$-module structure on this.
+\\
+
+One can then show that $\Ext^i(\star,\omega_X^{\circ})$ is coeffaceable for $i > 0$, so we get a universal contravariant $\delta$-functor, and then $H^{n-i}(X,\FF)^{\vee}$ is another contravariant $\delta$-functor, so we get morphisms $\theta^i: \Ext^i(\FF,\omega^{\circ}_X) \to H^{n-i}(X,\FF)^{\vee}$. If $X$ is smooth (in fact, Cohen-Macaulay and equidimensional is enough) then these maps will be isomorphisms. The proof of Serre duality for projective schemes takes plenty of inspiration from the projective space case, using certain vanishings.
+\\
+
+\hrule
+\vspace{1em}
+
+Now, onto the notion of flatness. Flat morphisms help give us a notion of a "nice, continuous" family of schemes. A lot of the example families we've written down, and that one could try to write down by hand, are flat. 
+
+A family of schemes is a morphism $f: X \to Y$, and the members of the family are the fibers
+\[X_y = X \times_Y \spec k(y)\]
+
+\begin{remark}
+To study families, one often wants some sort of relative notion of cohomology: the "cohomology of $X$ over $Y$" or "cohomology along the fibers of $X \to Y$." Thus, some of the details and proofs in the flat morphisms chapter of Hartshorne use \textit{higher direct images}. We don't have time for this, and we'll be skipping many of the proofs even when they don't require this. At this time, the most useful thing for us is to see some of the main results (criteria for flatness, existence of flat limits) and do some computations.
+\end{remark}
+
+\begin{definition} Let $A$ be a ring, $M$ an $A$-module. We say $M$ is \textbf{flat} over $A$ if the functor $M \otimes_A \star$ is exact. (It is always right-exact, now we ask that it is left-exact too). If $A \to B$ is a ring homomorphism, $B$ is flat over $A$ if it is flat as an $A$-module.
+\end{definition}
+
+\begin{proposition} \textup{ }
+\begin{enumerate}[(a)]
+\item $M$ is flat over $A \iff$ for every finitely generated ideal $\frak{a}$ in $A$, the map $\frak{a} \otimes M \to M$ is injective.
+\item (Base extension) If $M$ is a flat $A$-module and $A \to B$ a ring hom, then $M \otimes_A B$ is a flat $B$-module
+\item (Transitivity) If $B$ flat $A$-algebra and $N$ a flat $B$-module, then $N$ is a flat $A$-module
+\item (Localization) $M$ is flat over $A$ if and only if $M_{\pp}$ flat over $A_{\pp}$ for all $\pp \in \spec A$.
+\item If $0 \to M' \to M \to M'' \to 0$ exact sequence of $A$ modules an $M',M''$ are flat, then $M$ is flat. If $M, M''$ both flat then $M'$ is flat.
+\item If $M$ is a finitely generated module over a local noetherian ring $A$, then $M$ is flat if and only if $M$ is free.
+\end{enumerate}
+\end{proposition}
+
+\begin{definition} Let $f: X \to Y$ be a morphism of schemes, and let $\FF$ be an $\OO_X$-module. $\FF$ is \textbf{flat over $Y$ at a point $x \in X$} provided that the start $\FF_x$ is a flat $\OO_{y,f(x)}$-module. Here $\FF_x$ is made an $\OO_{y,f(x)}$ module via the map
+\[f^{\sharp}:\OO_{f(x),Y} \to \OO_{x,X}\]
+We say $\FF$ is \textbf{flat over $Y$} if it is flat at every point of $X$. We say $X$ is flat over $Y$ if $\OO_X$ is flat over $Y$.
+\end{definition}
+
+\begin{proposition}\textup{ }
+\begin{enumerate}[(a)]
+\item An open immersion is flat
+\item Base change: $f: X \to Y$ a morphism, and $\FF$ an $\OO_X$-module flat over $Y$. $g: Y' \to Y$ a morphism. Let $X' = X x_Y Y'$ and $f': X' \to Y'$ the second projection, and $\FF' = p_1^*(\FF)$. Then $\FF'$ is flat over $Y'$.
+\item Transitivity: If $f:X \to Y$ and $g: Y \to Z$ are morphisms, and $\FF$ an $\OO_X$-module flat over $Y$, and suppose $Y$ is flat over $Z$. Then $\FF$ is flat over $Z$.
+\item Let $A \to B$ be a ring homomorphism and $M$ a $B$-module. Let $f: \spec B \to \spec A$ be the corresponding morphism of affine schemes. Then $\FF = \wt{M}$ is flat over $Y$ if and only if $M$ is flat over $A$. 
+\item Let $X$ be a noetherian scheme and $\FF$ a coherent $\OO_X$-module. Then $\FF$ is flat over $X$ if and only if it is locally free. (Here flatness is relative to the identity map $X \to X$, i.e. tensoring with $\FF$ is exact).
+\end{enumerate}
+\end{proposition}
 %#######################################################################
 %#######################################################################
+%####################    L E C T U R E      3 8   ###############################
 %#######################################################################
 %#######################################################################
+\section{April 18: Properties of and criteria for flatness}
+
+\begin{corollary}
+As a corollary to the last one: suppose $f:X \to Y$ is a finite morphism and $Y$ is Noetherian. Then $f$ is flat $\iff f_* \OO_X$ is locally free.
+\end{corollary}
+\begin{proposition} Let $f: X \to Y$ be a flat morphism of schemes of finite type over a field $k$. For any $x \in X$, set $y = f(X)$. Then:
+\[\dim_x(X_y) = \dim_x X - \dim_y Y\]
+here $\dim_x X$ is the dimension of the local ring $\OO_{x,X}$, "the dimension of $X$ at $x$."
+\end{proposition}
+
+\begin{corollary} Let $f: X \to Y$ be a flat morphism of schemes of finite type over $k$, and $Y$ irreducible. The following are equivalent.
+\begin{enumerate}[(i)]
+\item every irreducible component of $X$ has dimension $\dim Y + n$,
+\item for any point $y \in Y$ (not necessarily closed!), every irreducible component of the fiber $X_y$ has dimension $n$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proposition}[Criterion 1] Let $f: X \to Y$ be a morphism of varieties over $k$. Assume $X,Y$ are regular. Then $f$ is flat if and only if every fiber has dimension $\dim X - \dim Y$.
+\end{proposition}
+
+\begin{remark} One can relax the conditions slightly to $Y$ regular and $X$ Cohen-Macaulay. This result is usually know as \textit{miracle flatness}.
+\end{remark}
+
+\hrule
+\vspace{1em}
+
+\begin{definition} A point $x$ of a scheme $X$ is an \textbf{associated point} of $X$ if the maximal ideal $m_x$ is an associated prime in the local ring $\OO_{X,x}$. That is, there is an element of $\OO_{X,x}$ whose annihilator is $m_x$.
+\end{definition}
+
+\begin{remark} What you should be envisioning in this case is generic points of irreducible components or embedded points. (Technically by embedded point we mean associated point that is in the closure of another associated point, which would make this a bit circular, but we can often approach embedded points with a more intuitive understanding-- see below).
+\end{remark}
+
+\begin{example} Consider $\spec k[x,y]/(xy,y^2)$, which is an affine line with an embedded point. The generic point is $(y)$ and the embedded point is $(x,y)$. You might draw this as a line with a thicker dot at the origin, or perhaps with a dot and tangent vector pointing perpendicular to the line $y=0$. If we "remove" the line by taking the quotient ideal $(xy,y^2):(y)$, we get the point $(x,y)$ left over. 
+
+Your mental picture of embedded points should be things of this sort. 
+\end{example}
+
+\begin{proposition}[Criterion 2] Let $f: X \to Y$ be a morphism of schemes, with $Y$ integral, regular, $\dim Y = 1$. Then $f$ is flat if and only if every associated point of $X$ maps to the generic point of $Y$. 
+
+If $X$ is reduced, this says every irreducible component of $X$ dominates $Y$.
+\end{proposition}
+
+\begin{remark} Note that a morphism $f:X \to Y$ with $X,Y$ irreducible is dominant if and only if the generic point of one goes to the generic point of the other. This can be checked quickly with properties of closures, and reflects that the image of the generic point captures something about "generic behavior" of the map. %If $f(\eta) = \theta$, then $\overline{f(X)} \supseteq \overline{f(\eta)} = \overline{\theta} = Y$. Conversely, if $f$ is dominant then continuity means $f(X) = f(\overline{\eta}) = \overline{f(\eta)}$. So the image has closure that whole thing, so $\eta = \theta$.
+\end{remark}
+
+\begin{remark} Regularity is certainly important in these criteria: consider the map $\mathbb{A}^1 \to X$ where $X$ is the cuspidal cubic $\spec k[x,y]/(y^2-x^3)$ in $\mathbb{A}^2$. This has equidimensional fibers, but is \textit{not} flat.  One way to see this is $k[t]$ is not flat over $k[t^2,t^3]$. (You would need it to be (locally) free: it is not!)
+\end{remark}
+
+\hrule
+\vspace{1em}
+
+\begin{proposition}[Criterion 3] Let $T$ be an integral Noetherian scheme, and $X \subseteq \PP^n \times T = \PP^n_T$ be a closed subscheme. Then $X \to T$ is flat if and only if the Hilbert polynomial $p_t$ of the fiber $X_t \subseteq \PP^n \times k(t) = \PP^n_{k(t)}$ is independent of $t$.
+\end{proposition}
+
+\begin{definition} Recall that the Hilbert polynomial of a projective variety $X$ over a field $k$ is taken by considering the function
+\[m \mapsto \dim_k k[X]_m = \dim_k \Gamma(X,\OO_X(m))\]
+(i.e. the dimension of the) $d$-th graded piece of the homogeneous coordinate ring) and taking the polynomial that aligns with this function for $m >> 0$. In general, we can take the Hilbert polynomial of a graded $ k[x_0,\dots,x_n]$ algebra by looking at $m \mapsto \dim_k S_{m}$ for $m \gg 0$.
+\end{definition}
+
+\begin{proposition} Let $X$ be a subvariety of some $\PP^r$. Then we can compute the Hilbert polynomial as $\chi(\OO_X(m))$. This follows from:
+\[\chi(\OO_X(m)) = \sum_{i} (-1)^n \dim_k H^i(X,\OO_X(m)) = \dim_k H^0(X,\OO_X(m)) = \dim_k \Gamma(X,\OO_X(m))\]
+which utilizes that, for coherent sheaves on projective space, we have $H^i(X,\FF(m)) = 0$ for $i > 0$ and $m \gg 0$.
+\end{proposition}
+
+\begin{proposition} The Hilbert polynomial of a degree $d$ hypersurface $X = V(f)$ in $\PP^n$ is given by
+\[p_X(m) = \binom{n+m}{m} - \binom{n+m-d}{m-d}\]
+\end{proposition}
+\begin{proof}
+One can compute this in one of two ways. One is to see that in $k(X)$, the degree $d$ piece will eventually be computed by 
+\[\dim_k k[x_0,\dots,x_n]_m - \dim_k k[x_0,\dots,x_n]_{m-d}\]
+as the terms getting zeroed out in $(k[x_0,\dots,x_n]/(f))_m$ are things of the form 
+\[\textup{(degree $d-m$ polynomial)$\cdot f$}\]
+
+One can also compute this from the exact sequence:
+\[0 \to \OO_{\PP^n}(-d) \stackrel{\times f}{\to} \OO_{\PP^n} \to \OO_X \to 0\]
+then twist to get 
+\[0 \to \OO_{\PP^n}(m-d) \stackrel{\times f}{\to} \OO_{\PP^n}(m) \to \OO_X(m) \to 0\]
+and use additivity of Euler characteristic.
+\end{proof}
+
+\begin{proposition} The degree of the Hilbert polynomial aligns with the dimension of the scheme. The leading coefficient of the Hilbert polynomial is $\frac{\deg(X)}{\dim(X)!}$.
+\end{proposition}
+
+\hrule
+\vspace{1em}
+
+\begin{example} $\A^n_{A} \to \spec A$ is flat, because $A[x_1,\dots,x_n]$ is a free (and thus flat) $A$-module.
+\end{example}
+
+\begin{example} $\spec k[x,y]/(x-y^2) \to \spec k[x]$ is flat because it dominates the target (and the source is reduced).
+\end{example}
+
+\begin{example} $\spec k[x,y]/(xy,y^2) \to \spec k[x]$ is not flat, because the embedded point does not go to the generic point. It is induced by the ring map $k[x] \to k[x,y]/(xy,y^2)$, and the preimage of the ideal $(x,y)$ is $(x)$, which is not the generic point. (Note that Criterion 1 does nothing for us here, as $k[x,y]/(xy,y^2)$ is not regular: the tangent space at the origin is too big).
+\end{example}
+
+\begin{example} As mentioned, $\spec k[t] \to \spec k[x,y]/(y^2-x^3)$ coming from $k[x,y]/(y^2-x^3) = k[t^2,t^3] \to k[t]$ is not flat. 
+\end{example}
+
+\begin{example} $\spec k[x,y,t]/(xy-t) \to \spec k[t]$ is flat. There are a couple of ways to see this: the fibers are equidimensional and the target and source are regular. Alternatively, the Hilbert polynomial is constant (for this you'd need to consider the projective space analogue and then use that open immersions and compositions of flat maps are flat). 
+
+For $t\ne 0$ the fibers look like smooth curves $xy = c$ in the plane. At $t=0$ the fiber degenerates to a reducible conic $xy = 0$.
+\end{example} 
+
+\begin{example} Consider the blowup of the projective plane at the origin. Then $\Bl_p \PP^2 \to \PP^2$ is not flat (source and target are smooth, but the fiber dimension jumps).
+\end{example}
+
 %#######################################################################
 %#######################################################################
-%#######################################################################
-%#######################################################################
-%#######################################################################
-%#######################################################################
+%####################    L E C T U R E      3 9   ###############################
 %#######################################################################
 %#######################################################################
 \begin{comment}
-\begin{remark}
-Let's think back to differential geometry. The tangent space at a point is sometimes defined as the vector space of derivations at $p$. A derivation at a point $p$ takes in functions $f$ near $p$ (so, elements of $\OO_{p}$ and outputs elements $f'(p)$ of $\R$ and must satisfy the Leibniz rule:
-\[(fg)' = f'g + gf'\]
-A derivation is the same as a map $\mm \to \R$. (The map $\OO_p \to \R$ extends to via $\OO_p \to \mm$ given by $f \mapsto f - f(p)$). But note that $\mm^2$ maps to zero, as if $f(p) = g(p) = 0$ then
-\[(fg)'(p) = f'(p)g(p) + g'(p)f(p) = 0\]
-Intuitively this makes sense: differentials should not detect anything from functions vanishing to the second order at the point. 
-
-\begin{proposition} \red{Generators of $(I/I^2)$ for nice cases. Proposition 21.2.16 in feb 2024 of vakil} 
+\section{April 21: Flat limits, smooth morphisms}
+\begin{proposition} Let $Y$ be a regular integral scheme of dimension 1, let $P \in Y$ be a closed point, and let $X \subseteq \PP^n \times (Y \setminus P)$ be a closed subscheme flat over $Y \setminus P$. Then there exists a unique closed subscheme $\overline{X} \subseteq \PP^n \times Y$, flat over $Y$, whose restriction to $\PP^n \times (Y \setminus P)$ is $X$.
 \end{proposition}
-
-\begin{corollary} If $B$ is a finitely generated $A$-algebra, or $B$ is a localization of a finitely generated $A$-algebra, then $\Omega_{B/A}$ is a finitely generated $B$-module.
-\end{corollary}
 \begin{proof}
-Statement is true for $B$ a polynomial ring over $A$, so true for quotients of it and localizations of (quotients of) it.
+Take $\overline{X}$ to be the scheme-theoretic closure of $X$ in $\PP^n \times Y$. The associated points of $\overline{X}$ are the same as the associated points of $X$, so by Criterion 2 $\overline{X}$ is flat over $Y$. Further, this extension is unique: other extensions would have associated points mapping to $P$.
 \end{proof}
 
-Then a derivation yields a map $\mm/\mm^2 \to \R$, i.e. an element of $(\mm/\mm^2)^{\vee}$. \red{Say what differentials are.}
+\begin{remark} This lemma means that flat limits exist for families over punctured curves. That is, the Hilbert scheme is proper. 
 \end{remark}
 
+\begin{example} A simple example: $\spec k[x,t]/(x^2-t) \to \spec k[t] \setminus 0$, which has flat limit $k[x]/(x^2)$.
+\end{example}
 
-\begin{theorem}
+\begin{example} Consider two skew lines in $\PP^3 = \proj k[x_0,x_1,x_2,x_3]$. Let's see what happens when we collide them at a point. We just care about the behavior near the collision point, so let's work in an affine chart $\spec k[x,y,z]$. Consider one line $y=z=0$ and another line $x=0,z=t$. What happens as $t \to 0$?
+\\
+
+We get a bunch of schemes cut out by $I_t = (y,z) \cap (x,z-t) = (xy,xz,(z-t)y,(z-t)z)$. As $t \to 0$, this yields the ideal $I_0 = (xy,xz,zy,z^2)$. This is the $x,y$ axes in the plane $z=0$ \textit{together} with an embedded point at the origin. Again, note that if one "cuts out" the axes by computing the quotient ideal $(xy,xz,yz,z^2):(xy,z)$, you get the ideal of the embedded point $(x,y,z)$.
+\\
+
+The cool thing about this limit is that, although the underlying algebraic set is contained in a plane, the scheme is \textit{not} contained in a plane. That is, the limit seems to be remembering that it came from schemes that were not contained in a plane. 
+\\
+
+Note that the limit really can't just be the degenerate conic $V(xy,z)$. The Hilbert polynomial of a line is $d+1$, and likewise the Hilbert polynomial of two disjoint lines is $2d+2$. Through direct algebraic computation (i.e. count the size of $k[X]_d$), one can compute that the Hilbert polynomial of the degenerate conic $V(xy,z)$ is $2d+1$. That is, it's missing a $+1$. This gets added in by the embedded point.
+\end{example}
+
+\begin{lemma} Consider two closed subschemes $X_1,X_2$ of $\PP^n$. Then we have the following relationship of Hilbert polynomials.
+\[h_{X_1 \cup X_2} = h_{X_1} + h_{X_2} - h_{X_1 \cap X_2} \]
+\end{lemma}
+\begin{proof}
+Let $I_1, I_2$ be the homogeneous ideal cutting out $X_1,X_2$ respectively. Let $S = k[x_0,\dots,x_n]$ Then this follows from the sequence of graded modules
+\[0 \to \frac{S}{I_1 \cap I_2} \to \frac{S}{I_1} \oplus \frac{S}{I_2} \to \frac{S}{I_1 + I_2} \to 0\]
+\end{proof}
+
+%\begin{lemma}[Residual and trace sequence] Let 
+%\end{lemma}
 
 
+\begin{remark} If one wants more formality: we are considering the family 
+\[\spec k[x,y,z,t]/(xy,yz,(z-t)y,(z-t)z) \to \spec k[t] \setminus 0\]
+ and filling in the flat limit. Be careful when computing these limits: if you thought of the ideals as $I_t = (y,z) \cap (x,z-t)$ and tried to set $t=0$, you might think the limit is $I_t = (y,z) \cap (x,z) = (xy,z)$, but this is not correct!
+\end{remark}
 
+\begin{example} The previous example fits into a broader class of examples. Let's think about projection from a point onto a hyperplane. We'll think about just the $\PP^3$ case. Let's think about projecting from $P = [0,0,0,1]$ onto $v_3 = 0$. We get the projection map
+\begin{align*}
+\varphi: \PP^3 \setminus P &\to \PP^2\\
+[x_0,x_1,x_2,x_3] &\mapsto [x_0,x_1,x_2]
+\end{align*}
+Now for each $a \in k, a \ne 0$, we get an automorphism of $\PP^3$ given by $\sigma_a: [x_0,x_1,x_2,x_3] \mapsto [x_0,x_1,x_2,ax_3]$. Let $X_1$ be a closed subscheme of $\PP^3$ not containing $P$. For each $a \ne 0$, let $X_a = \sigma_a(X_1)$. Then the $X_a$ form a flat family parametrized over $\A^1_k \setminus 0$. It is flat: every fiber will have the same Hilbert polynomial as $X_1$. 
+\\
+
+Therefore, it should have a flat limit: the family extends to one over $\A^1_k$, and we have some notion of $X_0$. This limit will agree set-theoretically with $\varphi(X_1)$, that is, this family roughly interpolates between $X_1$ and its projection. But is the flat limit the projection? Not necessarily!
+\\
+
+We don't have time for it, but in Hartshorne Example III.9.8.4, he computes this limit when $X_1$ is a twisted cubic and its projection to $\PP^2$ is a nodal cubic curve. Similarly, the flat limit is this nodal cubic with an embedded point. Again, the limit "remembers" that it is a limit of space curves and is scheme-theoretically not contained in a plane. Also, note that this limit makes sense: a plain old cubic planar curve has Hilbert polynomial $3m$, not $3m+1$, which is the Hilbert polynomial of the twisted cubic.
+\end{example}
+
+\begin{example}  \red{Hartshorne-Hirschowitz gets a lot out of studying}
+Hartshorne-Hirschowitz: paper about studying $H^0(I_X(d))$ for $X =$ disjoint union of lines in $\PP^n$. You want that it's (generically) expected dimension: it turns out it's enough to show that any such union of lines can be degenerated to some $\wt{X}$ such that $H^0(I_X(d))$ has desired dimension. This allows you to compute more easily: specialize some of the lines to lie in quadrics of collide, etc.
+\end{example}
 \end{comment}
+
+
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
+%#######################################################################
 %\end{comment}
 %###############################################
 %###############################################
 %###############################################
 %###############################################
-\begin{comment}
-\section{Future material storage}
-A construction worth seeing:
-First, let $X$ be Noetherian and normal. Note that for an effective Weil divisor $D$ on $X$, we have that we can view $D$ as a codimension 1 subscheme of $X$. In this case, note that $\mathscr{I}_D = \OO_X(-D)$. To see this: recall that 
-\[\Gamma(U, \OO_X(D)) := \{t \in \K(X)^*: \ddiv|_U(t) + D|_U \ge 0\} \cup \{0\}\]
-What this is saying is that $t$ has to be regular (no poles) and that it must vanish along $D$. That is, it is precisely the condition that $t \in \II_D(U)$. So $\OO_X(D) = \II_D$. So when we have a sequence of $\OO_X$-modules given by
-\[0 \to \II_D \to \OO_X \to \OO_D \to 0\]
-corresponding to, on affines, the map of $A$-modules:
-\[0 \to I \to A \to A/I\]
-then we can rewrite the sequence as
-\[0 \to \OO_X(-D) \to \OO_X \to \OO_D \to 0\]
-Now, tensoring with $\OO_X(D)$ is an invertible operation and thus preserves exact sequences so we get
-\[0 \to \OO_X \to \OO_X(D) \to \OO_D(D) \to 0\]
-where the last term is the restriction/pullback to $D$ of the line bundle, given by $\OO_X(D) \otimes \OO_D$. This is useful in certain computations: $\OO_D(D)$ is the normal bundle of $D$ in $X$ and is a way to give the self-intersection of curves on a surface. Note that one way to make sense of $\OO_D(D)$ can be to find a divisor equivalent to $D$ and pull that back. (E.g. in scenarios where the class group and picard group are the same, one can see that for hyperplanes $\OO_H(H)$ is just going to be the hyperplane class on $H$).
-\end{comment}
+%\begin{comment}
+%\section{Future material storage}
+%A construction worth seeing:
+%First, let $X$ be Noetherian and normal. Note that for an effective Weil divisor $D$ on $X$, we have that we can view $D$ as a codimension 1 subscheme of $X$. In this case, note that $\mathscr{I}_D = \OO_X(-D)$. To see this: recall that 
+%\[\Gamma(U, \OO_X(D)) := \{t \in \K(X)^*: \ddiv|_U(t) + D|_U \ge 0\} \cup \{0\}\]
+%What this is saying is that $t$ has to be regular (no poles) and that it must vanish along $D$. That is, it is precisely the condition that $t \in \II_D(U)$. So $\OO_X(D) = \II_D$. So when we have a sequence of $\OO_X$-modules given by
+%\[0 \to \II_D \to \OO_X \to \OO_D \to 0\]
+%corresponding to, on affines, the map of $A$-modules:
+%\[0 \to I \to A \to A/I\]
+%then we can rewrite the sequence as
+%\[0 \to \OO_X(-D) \to \OO_X \to \OO_D \to 0\]
+%Now, tensoring with $\OO_X(D)$ is an invertible operation and thus preserves exact sequences so we get
+%\[0 \to \OO_X \to \OO_X(D) \to \OO_D(D) \to 0\]
+%where the last term is the restriction/pullback to $D$ of the line bundle, given by $\OO_X(D) \otimes \OO_D$. This is useful in certain computations: $\OO_D(D)$ is the normal bundle of $D$ in $X$ and is a way to give the self-intersection of curves on a surface. Note that one way to make sense of $\OO_D(D)$ can be to find a divisor equivalent to $D$ and pull that back. (E.g. in scenarios where the class group and picard group are the same, one can see that for hyperplanes $\OO_H(H)$ is just going to be the hyperplane class on $H$).
+%\end{comment}
 
 \end{document}
