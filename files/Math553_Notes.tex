@@ -4116,24 +4116,23 @@ For $t\ne 0$ the fibers look like smooth curves $xy = c$ in the plane. At $t=0$ 
 %####################    L E C T U R E      3 9   ###############################
 %#######################################################################
 %#######################################################################
-\begin{comment}
-\section{April 21: Flat limits, smooth morphisms}
+\section{April 21: Flat limits, examples, Hilbert polynomials of unions}
 \begin{proposition} Let $Y$ be a regular integral scheme of dimension 1, let $P \in Y$ be a closed point, and let $X \subseteq \PP^n \times (Y \setminus P)$ be a closed subscheme flat over $Y \setminus P$. Then there exists a unique closed subscheme $\overline{X} \subseteq \PP^n \times Y$, flat over $Y$, whose restriction to $\PP^n \times (Y \setminus P)$ is $X$.
 \end{proposition}
 \begin{proof}
 Take $\overline{X}$ to be the scheme-theoretic closure of $X$ in $\PP^n \times Y$. The associated points of $\overline{X}$ are the same as the associated points of $X$, so by Criterion 2 $\overline{X}$ is flat over $Y$. Further, this extension is unique: other extensions would have associated points mapping to $P$.
 \end{proof}
 
-\begin{remark} This lemma means that flat limits exist for families over punctured curves. That is, the Hilbert scheme is proper. 
+\begin{remark} This lemma means that flat limits exist for families over punctured curves. That is, the Hilbert scheme is proper. (You should think of the Hilbert scheme as a moduli space that parametrizes subschemes of $\PP^n_k$ with the same Hilbert polynomial).
 \end{remark}
 
-\begin{example} A simple example: $\spec k[x,t]/(x^2-t) \to \spec k[t] \setminus 0$, which has flat limit $k[x]/(x^2)$.
+\begin{example} A simple example: consider $\spec k[x,t,t^{-1}]/(x^2-t) \to \spec k[t,t^{-1}$. The limit family is $\spec k[x,t]/(x^2-t) \to \spec k[t]$ and the flat limit at $t=0$ is  $k[x]/(x^2)$.
 \end{example}
 
-\begin{example} Consider two skew lines in $\PP^3 = \proj k[x_0,x_1,x_2,x_3]$. Let's see what happens when we collide them at a point. We just care about the behavior near the collision point, so let's work in an affine chart $\spec k[x,y,z]$. Consider one line $y=z=0$ and another line $x=0,z=t$. What happens as $t \to 0$?
+\begin{example} Consider two skew lines in $\PP^3 = \proj k[x_0,x_1,x_2,x_3]$. Let's see what happens when we collide them at a point. We just care about the behavior near the collision point, so let's work in an affine chart $\spec k[x,y,z]$. Consider one line $L: y=z=0$ and another line $L_t: x=0,z=t$. What happens as $t \to 0$? Set theoretically, we should get the union of two lines $V(xy,z)$. But what is the scheme-theoretic picture?
 \\
 
-We get a bunch of schemes cut out by $I_t = (y,z) \cap (x,z-t) = (xy,xz,(z-t)y,(z-t)z)$. As $t \to 0$, this yields the ideal $I_0 = (xy,xz,zy,z^2)$. This is the $x,y$ axes in the plane $z=0$ \textit{together} with an embedded point at the origin. Again, note that if one "cuts out" the axes by computing the quotient ideal $(xy,xz,yz,z^2):(xy,z)$, you get the ideal of the embedded point $(x,y,z)$.
+We get a bunch of schemes $L \cup L_t$ cut out by $I_t = (y,z) \cap (x,z-t) = (xy,xz,(z-t)y,(z-t)z)$. As $t \to 0$, this yields the ideal $I_0 = (xy,xz,zy,z^2)$. This is the $x,y$ axes in the plane $z=0$ \textit{together} with an embedded point at the origin. Again, note that if one "cuts out" the axes by computing the quotient ideal $(xy,xz,yz,z^2):(xy,z)$, you get the ideal of the embedded point $(x,y,z)$.
 \\
 
 The cool thing about this limit is that, although the underlying algebraic set is contained in a plane, the scheme is \textit{not} contained in a plane. That is, the limit seems to be remembering that it came from schemes that were not contained in a plane. 
@@ -4155,8 +4154,8 @@ Let $I_1, I_2$ be the homogeneous ideal cutting out $X_1,X_2$ respectively. Let 
 
 
 \begin{remark} If one wants more formality: we are considering the family 
-\[\spec k[x,y,z,t]/(xy,yz,(z-t)y,(z-t)z) \to \spec k[t] \setminus 0\]
- and filling in the flat limit. Be careful when computing these limits: if you thought of the ideals as $I_t = (y,z) \cap (x,z-t)$ and tried to set $t=0$, you might think the limit is $I_t = (y,z) \cap (x,z) = (xy,z)$, but this is not correct!
+\[\spec k[x,y,z,t]/(xy,yz,(z-t)y,(z-t)z) \to \spec k[t] \]
+ and computing the flat limit $t=0$. Be careful when computing these limits: if you thought of the ideals as $I_t = (y,z) \cap (x,z-t)$ and tried to set $t=0$, you might think the limit is $I_t = (y,z) \cap (x,z) = (xy,z)$, but this is not correct!
 \end{remark}
 
 \begin{example} The previous example fits into a broader class of examples. Let's think about projection from a point onto a hyperplane. We'll think about just the $\PP^3$ case. Let's think about projecting from $P = [0,0,0,1]$ onto $v_3 = 0$. We get the projection map
@@ -4170,15 +4169,141 @@ Now for each $a \in k, a \ne 0$, we get an automorphism of $\PP^3$ given by $\si
 Therefore, it should have a flat limit: the family extends to one over $\A^1_k$, and we have some notion of $X_0$. This limit will agree set-theoretically with $\varphi(X_1)$, that is, this family roughly interpolates between $X_1$ and its projection. But is the flat limit the projection? Not necessarily!
 \\
 
-We don't have time for it, but in Hartshorne Example III.9.8.4, he computes this limit when $X_1$ is a twisted cubic and its projection to $\PP^2$ is a nodal cubic curve. Similarly, the flat limit is this nodal cubic with an embedded point. Again, the limit "remembers" that it is a limit of space curves and is scheme-theoretically not contained in a plane. Also, note that this limit makes sense: a plain old cubic planar curve has Hilbert polynomial $3m$, not $3m+1$, which is the Hilbert polynomial of the twisted cubic.
+We don't have time for it, but in Hartshorne Example III.9.8.4, he computes this limit when $X_1$ is a twisted cubic and its projection to $\PP^2$ is a nodal planar cubic curve. Similarly, the flat limit is this nodal planar cubic with an embedded point, and the flat limit is \textit{not} contained in a plane. Again, the limit "remembers" that it is a limit of space curves and is scheme-theoretically not contained in a plane. Also, note that this limit makes sense: a plain old cubic planar curve has Hilbert polynomial $3m$, not $3m+1$, which is the Hilbert polynomial of the twisted cubic.
+\\
+
+To see that a twisted cubic $C$ has Hilbert polynomial $3m+1$: note that 
+\[\dim H^0(\PP^3, \OO_C(m)) = \dim H^0(\PP^1,\OO_{\PP^1}(3m)) = 3m+1\]
 \end{example}
 
-\begin{example}  \red{Hartshorne-Hirschowitz gets a lot out of studying}
-Hartshorne-Hirschowitz: paper about studying $H^0(I_X(d))$ for $X =$ disjoint union of lines in $\PP^n$. You want that it's (generically) expected dimension: it turns out it's enough to show that any such union of lines can be degenerated to some $\wt{X}$ such that $H^0(I_X(d))$ has desired dimension. This allows you to compute more easily: specialize some of the lines to lie in quadrics of collide, etc.
+\hrule
+\vspace{1em}
+
+So! We've demonstrated a lot of examples and non-examples of flat families, and computed some flat limits. Let's talk more about why we like flat families so much. They are supposed to correspond to the idea of nice, continuous families, so what nice properties do they have? First, we need the notion to define smooth morphisms. But furthermore: they have nice cohomological properties!
+
+\begin{theorem}["Upper semicontinuity of cohomology"] Let $f: X \to Y$ be a projective morphism of noetherian schemes, and $\FF$ a coherent sheaf on $X$, flat over $Y$. Then for each $i \ge 0$, we have
+\[ y \in Y \mapsto \dim_{k(y)} H^i(X_y, \FF_y)\]
+is an upper-semicontinuous function on $Y$. (Recall that a function $\varphi: Y \to \Z$ is upper semicontinuous if $\{y \in Y: \varphi(y) \ge n\}$ is closed for any $n$).
+\end{theorem}
+\begin{proof}
+See Theorem III.12.8 in Hartshorne.
+\end{proof}
+
+\begin{remark} In particular, this means $S = \{y : \dim_{k(y)} H^i(X_y, \FF_y) = 0\}$ is open. If $Y$ is irreducible, this means $S$, the set where the cohomology vanishes, is \textit{dense} so long as you can prove it is nonempty.
+\end{remark}
+
+\begin{remark}  Continuing the previous remark: among many nice uses of the upper-semicontinuity of cohomology, Hartshorne-Hirschowitz get a lot of mileage out of it in their '81 paper on disjoint unions of lines in $\PP^n$. The paper shows that for a general union of disjoint lines, the map
+\[H^0(\OO_{\PP^n}(d)) \to H^0(\OO_{X}(d))\]
+has maximal rank. Utilizing upper semicontinuity reduces this to showing that you can specialize the lines along a flat family to a configuration $X'$, possibly allowing some of the lines to collide, such that $H^0(\OO_{\PP^n}(d)) \to H^0(\OO_{X'}(d))$ has maximal rank. By colliding some of the lines and configuring them in a particular away along a fixed quadric $Q$, one can do an induction argument to show that this map for $X'$ has maximal rank.
+\end{remark}
+
+\begin{proposition} Let $\{X_t\}$ be a flat family of closed subschemes of $\PP^n_k$ parametrized by an irreducible curve $T$ of finite type over $k$. Suppose there is an open subset $U$ of $T$ where, over the closed points of $X$ within $U$ , we have $X_t$ is connected. Then $X_t$ is connected for all $t \in T$.
+\end{proposition}
+
+\begin{proposition} A flat morphism $f: X \to Y$ of finite type noetherian schemes is open.
+\end{proposition}
+
+We have not covered higher direct images, so we don't quite have the knowledge to parse the following. However, it is worth stating and giving the reference, and pointing out that this is a very commonly used cohomology result for families, and part of why we like flat families so much:
+
+\begin{theorem}[Cohomology and base change] Let $f: X \to Y$ be a projective morphism of noetherian schemes and $\FF$ a coherent sheaf on $X$, flat over $Y$. Let $y \in Y$. Then
+\begin{enumerate}
+\item if the natural map 
+\[\varphi^i(y): R^if_*(\FF) \otimes k(y) \to H^i(X_y,\FF_y)\]
+is surjective, then it is an isomorphism (and is an isomorphism in a neighborhood of $y$)
+\item In the $\varphi^i$ surjective case, we get $\varphi^{i-1}$ is surjective $\iff R^i f_*(\FF)$ locally free in a nieghborhood of $y$.
+\end{enumerate}
+\end{theorem}
+\begin{proof} See Theorem III.12.11 in Hartshorne.
+\end{proof}
+%#######################################################################
+%#######################################################################
+%####################    L E C T U R E      4 0   ###############################
+%#######################################################################
+%#######################################################################
+\begin{comment}
+\section{April 23: Smooth morphisms}
+Time to do a relative version of smoothness! \red{April 17 notes from Nolan}
+
+\begin{definition} Let $f: X \to Y$ be a morphism of schemes of finite type over $k$. $f$ is smooth of relative dimension $n$ provided the following three conditions hold:
+\begin{enumerate}
+\item $f$ is flat
+\item if $X' \subseteq X$ and $Y' \subseteq Y$ are irreducible components with $f(X') \subseteq Y'$, then $\dim X' = \dim y' + n$,
+\item for each point $x \in X$ (not necessarily closed)
+\[ \dim_{k(x)} (\Omega_{X/Y} \otimes k(x)) = n\]
+\end{enumerate}
+\end{definition}
+
+\begin{example} For any $Y$, $\A^n_Y$ and $\PP^n_Y$ are smooth of relative dimension $n$ over $Y$.
 \end{example}
+
+\begin{remark} If $X$ is integral, the last condition is equivalent to $\Omega_{X/Y}$ being locally free (on $X$) of rank $n$. (This is by Lemma 8.9 in Hartshorne: if $A$ is a noetherian local integral domain with residue field $k$ and quotient field $K$: $M$ is a finitely generated $A$-module with $\dim_k M \otimes_A k = \dim_K M \otimes_A K = r$ if and only if $M$ is free of rank $r$. This is a Nakayama lemma proof.
+\end{remark}
+
+\begin{example} If $Y = \spec k$ with $k$ algebraically closed, $X$ is smooth over $k$ if and only if $X$ is regular and $n$-dimensional. (So if irreducible and separated: $\iff$ nonsingular)
+\end{example}
+
+\begin{proposition} The following various properties of smooth morphisms hold:
+\begin{enumerate}
+\item  An open immersion is smooth of relative dimension zero.
+\item  Base change: if $f: X \to Y$ is smooth of relative dimension $n$, and $g: Y' \to Y$ is any morphism, then $f': X' = X \times_Y Y' \to Y'$ is also smooth of relative dimension $n$.
+\item $f:X \to Y$ smooth of relative dimension $n$ and $g: Y \to Z$ is smooth of relative dimension $m$ means $g \circ f: X \to Z$ is smooth of relative dimension $n+m$
+\item If $X,Y$ are smooth over $Z$ of relative dimension $n,m$ respectively, then $X \times_Z Y$ smooth of relative dimension $n+m$.
+\end{enumerate}
+\end{proposition}
+
+\begin{remark} \red{part about integral base} In general, families over non-integral things are a little wacky.
+\end{remark}
+
+\begin{theorem} Let $f:X \to Y$ be a morphism of schemes of finite type over $k$. Then $f$ is smooth of relative dimension $n$ if and only if the following conditions hold:
+\begin{enumerate}
+\item $f$ is flat,
+\item for each $y \in Y$, set $X_{\overline{y}} = X_y \otimes_{k(y)} \overline{k(y)}$. Then $X_{\overline{y}}$ is required to be equidimensional of dimension $n$ and regular.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark} The latter condition is referred to as "the fibers of $f$ are geometrically regular of equidimension $n$." Since the fibers are now schemes over an algebraically closed field, you can test for regularity by looking at local freeness of $\Omega_{X_{\overline{y}}/\overline{k(y)}}$.
+\end{remark}
+
+\begin{proposition} Let $f: X \to Y$ be morphism of nonsingular varieties over an algebraically closed field $k$. Let $n = \dim X - \dim Y$. The following are equivalent:
+\begin{enumerate}[(i)]
+\item $f$ is smooth of relative dimension $n$
+\item $\Omega_{X/Y}$ is locally free of rank $n$ on $X$
+\item for every closed point $x \in X$, the induced map on Zariski tangent spaces $T_f: T_x \to T_y$ is surjective.
+\end{enumerate} 
+\end{proposition}
+
+\begin{lemma} Let $f:X \to Y$ be a dominant morphism of integral schemes of finite type over al algebraically closed field $k$ of char $0$. Then there is a nonempty open set $U \subseteq X$ such that $f: U \to Y$ is smooth.
+\end{lemma}
+
+\begin{remark} Note that this means \red{something something locally checking}
+\end{remark}
+
+\begin{proposition} Some basic properties of smooth morphisms include: \red{finish}
+\end{proposition}
+
+\begin{example} A variety over $\overline{k}$ is smooth if and only if it is nonsingular. \red{remind def?}
+\end{example}
+
+\begin{theorem} $f: X \to Y$ is smooth of relative dimension $n$ if and only if the following two conditions hold:
+\begin{enumerate}
+\item $f$ is flat and,
+\item For all $y \in Y$, $X_{\overline{y}} = X_y \times_{k(y)} \overline{k(y)}$ is equidimensional of of dimension $n$ and regular (nonsingular). 
+\end{enumerate}
+Thus, smoothness can be reduced to a check over algebraically closed fields.
+\end{theorem}
+
+\begin{theorem}[Bertini]
+\end{theorem}
+
+\begin{definition} \red{\'etale}
+\end{definition}
+
+\begin{proposition} $f:X \to Y$ morphism of Noetherian schemes. \red{connected fibers}
+\end{proposition}
+
+\begin{theorem}[Zariski's main theorem] \red{roughly, branching behavior for normal things}
+\end{theorem}
 \end{comment}
-
-
 %#######################################################################
 %#######################################################################
 %#######################################################################
