@@ -4126,7 +4126,7 @@ Take $\overline{X}$ to be the scheme-theoretic closure of $X$ in $\PP^n \times Y
 \begin{remark} This lemma means that flat limits exist for families over punctured curves. That is, the Hilbert scheme is proper. (You should think of the Hilbert scheme as a moduli space that parametrizes subschemes of $\PP^n_k$ with the same Hilbert polynomial).
 \end{remark}
 
-\begin{example} A simple example: consider $\spec k[x,t,t^{-1}]/(x^2-t) \to \spec k[t,t^{-1}$. The limit family is $\spec k[x,t]/(x^2-t) \to \spec k[t]$ and the flat limit at $t=0$ is  $k[x]/(x^2)$.
+\begin{example} A simple example: consider $\spec k[x,t,t^{-1}]/(x^2-t) \to \spec k[t,t^{-1}]$. The limit family is $\spec k[x,t]/(x^2-t) \to \spec k[t]$ and the flat limit at $t=0$ is  $k[x]/(x^2)$.
 \end{example}
 
 \begin{example} Consider two skew lines in $\PP^3 = \proj k[x_0,x_1,x_2,x_3]$. Let's see what happens when we collide them at a point. We just care about the behavior near the collision point, so let's work in an affine chart $\spec k[x,y,z]$. Consider one line $L: y=z=0$ and another line $L_t: x=0,z=t$. What happens as $t \to 0$? Set theoretically, we should get the union of two lines $V(xy,z)$. But what is the scheme-theoretic picture?
@@ -4220,9 +4220,8 @@ is surjective, then it is an isomorphism (and is an isomorphism in a neighborhoo
 %####################    L E C T U R E      4 0   ###############################
 %#######################################################################
 %#######################################################################
-\begin{comment}
 \section{April 23: Smooth morphisms}
-Time to do a relative version of smoothness! \red{April 17 notes from Nolan}
+Time to do a relative version of smoothness! 
 
 \begin{definition} Let $f: X \to Y$ be a morphism of schemes of finite type over $k$. $f$ is smooth of relative dimension $n$ provided the following three conditions hold:
 \begin{enumerate}
@@ -4236,23 +4235,23 @@ Time to do a relative version of smoothness! \red{April 17 notes from Nolan}
 \begin{example} For any $Y$, $\A^n_Y$ and $\PP^n_Y$ are smooth of relative dimension $n$ over $Y$.
 \end{example}
 
-\begin{remark} If $X$ is integral, the last condition is equivalent to $\Omega_{X/Y}$ being locally free (on $X$) of rank $n$. (This is by Lemma 8.9 in Hartshorne: if $A$ is a noetherian local integral domain with residue field $k$ and quotient field $K$: $M$ is a finitely generated $A$-module with $\dim_k M \otimes_A k = \dim_K M \otimes_A K = r$ if and only if $M$ is free of rank $r$. This is a Nakayama lemma proof.
+\begin{remark} If $X$ is integral, the last condition is equivalent to $\Omega_{X/Y}$ being locally free on $X$ of rank $n$. \footnote{This is by Lemma II.8.9 in Hartshorne: if $A$ is a noetherian local integral domain with residue field $k$ and quotient field $K$: $M$ is a finitely generated $A$-module with $\dim_k M \otimes_A k = \dim_K M \otimes_A K = r$ if and only if $M$ is free of rank $r$. This is a Nakayama lemma proof.} This helps reduce to closed points, using Hartshorne Exercise II.5.7. (Let $X$ be a noethierian scheme, $\FF$ coherent on $X$. Then if $\FF_x$ is free at some point $x$, $\FF|_U$ is free in some neighborhood of $x$).
 \end{remark}
 
-\begin{example} If $Y = \spec k$ with $k$ algebraically closed, $X$ is smooth over $k$ if and only if $X$ is regular and $n$-dimensional. (So if irreducible and separated: $\iff$ nonsingular)
+\begin{example} If $Y = \spec k$ with $k$ algebraically closed, $X$ a variety over $\overline{k}$ is smooth over $k$ if and only if $X$ is regular and $n$-dimensional. (So if irreducible: $\iff$ nonsingular).
 \end{example}
 
 \begin{proposition} The following various properties of smooth morphisms hold:
 \begin{enumerate}
 \item  An open immersion is smooth of relative dimension zero.
 \item  Base change: if $f: X \to Y$ is smooth of relative dimension $n$, and $g: Y' \to Y$ is any morphism, then $f': X' = X \times_Y Y' \to Y'$ is also smooth of relative dimension $n$.
-\item $f:X \to Y$ smooth of relative dimension $n$ and $g: Y \to Z$ is smooth of relative dimension $m$ means $g \circ f: X \to Z$ is smooth of relative dimension $n+m$
+\item $f:X \to Y$ smooth of relative dimension $n$ and $g: Y \to Z$ is smooth of relative dimension $m$ means $g \circ f: X \to Z$ is smooth of relative dimension $n+m$.
 \item If $X,Y$ are smooth over $Z$ of relative dimension $n,m$ respectively, then $X \times_Z Y$ smooth of relative dimension $n+m$.
 \end{enumerate}
 \end{proposition}
 
-\begin{remark} \red{part about integral base} In general, families over non-integral things are a little wacky.
-\end{remark}
+%\begin{remark} \red{part about integral base} In general, families over non-integral things are a little strange. Flatness, etc is not great over them.
+%\end{remark}
 
 \begin{theorem} Let $f:X \to Y$ be a morphism of schemes of finite type over $k$. Then $f$ is smooth of relative dimension $n$ if and only if the following conditions hold:
 \begin{enumerate}
@@ -4262,38 +4261,103 @@ Time to do a relative version of smoothness! \red{April 17 notes from Nolan}
 \end{theorem}
 
 \begin{remark} The latter condition is referred to as "the fibers of $f$ are geometrically regular of equidimension $n$." Since the fibers are now schemes over an algebraically closed field, you can test for regularity by looking at local freeness of $\Omega_{X_{\overline{y}}/\overline{k(y)}}$.
+
+Thus the inuitive/shorthand notion of smooth morphisms is "flat with geometrically smooth fibers."
 \end{remark}
 
-\begin{proposition} Let $f: X \to Y$ be morphism of nonsingular varieties over an algebraically closed field $k$. Let $n = \dim X - \dim Y$. The following are equivalent:
+\begin{proposition}\label{prop:smooth-morphisms-surjective-tan-spaces} Let $f: X \to Y$ be morphism of nonsingular varieties over an algebraically closed field $k$. Let $n = \dim X - \dim Y$. The following are equivalent:
 \begin{enumerate}[(i)]
 \item $f$ is smooth of relative dimension $n$
 \item $\Omega_{X/Y}$ is locally free of rank $n$ on $X$
-\item for every closed point $x \in X$, the induced map on Zariski tangent spaces $T_f: T_x \to T_y$ is surjective.
+\item for every closed point $x \in X$, the induced map on Zariski tangent spaces $T_f: T_x \to T_{f(x)}$ is surjective.
 \end{enumerate} 
 \end{proposition}
 
-\begin{lemma} Let $f:X \to Y$ be a dominant morphism of integral schemes of finite type over al algebraically closed field $k$ of char $0$. Then there is a nonempty open set $U \subseteq X$ such that $f: U \to Y$ is smooth.
-\end{lemma}
-
-\begin{remark} Note that this means \red{something something locally checking}
+\begin{remark} The last condition is meant to be an analogue of submersions in differential geometry. You should think of smooth morphisms as generalizations of submersions (and thus of locally trivial fibrations).
 \end{remark}
 
-\begin{proposition} Some basic properties of smooth morphisms include: \red{finish}
+\begin{lemma}[Generic smoothness on source] Let $f:X \to Y$ be a dominant morphism of $k$ varieties over an algebraically closed field $k$ of char $0$. Then there is a nonempty open set $U \subseteq X$ such that $f: U \to Y$ is smooth.
+\end{lemma}
+\begin{proof} One can show that if $K(X)/K(Y)$ is finitely generated with transcendence degree $n$, then $\Omega_{X/Y}$ has rank $n$ at the generic point. Upper semicontinuity of fiber rank (HW 2) implies rank $n$ on an open dense set. Reducedness means constant rank means locally free of that rank (also HW 2), so $\Omega_{X/Y}$ locally free of rank $n$ on that open set. One can also show "generic flatness" so done (intersect two open sets).
+\end{proof}
+
+\begin{lemma} Suppose $\pi: X \to Y$ is a finite type morphism to a Noetherian integral scheme, $\FF$ coherent on $X$. There is an open dense $U \subseteq Y$ over which $\FF$ is flat. 
+\end{lemma}
+
+This uses Grothendieck's generic freeness lemma: if $B$ a Noetherian integral domain, then every f.g. $B$ algebra has prop: for any finitely generated $A$-module $M$, there exists $f$ such that $M_f$ is a free $B_f$-module.
+
+Now, we would like generic smoothness on the target, as this is pretty useful in proofs. We can get this from generic smoothness on the source. We'll need the following lemma.
+
+\begin{proposition}\label{prop:tangent-rank-contained} Let $f: X \to Y$ be a morphism of schemes of finite type over an algebraically closed field $k$ of char $0$. For any $r$, set 
+\[X_r = \{\textup{closed points $x \in X$ }: \textup{rank } T_{f,x} \le r\}\]
+then,
+\[\dim \overline{f(X_r)} \le r\]
+In practice, this lets us bound the (target) set where the tangent map is poorly behaved.
 \end{proposition}
+\begin{proof}
+Let $Y'$ be any irreducible component of $\overline{f(X_r)}$ and $X'$ an irreducible component of $\overline{X_r}$ that dominates $Y'$. We give $X', Y'$ reduced structures, and consider $f': X' \to Y'$. Then there is a nonempty open subset $U' \subseteq X'$ such that $f': U' \to Y'$ is smooth. Consider $x \in U' \cap X_r$ and consider the diagram of tangent spaces
+\[
+\begin{tikzcd}
+T_{x,U'} \arrow[d, twoheadrightarrow, "T_{f',x}"] \arrow[r, hook]&T_{x,X} \arrow[d, "T_{f,x}"]\\
+T_{y,Y'} \arrow[r, hook] &T_{y,Y}
+\end{tikzcd}
+\]
+The horizontal arrows are injective because $U',Y'$ are locally closed in $X,Y$. On the other hand, $\dim T_{f,x} \le r$ since $x \in X_r$ and $T_{f',x}$ is surjective because $f'$ is smooth. Thus $\dim T_{y,Y'} \le r$ and so $\dim Y' \le r$. Then every component of $\overline{f(X_r)}$ has dimension $\le r$ and we are done. 
+\end{proof}
 
-\begin{example} A variety over $\overline{k}$ is smooth if and only if it is nonsingular. \red{remind def?}
-\end{example}
 
-\begin{theorem} $f: X \to Y$ is smooth of relative dimension $n$ if and only if the following two conditions hold:
-\begin{enumerate}
-\item $f$ is flat and,
-\item For all $y \in Y$, $X_{\overline{y}} = X_y \times_{k(y)} \overline{k(y)}$ is equidimensional of of dimension $n$ and regular (nonsingular). 
-\end{enumerate}
-Thus, smoothness can be reduced to a check over algebraically closed fields.
+\begin{corollary}[Generic smoothness on base] Let $f: X \to Y$ be a dominant morphism of varieties over an algebraically closed field $k$ of characteristic $0$. Assume $X$ is nonsingular over $k$. Then there is a nonempty open subset $V \subseteq Y$ such that $f: f^{-1}(V) \to V$ is smooth.
+\end{corollary}
+\begin{proof}
+$Y$ is nonsingular on an open set, so restrict to that set first. So we may assume $Y$ is nonsingular. Let $r = \dim Y$. Let $X_{r-1} \subseteq X$ be the subset defined in Proposition \ref{prop:tangent-rank-contained}. Then $\dim \overline{f(X_{r-1})} \le r-1$, so removing it from $Y$ and adjusting $X$ accordingly, we may assume that $\textup{rank }T_f \ge r$ for every closed point of $X$. But since $Y$ is nonsingular of dimension $r$, this means $T_f$ is surjective for every closed point of $X$. Thus $f$ is smooth by Proposition \ref{prop:smooth-morphisms-surjective-tan-spaces}.
+\end{proof}
+
+\begin{remark} Note that if $f$ was not originally dominant, then $V \subseteq Y \setminus \overline{f(X)}$ and the morphism will be empty.
+\end{remark}
+
+%#######################################################################
+%#######################################################################
+%####################    L E C T U R E      4 1   ###############################
+%#######################################################################
+%#######################################################################
+\begin{comment}
+\section{April 25: Group schemes, homogeneous varieties, theorems of Kleiman and Bertini}
+For the next topic, we need the rough notion of a group variety. A group variety $G$ over an algebraically closed field is a variety $G$ with multiplication and inverse morphisms
+\[\mu: G \times G \to G, \rho: G \to G\]
+such that the set of closed points of $G$ becomes a group under the operation $\mu$, and the inverses given by $\rho$.
+
+For example. $\mathbb{G}_m$ is an group scheme: its inverse is given by $t \mapsto t^{-1}$ and its multiplication map is induced by 
+\begin{align*}
+\spec k[t,t^{-1}] \to \spec k[t,t^{-1}, s, s^{-1}]
+t \mapsto t \otimes s
+\end{align*}
+Then one can show that the prime ideal $(t-a,s-b)$ pulls back to $(t-ab)$.
+
+A group variety $G$ acts on a variety $X$ if there is a morphism $\theta: G \times X \to X$ which induces a homomorphism $G(k) \to \textup{Aut}(X)$ of groups. A homogeneous space is a variety $X$ and group variety $G$ such that the closed points of $G$ act transitively on the closed points on $X$.
+
+The canonical example in peoples' heads:
+
+\begin{remark} Projective space $\PP^n_k$ is a homogeneous space for the action of $G = \textup{PGL}_n$.
+\end{remark}
+
+\begin{remark} Homogeneous spaces are nonsingular. It is nonsingular on an open set, but then the transitive group action means nonsingular everywhere.
+\end{remark}
+
+\begin{theorem}[Kleiman] We work over an algebraically closed field $k$ of char $0$. Let $X$ be a homogeneous space of a group $G$. Let $f: Y \to X, g: Z \to X$ be morphisms of nonsingular varieties $Y,Z$ to $X$ (often, they are closed embeddings). For any $\sigma \in G(k)$, let $Y^{\sigma}$ be $Y$ with the morphism $\sigma \circ f$ to $X$. (That is, translate the closed subscheme). Then there is a nonempty over subset $V \subseteq G$ such that for every $\sigma in V(k)$
+\[Y^{\sigma} \times_X Z\]
+is nonsingular and either empty or of dimension exactly
+\[\dim Y + \dim Z - \dim X\]
+(If $Y,Z$ are closed subschemes, this fiber product comptues the intersection. So, if you have two closed subschemes and take generic translates of one, they intersect smoothly in the expected dimension. If $Y,Z$ are closed subschemes of complimentary dimension, this says taking generic translates of one results in an intersection that is a collection of reduced points. This is very nice for computing \textit{effective} and \textit{nef cones} in Grassmannians).
 \end{theorem}
 
-\begin{theorem}[Bertini]
-\end{theorem}
+\includegraphics[scale=.35]{hart1.png}\\
+\includegraphics[scale=.35]{hart2.png}
+
+\begin{corollary}[Bertini's theorem] Let $X$ be a nonsingular projective variety over an algebraically closed field $k$ of char $0$. Let $L$ be a linear system without base points. Then almost every element of $L$, considered as a closed subscheme of $X$, is nonsingular (may be reducible, though). 
+\end{corollary}
+\begin{proof}
+Let $f: X \to \PP^n$ be the morphism to $\PP^n$ determined by the bpf system. Consider $\PP^n$ as a homogeneous space under the action of PGL. Apply the theorem taking $g: H \to \PP^n$ being the inclusion of a hyperplane. For generic $\sigma \in G(k)$, we get $X \times_{\PP^n} H^{\sigma} = f^{-1}(H^{\sigma})$ is nonsingular. But the divisor $f^{-1}(H^{\sigma})$ are just elements of the linear system, by construction of $f$. Thus almost all (i.e. generically) the elements are nonsingular.
+\end{proof}
 
 \begin{definition} \red{\'etale}
 \end{definition}
