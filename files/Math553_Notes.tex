@@ -4320,53 +4320,142 @@ $Y$ is nonsingular on an open set, so restrict to that set first. So we may assu
 %####################    L E C T U R E      4 1   ###############################
 %#######################################################################
 %#######################################################################
-\begin{comment}
 \section{April 25: Group schemes, homogeneous varieties, theorems of Kleiman and Bertini}
-For the next topic, we need the rough notion of a group variety. A group variety $G$ over an algebraically closed field is a variety $G$ with multiplication and inverse morphisms
+For the next topic, we need the rough notion of a group variety. A group variety $G$ (which we will also refer to as a group scheme) over an algebraically closed field is a variety $G$ with multiplication and inverse morphisms
 \[\mu: G \times G \to G, \rho: G \to G\]
-such that the set of closed points of $G$ becomes a group under the operation $\mu$, and the inverses given by $\rho$.
+such that the set of closed points of $G$ becomes a group under the operation $\mu$, and the inverses are given by $\rho$.
 
-For example. $\mathbb{G}_m$ is an group scheme: its inverse is given by $t \mapsto t^{-1}$ and its multiplication map is induced by 
+\begin{example} An example of a group scheme is $\mathbb{G}_m = \spec k[t,t^{-1}] = \A^1_k \setminus 0$. Its inverse is the morphism induced by $t \mapsto t^{-1}$. Note that the preimage of the maximal ideal $(t-a)$ under this is $(t^{-1}-a) = (1-at) = (a^{-1} - t)$.
+
+This group scheme's multiplication map is induced by 
 \begin{align*}
-\spec k[t,t^{-1}] \to \spec k[t,t^{-1}, s, s^{-1}]
-t \mapsto t \otimes s
+\spec k[t,t^{-1}] &\to \spec k[s,s^{-1}, u, u^{-1}]\\
+t &\mapsto s \cdot u
 \end{align*}
-Then one can show that the prime ideal $(t-a,s-b)$ pulls back to $(t-ab)$.
+Then one can show that the preimage of the maximal ideal $(s-a,u-b)$ is $(t-ab)$.
+\end{example}
 
-A group variety $G$ acts on a variety $X$ if there is a morphism $\theta: G \times X \to X$ which induces a homomorphism $G(k) \to \textup{Aut}(X)$ of groups. A homogeneous space is a variety $X$ and group variety $G$ such that the closed points of $G$ act transitively on the closed points on $X$.
+A group variety $G$ acts on a variety $X$ if there is a morphism $\theta: G \times X \to X$ which induces a group homomorphism $G(k) \to \textup{Aut}(X)$ of groups. A homogeneous space is a variety $X$ and group variety $G$ such that the closed points of $G$ act transitively on the closed points of $X$.
+\\
 
-The canonical example in peoples' heads:
+One of the most important examples is the following.
 
-\begin{remark} Projective space $\PP^n_k$ is a homogeneous space for the action of $G = \textup{PGL}_n$.
+\begin{example} Projective space $\PP^n_k$ is a homogeneous space for the action of $G = \textup{PGL}_{n+1}$.
+\end{example}
+
+\begin{example} A group scheme $G$ acts on itself via left multiplication. Thus a group scheme is a homogeneous space (under this left multiplication action).
+\end{example}
+
+\begin{remark} Homogeneous spaces are nonsingular (over $k$ algebraically closed, char $0$). It is nonsingular on an open set, but then the transitive group action means nonsingular everywhere. In particular, group schemes are nonsingular because they are homogeneous spaces.
 \end{remark}
 
-\begin{remark} Homogeneous spaces are nonsingular. It is nonsingular on an open set, but then the transitive group action means nonsingular everywhere.
-\end{remark}
-
-\begin{theorem}[Kleiman] We work over an algebraically closed field $k$ of char $0$. Let $X$ be a homogeneous space of a group $G$. Let $f: Y \to X, g: Z \to X$ be morphisms of nonsingular varieties $Y,Z$ to $X$ (often, they are closed embeddings). For any $\sigma \in G(k)$, let $Y^{\sigma}$ be $Y$ with the morphism $\sigma \circ f$ to $X$. (That is, translate the closed subscheme). Then there is a nonempty over subset $V \subseteq G$ such that for every $\sigma in V(k)$
+\begin{theorem}[Kleiman]\label{theorem:Kleiman} We work over an algebraically closed field $k$ of characteristic $0$. Let $X$ be a homogeneous space with action by a group $G$. Let $f: Y \to X, g: Z \to X$ be morphisms of nonsingular varieties $Y,Z$ to $X$ (one useful example to think about: $f,g$ both closed embeddings). For any $\sigma \in G(k)$, let $Y^{\sigma}$ be $Y$ with the morphism $\sigma \circ f$ to $X$. Then there is a nonempty open subset $V \subseteq G$ such that for every $\sigma \in V(k)$ we have
 \[Y^{\sigma} \times_X Z\]
 is nonsingular and either empty or of dimension exactly
 \[\dim Y + \dim Z - \dim X\]
-(If $Y,Z$ are closed subschemes, this fiber product comptues the intersection. So, if you have two closed subschemes and take generic translates of one, they intersect smoothly in the expected dimension. If $Y,Z$ are closed subschemes of complimentary dimension, this says taking generic translates of one results in an intersection that is a collection of reduced points. This is very nice for computing \textit{effective} and \textit{nef cones} in Grassmannians).
 \end{theorem}
 
-\includegraphics[scale=.35]{hart1.png}\\
-\includegraphics[scale=.35]{hart2.png}
+\begin{remark}
+Let us build intuition with the case of $f,g$ closed embeddings. If $Y,Z$ are closed subschemes, this fiber product computes the intersection. So, this theorem is saying if you have two closed smooth subschemes and take generic translates of one, they (as in, $Y^{\sigma}$ and $Z$) intersect to something smooth in the expected dimension (or empty). If $Y,Z$ are closed subschemes of complimentary dimension, this says taking generic translates of one results in an intersection that is a collection of reduced points. This is very nice for computations \footnote{With a little tweaking, this theorem lets you compute the effective and nef cones in all dimensions for Grasmmannians $\textup{Gr}(k,n)$ over $\C$. You can think of this problem in the following way: consider the singular homology groups $H_{2d}(\textup{Gr}(k,n))$ of the Grassmannian. Tensor with $\Q$ or $\R$. Within this vector space, you can look at the cone spanned by classes that are equivalent to the class of some algebraic subscheme of $\textup{Gr}(k,n)$. We call this the cone of effective $d$-folds. One might ask: what is this cone?
 
-\begin{corollary}[Bertini's theorem] Let $X$ be a nonsingular projective variety over an algebraically closed field $k$ of char $0$. Let $L$ be a linear system without base points. Then almost every element of $L$, considered as a closed subscheme of $X$, is nonsingular (may be reducible, though). 
-\end{corollary}
-\begin{proof}
-Let $f: X \to \PP^n$ be the morphism to $\PP^n$ determined by the bpf system. Consider $\PP^n$ as a homogeneous space under the action of PGL. Apply the theorem taking $g: H \to \PP^n$ being the inclusion of a hyperplane. For generic $\sigma \in G(k)$, we get $X \times_{\PP^n} H^{\sigma} = f^{-1}(H^{\sigma})$ is nonsingular. But the divisor $f^{-1}(H^{\sigma})$ are just elements of the linear system, by construction of $f$. Thus almost all (i.e. generically) the elements are nonsingular.
+It turns out it is spanned by Schubert cycles of the appropriate dimension. Take a class equivalent to some subscheme $X$. Write it as a sum of Schubert cycles $X = \sum a_{\tau} \Sigma_{\tau}$, which we can do because the Schubert cycles give a basis for the homology. Consider the intersections of $X$ with the dual Schubert cycle $\Sigma_{\tau}^*$. This computes the coefficient $a_{\tau}$. Then $a_{\tau} = X \cdot \Sigma_{\tau} = X \cdot \sigma(\Sigma_{\tau})$ for generic translates by $\sigma \in \textup{PGL}_{n+1}$. Kleiman's theorem says that the last expression is a bunch of reduced points. Thus, $a_{\tau} \ge 0$. So the effective cone is contained in the cone spanned by Schubert cycles of appropriate dimension, and certainly the cone spanned by Schubert cycles is contained in the effective cone. So, they must be equal.}
+\end{remark}
+
+\begin{proof}[Proof of Theorem \ref{theorem:Kleiman}]
+Consider the morphism
+\[h: G \times Y \to X\]
+given by composing $f$ with the group action $\theta: G \times X \to X$. That is, you may $Y$ to $X$ and translate it in $X$ via the action. $G$ is nonsingular because it is a group scheme, and $Y$ is nonsingular by assumption, so $G \times Y$ is nonsingular. Generic smoothness says there is a nonempty open subset $U \subseteq X$ such that 
+\[h: h^{-1}(U) \to U\]
+is smooth.
+
+$G$ acts on $G \times Y$ by left multiplication, and $G$ acts on $X$ by the map $\theta$. These two actions are compatible. So, for $\sigma \in G(k)$, we have $h: h^{-1}(U^{\sigma}) \to U^{\sigma}$ is smooth. The $U^{\sigma}$ cover $X$, so $h$ is smooth everywhere.
+
+Now, let's write down a bunch of maps. Let $W = (G \times Y) \times_X Z$. We have the following info.
+\[
+\begin{tikzcd}
+W \arrow[r,"h'"] \arrow[d, "g'"] & Z \arrow[d, "g"] \arrow[r] & \spec k\\
+G \times \arrow[r,"h"] \arrow[d, "p_1"]Y & X &\\
+G & &
+\end{tikzcd}\]
+$h$ is smooth, so $h'$ is smooth because base extension preserves smoothness. $Z$ is nonsingular and so smooth over $k$. Thus $W$ is smooth over $k$, as smoothness is preserved under composition. Thus, $W$ is nonsingular.
+
+Let $q = p_1 \circ g': W \to G$. Generic smoothness yields a nonempty open $V \subseteq G$ such that $q: q^{-1}(V) \to V$ is smooth. Then if $\sigma \in V(k)$, the fiber $W_{\sigma}$ will be nonsingular. But note that $W_{\sigma} = Y^{\sigma} \times_X Z$. So we have shown $Y^{\sigma} \times_X Z$ is nonsingular as desired. (Note that $h$ is $f$ and then \textit{translation}, so the fiber is indeed $Y^{\sigma} \times_X Z$ and not just $Y \times_X Z$).
+
+If the map $q: q^{-1}(V) \to V$ is not empty, we proceed to compute the fiber dimensions.
+
+First, $h$ is smooth of some relative dimension. Looking at the dimensions of source and target, it is relative of dimension
+\[\dim G + \dim Y - \dim X\]
+And so $h'$, as it is base-change of $h$, has the same relative dimension. Thus, we have that 
+\[\dim W = (\dim G + \dim Y - \dim X) + \dim Z\]
+If $W$ is not empty, then again looking at dimension of source and target, $q$ has relative dimension $\dim W - \dim G$. So the fibers $W_{\sigma}$ must have dimension
+\begin{align*}
+\dim W_{\sigma} &= \dim W - \dim G\\
+&=  (\dim G + \dim Y - \dim X) + \dim Z - \dim G\\
+&= \dim Y + \dim Z - \dim X 
+\end{align*}
 \end{proof}
 
-\begin{definition} \red{\'etale}
-\end{definition}
+We can now give a quick proof of Bertini's theorem (generic hyperplane sections of a nonsingular subscheme of $\PP^n$ are nonsingular). In fact, we get something a little more general.
+\\
 
-\begin{proposition} $f:X \to Y$ morphism of Noetherian schemes. \red{connected fibers}
+Recall that for a divisor $D$ on a smooth projective variety over $k = \overline{k}$, the complete linear system associated to $D$ is
+\[|D| = \{D' : D' \ge 0, D' \sim D\}\]
+That is, it is the effective divisors linearly equivalent to $D$. Since we have 
+
+\begin{enumerate}
+\item $D'$ effective and $D' \sim D \iff$ $D' = \Div(s)$ for some $s \in \Gamma(X,\LL(D)) \setminus \{0\}$.
+\item $\Div(s) = \Div(s') \iff$ there exists $\lambda \in k^*$ such that $s' = \lambda s$.
+\end{enumerate}
+
+we have that $|D| = \PP(\Gamma(X,\LL(D)))$, where $\LL(D)$ is the line bundle associated to a Weil divisor $D$. A linear system $L$ on $X$ is a subset of $|D|$ giving a linear subspace of $\PP(\Gamma(X,\LL(D))$.
+
+
+\begin{corollary}[Bertini's theorem] Let $X$ be a nonsingular projective variety over an algebraically closed field $k$ of char $0$. Let $L$ be a linear system without base points. Then almost every element of $L$, considered as a closed subscheme of $X$, is nonsingular (may be reducible, though). By almost every, we mean there is an open dense subset of $L$ corresponding to nonsingular subschemes.
+\end{corollary}
+\begin{proof}
+Let $f: X \to \PP^n$ be the morphism to $\PP^n$ determined by the basepoint-free system $L$. Note that we get a bonafide morphism because $L$ is basepoint-free.
+
+Consider $\PP^n$ as a homogeneous space under the action of PGL. Apply the theorem of Kleiman, taking $g: H \to \PP^n$ being the inclusion of a hyperplane. For generic $\sigma \in G(k)$, we get $X \times_{\PP^n} H^{\sigma} = f^{-1}(H^{\sigma})$ is nonsingular. But the various divisors $f^{-1}(H^{\sigma})$ are just the elements of the linear system, by construction of $f$. Thus almost all (i.e. generically) the divisors that are elements of $L$ are nonsingular.
+\end{proof}
+
+%\begin{definition} \red{\'etale}
+%\end{definition}
+
+%\begin{proposition} $f:X \to Y$ morphism of Noetherian schemes. \red{connected fibers}
+%\end{proposition}
+
+%\begin{theorem}[Zariski's main theorem] \red{roughly, branching behavior for normal things}
+%\end{theorem}
+%#######################################################################
+%#######################################################################
+%####################    L E C T U R E      4 2   ###############################
+%#######################################################################
+%#######################################################################
+\begin{comment}
+\section{April 28: Curves! Riemann-Roch!}
+
+Now for curves! Work for $k$ algebraically closed. Curve is an integral scheme of dimension $1$, proper over $k$, all of whose local rings are regular (so it is nonsingular). In this scenario, we have that it is projective over $k$. We will use curve to mean this.
+\\
+
+We use scheme in this chapter to mean integral scheme of dimension $1$ of finite type over $k$. Point will mean closed point, unless we specify "generic point"
+
+Important invariants: genus. Geometric genus is $dim_k \Gamma(X,\omega_X)$. Arithmetic genus is 
+\[p_a(X) = (-1)^{\dim X}(\chi(\OO_x) - 1)\]
+Or for a curve: $(1-\chi(\OO_X))$. Note that $H^0(\OO_X) = \Gamma(\OO_X)$ corresponds to morphisms to $\A^1$. Composing to $X \to \PP^1$ using that $\A^1 \to \P^1$ is separated, we get a proper map $X \to \P^1$. Its image must be closed and contained in $\A^1$, hence a finite union of points. $X$ is connected, so it must be a point. Thus the section is constant and $H^0(\OO_X) = k$.
+
+Thus, we get that $p_a(X) = \dim H^1(X,\OO_X)$.
+
+
+\begin{proposition} If $X$ is a curve, then
+\[p_a(C) = p_g(X) = \dim_k H^1(X,\OO_X)\]
+Thus, in this case, we refer to both as the genus. 
 \end{proposition}
+\begin{proof} We know $p_a(C) = \dim_k H^1(X,\OO_X)$. The fact that
+\[p_g(X) = \dim_k H^0(X,\omega_x) =\dim_k H^1(X,\OO_X)\]
+is a consequence of Serre duality.
+\end{proof}
 
-\begin{theorem}[Zariski's main theorem] \red{roughly, branching behavior for normal things}
-\end{theorem}
+Recall that a Weil divisor on a curve looks like $\sum n_i P_i$. The degree is $\sum n_i$. We have line bundle assocated to divisors $\LL(D)$, and this gives an isomorphism with $\textup{Pic}$ for nonsingular curves. ($X$ is noetherian, integral, sep). Regular local rings are UFDs.
 \end{comment}
 %#######################################################################
 %#######################################################################
