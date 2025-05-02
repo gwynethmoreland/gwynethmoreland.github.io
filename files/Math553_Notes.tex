@@ -149,6 +149,7 @@ Notes for Math 553: algebraic geometry II, spring 2025. Heavily referenced from 
 %####################    L E C T U R E      0 1  ###############################
 %#######################################################################
 %#######################################################################
+%\begin{comment}
 \section{Jan 13: Syllabus, sheaves}
 
 \textbf{Recommended reading: Harthsorne II.1, Vakil 2.1-2}
@@ -2578,7 +2579,7 @@ See Hartshorne II.7.6 to see how one guarantees $\LL$ has a suitably high power 
 \begin{remark} Why introduce the notion of ampleness? First, it's still useful to know that powers of a line bundle \textit{eventually} give us an embedding into projective space. Secondly, it has some stability under pullbacks: the pullback of a very ample line bundle under a finite morphism need not be very ample, but the pullback of an ample line bundle under a finite morphism is ample (with some niceness criteria: Noetherian, projective over $k$ works). Thirdly, there are nice numerical criterion for ampleness. (You can find some numerical criterion for very ampleness, but generally, aside from curves, they're more complicated and the proofs are not so easy).
 \end{remark}
 
-\begin{remark} Looking at the correspondence between maps $X \to \PP^n$ and line bundles and global sections, it seems like one should be able to come up with an example of a very ample line bundle pulling back to something not very ample (under a finite morphism) by just pulling back $\OO_{\PP^n}(1)$ along a well-chosen map.
+\begin{remark}\label{remark:elliptic-not-very-ample} Looking at the correspondence between maps $X \to \PP^n$ and line bundles and global sections, it seems like one should be able to come up with an example of a very ample line bundle pulling back to something not very ample (under a finite morphism) by just pulling back $\OO_{\PP^n}(1)$ along a well-chosen map.
 
 One example that works: consider $f: E \to \PP^1_{\C}$, a complex elliptic curve with its 2-to-1 map to $\PP^1$. Then $\OO_{\PP^1}(1)$ is very ample, but $f^*(\OO(1)) = \MM$ is not. Proving this requires us to borrow some future tools. Riemann-Roch tells us that
 \[h^0(\MM) - h^0(\omega_E - \MM) = \deg(\MM) - g(E) + 1\]
@@ -3111,7 +3112,7 @@ where $p_1$ is the projection $X \times_Y Y' \to X$ onto the first factor.
 Follows from Proposition \ref{prop:differentials-base-change}.
 \end{proof}
 
-\begin{proposition} Let $f: X \to Y$ and $g: Y \to Z$ be morphisms of schemes. Then there is an exact sequence of sheaves on $X$:
+\begin{proposition}\label{prop:relative-cotangent-seq} Let $f: X \to Y$ and $g: Y \to Z$ be morphisms of schemes. Then there is an exact sequence of sheaves on $X$:
 \[f^*\Omega_{Y/Z} \to \Omega_{X/Z} \to \Omega_{X/Y} \to 0\]
 \end{proposition}
 \begin{proof}
@@ -3250,7 +3251,7 @@ Alright, time for computing!
 \begin{proof}
 From the Euler exact sequence we get:
 \begin{align*}
-\det(\OO_X(-1)^{\oplus n+1}) = \det(\Omega_{X/k}) \otimes \det(\OO_x) 
+\det(\OO_X(-1)^{\oplus n+1}) = \det(\Omega_{X/k}) \otimes \det(\OO_X) 
 \end{align*}
 On the right we get $\omega_{X} \otimes \OO_x = \omega_X$. On the left we get $\OO_X(-1)^{\otimes (n+1)} = \OO_X(-n-1)$. Here, $\det$ of a locally free sheaf of rank $r$ means taking $\wedge^r$ of that sheaf. The equation above follows from the analogous statement for free modules (you showed this on HW 2).
 \end{proof}
@@ -3618,8 +3619,10 @@ The separated criterion is important for guaranteeing that that $U_i \cap U_j$ i
 \textbf{In general:} for $X$ a topological space, $\{U_i\}$ an open cover, you get a morphism (not necessarily an isomorphism, though).
 \end{theorem}
 \begin{proof}
+
 %##
 See Hartshorne Theorem III.4.5.
+\end{proof}
 \begin{comment}
 \red{DELAY TILL NEXT TIME: COMPUTATION MORE IMPORTANT: need a few facts}
 \\
@@ -3632,7 +3635,7 @@ Look at the two resolutions $0 \to \FF \to \II^{\bullet}$ and $0 \to \FF \to \ma
 
 Why is it an isomorphism? Note that we always have the $U_{i_0 < \dots < i_p}$ are affine because $X$ is separated. Then imbedding into flasque \red{and etc etc etc} we get a chain of isomorphisms and are done.
 \end{comment}
-\end{proof}
+
 
 The following shows the computational usefulness of \v Cech cohomology. Writing down injection resolutions is hard. Writing down flasque resolutions, while a bit better, can still be quite tricky! Whereas concrete chart computations on $\PP^n$ and some other stock projective schemes are not so bad.
 
@@ -4426,38 +4429,356 @@ Consider $\PP^n$ as a homogeneous space under the action of PGL. Apply the theor
 
 %\begin{theorem}[Zariski's main theorem] \red{roughly, branching behavior for normal things}
 %\end{theorem}
+%\end{comment}
 %#######################################################################
 %#######################################################################
 %####################    L E C T U R E      4 2   ###############################
 %#######################################################################
 %#######################################################################
-\begin{comment}
 \section{April 28: Curves! Riemann-Roch!}
 
-Now for curves! Work for $k$ algebraically closed. Curve is an integral scheme of dimension $1$, proper over $k$, all of whose local rings are regular (so it is nonsingular). In this scenario, we have that it is projective over $k$. We will use curve to mean this.
+Now for curves! We'll work over $k$ algebraically closed. We will need to set some conventions for terminology when we are doing Hartshorne IV material. We'll use curve to mean an integral scheme of dimension $1$, proper over $k$, all of whose local rings are regular (so it is nonsingular). In this scenario, we have that it is projective over $k$. This is from Hartshorne Proposition II.6.7 (Let $X$ be one-dimensional integral, separated, nonsingular scheme of finite type over $k = \overline{k}$. Then $X$ is projective over $k$ $\iff$ it is proper over $k$).
+\\
+We'll use scheme in the to mean integral scheme of dimension $1$ of finite type over $k$. "Point" will mean a closed point, unless we specify "generic point."
 \\
 
-We use scheme in this chapter to mean integral scheme of dimension $1$ of finite type over $k$. Point will mean closed point, unless we specify "generic point"
+For curves, the most important invariant is the genus.  There are two notions: the geometric genus, which is  $\dim_k \Gamma(X,\omega_X)$, and the arithmetic genus. In general, the  arithmetic genus of a scheme is
+\[p_a(X) = (-1)^{\dim X}(\chi(\OO_X) - 1)\]
+For a curve, this turns into $(1-\chi(\OO_C))$. 
 
-Important invariants: genus. Geometric genus is $dim_k \Gamma(X,\omega_X)$. Arithmetic genus is 
-\[p_a(X) = (-1)^{\dim X}(\chi(\OO_x) - 1)\]
-Or for a curve: $(1-\chi(\OO_X))$. Note that $H^0(\OO_X) = \Gamma(\OO_X)$ corresponds to morphisms to $\A^1$. Composing to $X \to \PP^1$ using that $\A^1 \to \P^1$ is separated, we get a proper map $X \to \P^1$. Its image must be closed and contained in $\A^1$, hence a finite union of points. $X$ is connected, so it must be a point. Thus the section is constant and $H^0(\OO_X) = k$.
+For curves, it turns out that arithmetic and geometric genus align. To proceed further, we need the following.
 
-Thus, we get that $p_a(X) = \dim H^1(X,\OO_X)$.
+\begin{lemma} For an integral projective $k$-scheme, $ H^0(X,\OO_X) = k$, and so $\dim_k H^0(X,\OO_X) =1$.
+\end{lemma}
+\begin{proof}
+Firstly, this is a consequence of Hartshorne Theorem I.3.4.
 
+Alternatively, note that $H^0(X,\OO_X) = \Gamma(X, \OO_X)$ corresponds to morphisms to $\A^1_k$. Take $\varphi: X \to \A^1$. Then the image $f(X)$ must be closed and proper (Hartshorne Exercise II.4.4: roughly, the image of a proper scheme is proper). Thus the image must look like a collection of points. Furthermore, because $X$ is irreducible, it must be precisely one point. So the global sections on $X$ are constants.
+\end{proof}
+
+From this lemma,  we get that $p_a(X) = \dim H^1(X,\OO_X)$. 
 
 \begin{proposition} If $X$ is a curve, then
-\[p_a(C) = p_g(X) = \dim_k H^1(X,\OO_X)\]
+\[p_a(X) = p_g(X) = \dim_k H^1(X,\OO_X)\]
 Thus, in this case, we refer to both as the genus. 
 \end{proposition}
-\begin{proof} We know $p_a(C) = \dim_k H^1(X,\OO_X)$. The fact that
+\begin{proof} Utilizing the lemma, we have that 
+\[p_a(X) = (1 - \chi(\OO_X)) = 1 - \dim_k H^0(X,\OO_X) + \dim_k H^1(X,\OO_X) =  \dim_k H^1(X,\OO_X).\]
+ The fact that
 \[p_g(X) = \dim_k H^0(X,\omega_x) =\dim_k H^1(X,\OO_X)\]
 is a consequence of Serre duality.
 \end{proof}
 
-Recall that a Weil divisor on a curve looks like $\sum n_i P_i$. The degree is $\sum n_i$. We have line bundle assocated to divisors $\LL(D)$, and this gives an isomorphism with $\textup{Pic}$ for nonsingular curves. ($X$ is noetherian, integral, sep). Regular local rings are UFDs.
-\end{comment}
+\begin{remark} Perhaps a useful example is to think of a family of smooth elliptic curves degenerating to a cuspidal cubic. We want to work with projective schemes, but for convenience let's (temporarily) work in an affine patch, and consider the family
+\begin{align*}
+\spec k[x,y,t]/(y^2-x^3-t) \to \spec k[t]
+\end{align*}
+For $t \ne 0$, the fiber $C_t$ is a smooth cubic curve (one can look at the Jacobian to see this) and so we can compute the geometric genus via adjunction and see that $p_g(C_t) = 1$. However, at $t=0$ the geometry is different: the curve is no longer smooth, and it is birational to $\PP^1$. We compute the geometric genus by computing it on a smooth birational model, in this case $\PP^1$, to see that $p_g(C_0) = 0$.
+
+But the arithmetic genus remains unchanged. We still have that, after homogenizing and viewing these curves in $\PP^2$:
+\[0 \to \OO_{\PP^2} (-C_t) = \OO_{\PP^2}(-3) \to \OO_{\PP^2} \to \OO_{C_t} \to 0 \]
+so $\chi(C_t)$ is constant over the family, and thus $p_a(C_t) = 1$ is constant. This makes sense: arithmetically, nothing has majorly changed: we are still considering a cubic planar curve.
+\end{remark}
+\hrule
+\vspace{1em}
+
+Recall that a Weil divisor on a curve looks like $\sum n_i P_i$. The degree is $\sum n_i$. Given a Weil divisor $D$ we can associate to it a line bundle $\LL(D) = \OO_X(D)$, and this gives an isomorphism betewen the class group and the Picard group for nonsingular curves. 
+
+A divisor $D$ is effective if $D = \sum n_i P_i$  with all $n_i \ge 0$. The set of all effective divisors linearly equivalent to $D$ is the \textit{complete linear series} $|D|$. One can show that the elements of $|D|$ correspond to $\PP(H^0(X,\LL(D))$.
+
+\begin{definition}
+Let $\ell(D) = \dim_k H^0(X,\LL(D))$. It is called the \textbf{length} of the divisor $D$.
+\end{definition}
+
+\begin{lemma}\label{lemma:degree-positivity-length}
+Let $D$ be a divisor on a curve $X$. If $\ell(D) \ne 0$, we must have $\deg D \ge 0$. If $\ell(D) \ne 0$ and $\deg D = 0$, then $D \sim 0$, i.e. $\LL(D) \cong \OO_X$.
+\end{lemma}
+\begin{proof}
+If $\ell(D) \ne 0$, then $|D|$ is nonempty and so $D$ is linearly equivalent to an effective divisor. The degree map is $\textup{Cl}(X) \to \Z$, so constant on equivalence classes. Thus $\deg(D) \ge 0$.
+
+If $\deg D = 0$, then $D$ is linearly equivalent to an effective divisor of degree zero. The only possibility is $D \sim 0$, and so $\LL(D) \cong \OO_X$.
+\end{proof}
+
+\begin{definition} We refer to any Weil divisor whose associated line bundle is isomorphic to $\omega_X$ as a/the \textbf{canonical divisor}. It is generally denoted by $K_X$.
+\end{definition}
+
+\begin{theorem}[Riemann-Roch] Let $D$ be a divisor on a curve $X$, and let $g$ denote the genus of $X$. Then:
+\[\ell(D) - \ell(K_X-D) = \deg D + 1 - g \]
+\end{theorem}
+\begin{proof}
+We have:
+\begin{align*}
+\ell(D) - \ell(K_X-D) &= \dim H^0(X,\LL(D)) - \dim H^0(\omega_X \otimes \LL(D)^{\vee})\\
+&= \dim H^0(X,\LL(D)) - \dim H^1(X,\LL(D)) \tag{Serre duality}\\
+&= \chi(\LL(D))
+\end{align*}
+So we need to show that, for any divisor $D$, we have $\chi(\LL(D)) = \deg D + 1 - g$. We will do this with an induction argument. Consider $D=0$. Then the formula becomes
+\[\dim H^0(\OO_X) - \dim H^1(\OO_X) = 0 + 1 - g\]
+which is true, as $H^0(\OO_X) = k$ and $\dim H^1(\OO_X) = g$ by the previous lemma. 
+
+Next, we show that the formula is true for a divisor $D$ if and only if it is true for $D+P$. We get from the zero divisor to all other divisors by adding/subtracting points, so this will get use the formula for all $D$.
+
+For a point $P$ in a curve, the ideal sheaf is given by $\LL(-P) = \OO_X(-P)$ and the structure sheaf of the point is a skyscraper sheaf $k(P)$. We have
+\[0 \to \LL(-P) = \OO_X(-P) \to \OO_X \to k(P) \to 0\]
+Tensor with $\LL(D+P) = \OO_X(D+P)$ to get
+\[0 \to \LL(D) \to \LL(D+P) \to k(P) \to 0\]
+$\LL(D+P)$ being locally free and rank 1 leaves the last sheaf unchanged. Additivity of Euler characteristic in short exact sequences means
+\[\chi(\LL(D+P)) = \chi(\LL(D)) + 1\]
+On the other side of the Riemann-Roch formula, $\deg(D+P) = \deg D + 1$. So adding a point $P$ to $D$ adds one to both sides of the formula. So, the formula holds for $D$ if and only if it holds for $D+P$. Thus, we are done.
+\end{proof}
+
+This theorem has many neat and practical uses, some of which you'll see on your HW. Some  uses include:
+
+\begin{corollary} Let $X$ be a curve of genus $g$. Then $\deg(K_X) = 2g-2$.
+\end{corollary}
+\begin{proof}
+Taking $D = K_X$ in Riemann-Roch, we get
+\begin{align*}
+\deg K_X + 1 - g &= \ell(K_X) - \ell(K_X - K_X) \\
+&= \ell(K_X) - \ell(O_X) \\
+&=  g - 1
+\end{align*}
+Which implies $\deg K_X = 2g-2$.
+\end{proof}
+
+\begin{corollary} We now have the tools to formalize our example from Remark \ref{remark:elliptic-not-very-ample}. That is, we can give an example of a very ample line bundle that does \textit{not} pull back to something very ample under a finite morphism.
+
+Consider an elliptic curve $E$ with its 2-to-1 map to $\PP^1_C$. (On affine charts, this looks like $y^2 = x^2 + ax + c$ projecting to the $y$ coordinate). $\OO_{\PP^1}(1)$ is very ample, but $f^*(\OO(1)) = \MM$ is not. We will use $\MM$ to refer to both the line bundle and a divisor corresponding to that bundle interchangeably. We have
+\[\ell(\MM) - \ell(\omega_E - \MM) = \deg(\MM)  + 1 - g(E)\]
+The left side is just $\ell(\MM)$ because $\omega_E - \MM$ has negative degree. The right side is $2 -1 + 1 = 2$. So $\MM$ has a two-dimensional space of global sections, and at best defines a map to $\PP^1$. This cannot be an immersion, as $E$ and $\PP^1$ are curves with different genuses.
+\end{corollary}
+
+\begin{corollary} A curve $X$ (careful with our definition of curve in this chapter!) is rational if and only if its genus is zero.
+\end{corollary}
+\begin{proof}
+Curves for us are complete and nonsingular, so $X$ is rational if and only if $X \cong \PP^1$. If $X \cong \PP^1$, then certainly $p_a(\PP^1) = 0$.
+
+For the reverse direction, suppose $g = 0$. Let $P,Q$ be distinct points on $X$. Set $D= P-Q$. Then, $\deg(K_X - D) = \deg(K_X) - \deg(D) = 2g-2-0 = -2$. Then $\ell(K-D) = 0$ because it has negative degree. Thus: 
+\begin{align*}
+ \ell(D) &=  \ell(K-D) + \deg D + 1 - g\\
+ &= 0 + 0 + 1 - 0 = 1.
+\end{align*}
+But $D$ has degree $0$, so by Lemma \ref{lemma:degree-positivity-length}, we have $D \sim 0$. Thus, $P \sim Q$. That is, there is a rational function $f$ on $X$ with $(f) = P - Q$. Then $f$ determines a finite morphism $\varphi: X \to \PP^1$, and $\varphi^*(0) = P$, so the map is degree 1. Therefore, $X$ is rational.
+\end{proof}
 %#######################################################################
+%#######################################################################
+%####################    L E C T U R E      4 3   ###############################
+%#######################################################################
+%#######################################################################
+\section{April 30: Embeddings to projective space, all curves can be embedded in $\PP^3$}
+Time to study embeddings of curves into projective space! We saw some criterion for this before, but now we'll go indepth and also talk about how any curve can be embedded into $\PP^3$.
+
+For various line bundle descriptors such as ample, very ample, etc, we say a divisor has that property (ample, very ample, etc) if its associated line bundle $\LL(D)$ does.
+
+\begin{definition} A divisor is called \textbf{special} if $\ell(K_X-D) > 0$ and \textbf{nonspecial} if $\ell(K_X-D) = 0$. That is, being nonspecial means the "correction term" of Riemann-Roch is zero. For nonspecial divisors, we have
+\[\ell(D) = \deg D + 1 -g\]
+If $\deg D > 2g-2$, then $D$ is automatically nonspecial, as $K_X - D$ has negative degree.
+\end{definition}
+
+\begin{proposition} Let $D$ be a divisor on a curve $X$. Then:
+\begin{enumerate}
+\item the complete linear system $|D|$ has no base points (and thus defines a morphism to $\PP^n$) if and only if for every $P \in X$ we have
+\[\dim |D - P| = \dim |D| - 1\]
+\item $D$ is very ample if and only if for every $P,Q \in X$ ($P=Q$ case is counted as a possibility) we have
+\[\dim |D - P - Q| = \dim |D| - 2\]
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Consider the exact sequence of sheaves
+\[0 \to \LL(D-P) \to \LL(D) \to k(P) \to 0\]
+Taking global sections:
+\[0 \to \Gamma(X,\LL(D-P)) \to \Gamma(X,\LL(D)) \to k\]
+so $\dim |D-P|$ is $\dim |D|$ or $\dim |D| - 1$. We also have a linear map
+\begin{align*}
+\varphi: |D-P| &\to |D|\\
+E &\mapsto E + P
+\end{align*}
+which is injective. The dimensions of these linear systems are equal if and only if $\varphi$ is surjective (we are thinking of these are finite dimensional spaces, after all). But $\varphi$ is surjective if and only if $P$ is a base point of $|D|$, so this yields (a).
+\\
+
+Now, onto (b). We may assume $|D|$ has no base points. (Very ample divisors have no base points, and on the flip side if the dimension equation holds we have that moving from $|D|$ to $|D-P|$ drops the dimension of the linear space by 1, so it is base point free by (a). Here we use that moving from $|D|$ to $|D-P|$ can drop the dimension of the space by at most one).
+
+So, we get a morphism $X \to \PP^n$ determined by $|D|$. To see when it is a closed immersion, we use the local criteria: the morphism needs to separate points and separate tangent vectors.
+
+To separate points, this is equivalent to, for any $P \ne Q$, we have $Q$ is not a base point of $|D-P|$. By (a), this is equivalent to
+\[\dim |D-P-Q = \dim |D| - 2\]
+Separating tangent vectors is equivalent to: for any $P \in X$, there should be a divisor $D' \in |D|$ such that $P$ occurs with exactly multiplicity 1 in $D'$. (We are using that the dimension of tangent spaces of curves are 1, and that divisors in $|D|$ correspond to divs of global sections, and that to separate tangent vectors we need a section whose germ is in $m_P \LL_P$ but not $m_P^2 \LL_P$). But this means $P$ is not a base point of $|D-P|$, or equivalently, by (a),
+\[\dim |D-2P| = \dim |D| - 2\]
+\end{proof}
+
+\begin{corollary} Let $D$ be a divisor on a curve $X$ with genus $g$.
+\begin{enumerate}
+\item If $\deg D \ge 2g$ then $|D|$ is base point free
+\item If $\deg D \ge 2g+1$ then $D$ is very ample.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+For (a): both $D,D-P$ are nonspecial, so the count from Riemann-Roch yields
+\[\dim |D-P| = \dim |D| - 1\]
+so by (a) of the previous, $|D|$ is base point free.
+
+For (b): $D$ and $D-P-Q$ are nonspecial, so the count from Riemann-Roch yields
+\[\dim |D-P-Q| = \dim|D| - 2\]
+and so by (b) of previous, $|D|$ is very ample.
+\end{proof}
+
+\begin{corollary}
+A divisor $D$ on a curve $X$ is ample if and only if $\deg D > 0.$
+\end{corollary}
+
+\begin{remark} Observe that for $D$ a very ample divisor on a curve $X$ whose complete linear series yields an embedding $\varphi: X \to \PP^n$, the degree of $\varphi(X) \subseteq \PP^n$ is just $\deg D$. Seeing how many points are in the intersection of the curve and a hyperplane is just computing the degree of the divisor obtained by pulling back $H$.
+\end{remark}
+
+\begin{example} Consider $X$ an elliptic curve (i.e. the $g=1$ case). Any divisor $D$ of degree $3$ is very ample and nonspecial, so $\ell(D) = 3$. Thus $D$ defines an embedding into $\PP^2$ as a cubic (degree 3) curve. It is also quick to see that $D$ is very ample if and only if $\deg D \ge 3$.
+\end{example}
+
+ Similar such counts will give you immediate guarantees for what $n$ a curve of genus $g$ can be embedded in. But in fact, one can show that a curve can always be embedded into $\PP^3$. We will do this by first putting it in $\PP^n$ (which we can do: these curves are projective and have some very ample divisor) and then carefully projecting from well-chosen points $O$ to hyperplanes $\PP^{n-1}$. Well-chosen in this case means avoiding the secant variety.
+ 
+For $P,Q \in X, P \ne Q$, the secant line between them is simply the line (in $\PP^n$) joining $P$ and $Q$. For $P=Q$, we take the line to be the tangent line. That is, there is a line $L$ whose tangent space $T_P L$ is equal to $T_P X \subseteq T_P \PP^n$.
+
+\begin{proposition} Let $X$ be a curve in $\PP^n$ and $O \in \PP^n$ with $X \not \in O$. Let $\varphi: X \to \PP^{n-1}$ be the projection from $O$ to a hyperplane $\PP^{n-1} \subseteq \PP^n$. $\varphi$ is a closed immersion if and only if both of the following hold
+\begin{enumerate}
+\item $O$ is not on any secant line of $X$,
+\item $O$ is not on any tangent line of $X$
+\end{enumerate}
+(So really, this is saying $O$ is not contained in the secant variety of $X$).
+\end{proposition}
+\begin{proof}
+The morphism $\varphi$ corresponds to the linear system (on $X$) cut out by hyperplane $H$ passing through $O$. This system separates points if and only if there is an $H$ containing $O,P$ but not $Q$, which is fine so long as $O \not \in \overline{PQ}$. This system separates tangent vectors if and only if there is an $H$ containing $O,P$ and meeting $X$ at $P$ with precisely multiplicity 1, which is doable so long as $O$ is not on the tangent line.
+\end{proof}
+
+\begin{corollary}
+If $X$ is a curve in $\PP^n$ with $n \ge 4$, then we can find a point $O$ satisfying the conditions of the previous proposition.
+\end{corollary}
+\begin{proof}
+This can be seen through the secant variety having dimension 3. (One can do this with an incidence correspondence. Roughly, there is one dimension of choice for the first point, one dimension of choice for the second, and then a dimension contributed by the line between them).
+\end{proof}
+
+\begin{corollary}
+Any curve can be embedded in $\PP^3$.
+\end{corollary}
+
+One can hope: what happens if you continue this projection down to $\PP^2$? You can check that you have an $O$ suitably nice enough (lies on finitely many secants, not on tangent lines, multisecants (line meeting $>$ 2), secant joining two points with same tangent line). Projecting from that point gives a birational morphism from $X$ to a curve in $\PP^2$ with at worst nodes as singularities. Here nodes are things that roughly "look like $k[x,y]/(xy)$. In a more formal sense, this is saying $\widehat{O}_{X,p}$ is isomorphic to $k[[x,y]]/(xy)$.
+%#######################################################################
+%#######################################################################
+%####################    L E C T U R E      4 4   ###############################
+%#######################################################################
+%#######################################################################
+\section{May 02: Riemann-Hurwitz}
+
+%The degree of a finite morphism $f:X \to Y$ of curves is defined as $[K(X): K(Y)]$ the degree of the extension of function fields. \red{You can also think of it as the degree of a general preimage of a point}. 
+
+You may be familiar with Riemann-Hurwitz in the topological/Riemann surface context. We do its algebraic counterpart here. Again, Riemann-Hurwitz for us will be a relationship between genuses of curves when one covers another, factoring in ramification. Here the analogue of a covering map is a finite morphism $f$. We study how the canonical divisor changes across this map.
+
+For any point $P$, we can define the ramification index to see where this map has degenerate behavior. Note that $f$ is necessarily flat, so its fiber length stays unchanged even if the size of the support varies. It is flat by Criterion 2: it is a map $f:X \to Y$ with $Y$ integral, regular, dim 1, and $X$ dominates the base.
+
+\begin{definition}[Ramification index] Let $f:X \to Y$ be a finite morphism of curves. Let $P$ be a point of $X$. Let $Q = f(P)$ and $t \in \OO_Q$ be a local parameter/uniformizer. The stalks at closed points are integrally closed, Noetherian, local, and have Krull dimension one, so they are DVRs.
+
+ View $t$ in $\OO_P$ via the map
+\[f^{\sharp}: \OO_Q \to f_*\OO_P \to \OO_P\]
+and define $e_P = v_P(t)$, where $v_P$ is the valuation in $\OO_P$. $e_P$ is called the \textbf{ramification index} of $P$. If $e_p > 1$, we say $f$ is ramified at $P$, and if $e_P = 1$ we say $f$ is unramified at $P$. 
+
+If char $k = 0$, or char $k = 0$ and $p \nmid e_P$, then the ramfication is \textit{tame}. If $p \mid e_P$, we say it is \textit{wild}.
+\end{definition}
+
+Now, recall that we had a morphism $f^*: \Div Y \to \Div X$ given by 
+\[f^*(Q) = \sum_{P \to Q} e_P \cdot P\]
+This pullback morphism is compatible with the one on line bundles, so that $f^*(\LL(D)) \cong \LL(f^* D)$.
+
+\begin{example} Let's look at a simple example. Consider the curve $\proj k[x,y,z]/(yz-x^2) \to \proj k[y,z]$ given by
+\begin{align*}
+[x,y,z] \to \begin{cases} [y/z,1] & z \ne 0 \\ [1,z/y] & y \ne 0\end{cases}\\
+\end{align*}
+On the affine chart $z \ne 0$ this looks like $\spec k[x,y]/(y-x^2) \to \spec k[y]$ given by projection onto the $y$ factor The fiber over $(y)$ is a length 2 scheme supported at the origin in the plane. We get that the uniformizer $y$ in $k[y]_(y)$ pulls back to $y \in (k[x,y]/(y-x^2))_{(x,y)} = (k[x,y]/(y-x^2))_{(x)}$, where it has valuation two. So the map is ramified at the origin with ramification index two. LIkewise, one can check that it is ramified at infinity also with ramification index two. (Note that the ramification index could be at most two).
+\end{example}
+
+\begin{definition} The morphism $f:X \to Y$ is \textbf{separable} if $K(X)$ is a separable field extension of $K(Y)$. Note that this conditions is automatically fulfilled in characteristic 0.
+\end{definition}
+
+\begin{proposition} Let $f:X \to Y$ be a finite separable morphism of curves. There is an exact sequence of sheaves on $X$:
+\[0 \to f^* \Omega_Y \to \Omega_X \to \Omega_{X/Y} \to 0\]
+\end{proposition}
+\begin{proof}
+This is the relative cotangent sequence from Proposition \ref{prop:relative-cotangent-seq} 
+\[ (0 \to) \ \pi^*\Omega_{Y} \to \Omega_{X} \to \Omega_{X/Y} \to 0\]
+with the zero filled in. One can motivate from differential geometry by looking at the dualized version 
+\[0 \to T_{X/Y} \to T_{X} \to \pi^*(T_{Y}) \to 0\]
+where $X \stackrel{\pi}{\to} Y$ and the tangent space $T_X$ splits into vectors parallel and perpendicular to the fiber.
+
+The main thing is we need $f^*\Omega_Y \to \Omega_X$ to be injective. Both are invertible sheaves on $X$, so it's enough to show that the map is nonzero at the generic point. But this is $\Omega_{K(X)/K(Y)}$ which is zero for separable extensions. So $f^*\Omega_Y \to \Omega_X$ is surjective at the generic point. See Hartshorne Proposition IV.2.1 for details.
+\end{proof}
+
+This proposition says that the relative canonical $\Omega_{X/Y}$ measures the difference of the two divisors $\Omega_X, \Omega_Y$. For $P \in X$, set $Q = f(P)$. Let $t$ be the local parameter at $Q$, and $u$ the local parameter at $P$. $dt$ generates the (free) module $\Omega_{Y,Q}$ and $du$ generates the (free) module $\Omega_{X,P}$. Then there is some $g \in \OO_P$ such that $f^*dt = g \cdot du$. We use $dt/du$ to denote this $g$.
+
+\begin{proposition} Let $f:X \to Y$ be a finite, separable morphism of curves.
+\begin{enumerate}[(a)]
+\item $\Omega_{X/Y}$ is a torsion sheaf (that is, its abelian groups are all torsion) with support equal to the set of ramification points of $f$. Consequently, $f$ is ramified at only finitely many points.
+\item For each $P \in X$, the stalk $\Omega_{X/Y})_P$ is a principal $\OO_P$ module (i.e. a direct summand term of the full thing) of finite length equal to $v_P(dt/du)$.
+\item If $f$ if tamely ramified at $P$, then 
+\[\textup{length }(\Omega_{X/Y})_P = e_P - 1\]
+and if $f$ is wildly ramified at $P$, the length is $> e_P - 1$. 
+\end{enumerate}
+\end{proposition}
+\begin{proof}\textup{ }
+\begin{enumerate}[(a)]
+\item $f^*\Omega_Y$ and $\Omega_X$ are both line bundles on $X$, so $\Omega_{X/Y}$ has to be torsion. But $(\Omega_{X/Y})_P = 0$ if and only if $f^*dt$ is a generator for $\Omega_{X,P}$. This happens if and only if $t$ is a local parameter/uniformizer for $\OO_P$, i.e. $f$ is unramified at $P$.
+\item The sequence yields that $(\Omega_{X/Y})_P \cong \Omega_{X,P}/f^*\Omega_{Y,Q} \cong \OO_P/(dt/du)$.
+\item By definition of ramification index $e_P$, we can write $t = au^{e_P}$ with $a \in \OO_P^{\times}$. Then the Leibniz rule yields
+\[dt = ae_P u^{e_P-1} du + u^{e_P}da\]
+If that ramification is tame, the first term is nonzero, and so $v_P(dt/du)$ will be $e_P-1$. If the ramification is wild, the first term zeroes out and the valuation is at least $e_P$.
+\end{enumerate}
+\end{proof}
+
+\begin{definition} Let $f: X \to Y$ be a finite, separable morphism of curves. The \textbf{ramification divisor} of $f$ is
+\[R = \sum_{P \in X} \textup{length}(\Omega_{X/Y})_P \cdot P\]
+By the prior result, only finitely many of the terms are nonzero, so this sum makes sense.
+\end{definition}
+
+\begin{definition} Let $f:X \to Y$ be a finite, separable morphism of curves. Then:
+\[K_X \sim f^* K_Y + R\]
+\end{definition}
+\begin{proof}
+By construction, the divisor $R$ is effective and has structure sheaf $\OO_R \cong \Omega_{X/Y}$. Tensoring the relative cotangent sequence with the invertible sheaf $\Omega_X^{-1}$ we get
+\[0 \to f^*\Omega_Y \otimes \Omega_X^{-1} \to \OO_X \to \OO_R \to 0\]
+The rightmost term remains unchanged because sheaves with finite support are not affected by tensoring by line bundles (locally you are just tensoring with $\OO_{X,P}$ at a few finite places). Looking at this sequence, we have $f^*\Omega_Y \otimes \Omega_X^{-1}$ is isomorphic to the ideal sheaf of $R$. But this is $\LL(-R) = \OO_X(-R)$. Rearranging the data of this isomorphism yields
+\[ \Omega_X \cong f^*\Omega_Y \otimes \OO_X(R) \] 
+and then taking divisors yields
+\[K_X \sim f^* K_Y + R\]
+\end{proof}
+
+\begin{corollary}[Riemann-Hurwitz] Let $f: X \to Y$ be a finite separable morphism of curves. Let $n = \deg f$. Then
+\[2g(X) - 2 = n(2g(Y) - 2) + \deg R\]
+where $g(C)$ denotes the genus of a curve $C$. If $f$ is only tamely ramified, then this yields the more commonly-cited:
+\[2g(X) - 2 =  n(2g(Y) - 2) + \sum_{P \in X} (e_P - 1)\]
+\end{corollary}
+\begin{proof}
+Take degrees on either side of $K_X \sim f^* K_Y + R$, using that the degree of the canonical is $2g-2$.
+\end{proof}
+
+\begin{corollary}
+If $f: X \to Y$ is separable, the degree of the ramification divisor is even.
+\end{corollary}
+
+\begin{corollary}
+If $f: X \to Y$ is any finite morphism of curves, then $g(X) \ge g(Y)$.
+\end{corollary}
+\begin{proof}
+Use that the field extension $K(X)/K(Y)$ can be split into a separable part and a purely inseparable part. Riemann-Hurwitz gives the inequality for separable morphisms, and purely inseperable ones do not change the genus. See Hartshorne Proposition IV.2.5 and example IV.2.5.4 and the surrounding exposition for more details.
+\end{proof}
+
+\begin{example} Returning to our $C = \spec k[x,y]/(y-x^2) \to \spec k[y] = \PP^1$ example, what we get is 
+\begin{align*}
+2g(C) -2 &= 2(0) - 2 =  -2\\
+2(2g(\PP^1)-2) + \sum (e_P -1) &= 2 \cdot (2(g(\PP^1)) - 2) + (e_0 -1) + (e_{\infty}-1) = -4 + 1 + 1 = -2
+\end{align*}
+and both sides align as they should.
+\end{example}
+
+\begin{example} One way elliptic curves are described as double covers of $\PP^1$ branched over four points. Note that this yields a genus count of
+\[2g(E)-2 = 2 \cdot (2(0)-2) + 1 + 1 + 1 + 1 = 0\]
+which aligns with $g(E) = 1$ as it should. (If the ellipiic curve is written as $y^2 = x^3+ax+b$, then the branch points are seen at the roots of the cubic, along with the point at infinity).
+\end{example}
+
 %#######################################################################
 %#######################################################################
 %#######################################################################
@@ -4474,7 +4795,6 @@ Recall that a Weil divisor on a curve looks like $\sum n_i P_i$. The degree is $
 %###############################################
 %###############################################
 %###############################################
-%\begin{comment}
 %\section{Future material storage}
 %A construction worth seeing:
 %First, let $X$ be Noetherian and normal. Note that for an effective Weil divisor $D$ on $X$, we have that we can view $D$ as a codimension 1 subscheme of $X$. In this case, note that $\mathscr{I}_D = \OO_X(-D)$. To see this: recall that 
