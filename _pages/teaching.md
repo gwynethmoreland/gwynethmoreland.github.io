@@ -5,12 +5,14 @@ permalink: /teaching/
 author_profile: true
 ---
 
-For fall 2024, I am teaching Math 210: Calculus III. Our section meets 2-2:50PM on MWF. Please see the [Blackboard site](https://uic.blackboard.com/) for more details.
+For fall 2025, I am teaching Math 210: Calculus III. Our section meets 4-4:50PM on MWF. Please see the [Blackboard site](https://uic.blackboard.com/) for more details.
 
-My office hours are TBA.
+My office hours are Monday 2-2:50 in the MSLC and Wednesday 3-3:50 in SEO 413.
 
 Past teaching (at UIC)
 ------
+* Spring 2025: Math 553 (Algebraic geometry 2: scheme theory)
+* Fall 2024: Math 210 (Calc III)
 * Spring 2024: Math 215 (Introduction to Advanced Mathematics)
 * Fall 2023: Math 210 (Calc III)
 
