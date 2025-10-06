@@ -11,7 +11,7 @@ My office hours are Monday 2-2:50 in the MSLC and Wednesday 3-3:50 in SEO 413.
 
 Past teaching (at UIC)
 ------
-* Spring 2025: Math 553 (Algebraic geometry 2: scheme theory)
+* Spring 2025: Math 553 (Algebraic geometry II: scheme theory)
 * Fall 2024: Math 210 (Calc III)
 * Spring 2024: Math 215 (Introduction to Advanced Mathematics)
 * Fall 2023: Math 210 (Calc III)
